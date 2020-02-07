@@ -203,8 +203,6 @@ class MainViewController: UIViewController {
 //    }
     
     override func viewDidLoad() {
-        print(searchView)
-        print(closetView)
         viewArray = [searchView, closetView]
         super.viewDidLoad()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

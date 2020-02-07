@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 var documentsURL: URL = NSURLComponents().url!
 
@@ -15,6 +16,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     let itemsPerRow: CGFloat = 2.0
+    let currentUser = Auth.auth().currentUser
     var status_lending = true
 
     @IBOutlet weak var tabPicker: UISegmentedControl!
@@ -171,16 +173,17 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func loadProfImage() {
-        let image = UIImage(named: currUser.profPic);
-        print(image)
+        let url = currentUser?.photoURL
+        let data = try? Data(contentsOf: url!)
+        let image = UIImage(data: data!)
+        //let image = UIImage(named: currUser.profPic);
         self.profilePicture.image = image;
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
         self.profilePicture.clipsToBounds = true;
     }
     
     func showUserName() {
-        let userName = currUser.owner;
-       self.profileName.text = userName;
+        self.profileName.text = currentUser?.displayName;
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
