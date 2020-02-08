@@ -9,30 +9,26 @@
 import UIKit
 import FBSDKLoginKit
 import Firebase
+import FirebaseDatabase
 
 class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Auth.auth().addStateDidChangeListener { (auth, user) in
-//            if user != nil {
-//                self.performSegue(withIdentifier: "toBegin", sender: self)
-//            }
-//        }
-        let loginButton = FBLoginButton()
-        //loginButton.delegate = self as! LoginButtonDelegate
-        loginButton.center = view.center
-        view.addSubview(loginButton)
-        //let loginButton = FBLoginButton(readPermissions: [ .publicProfile ])
-        // Do any additional setup after loading the view.
+//        let loginButton = FBLoginButton() commenting this out now bc the button isn't used
+//        loginButton.center = view.center
+//        view.addSubview(loginButton)
     }
     
     @IBAction func clickedFB(_ sender: Any) {
-        if Auth.auth().currentUser != nil {
+        let ref = Database.database().reference()
+        var user = Auth.auth().currentUser
+        if user != nil {
+            ref.child("users").child(user!.uid).setValue(["username": user?.email, "display_name": user?.displayName])
             self.performSegue(withIdentifier: "toBegin", sender: self)
             return
         }
-        print("here")
+        
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
            if let error = error {
@@ -58,7 +54,9 @@ class FirstViewController: UIViewController {
                    
                    return
                }
-              self.performSegue(withIdentifier: "toBegin", sender: self)
+                var user = Auth.auth().currentUser
+                ref.child("users").child(user!.uid).setValue(["username": user?.displayName])
+                self.performSegue(withIdentifier: "toBegin", sender: self)
            })
 
         }
