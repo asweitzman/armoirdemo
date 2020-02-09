@@ -203,7 +203,7 @@ class MainViewController: UIViewController {
 //    }
     
     override func viewDidLoad() {
-        viewArray = [searchView, closetView, newsView]
+        viewArray = [searchView, closetView]
         super.viewDidLoad()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         

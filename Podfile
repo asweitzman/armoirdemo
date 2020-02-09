@@ -12,6 +12,7 @@ target 'Armoir' do
     pod 'Firebase/Analytics'
     pod 'Firebase/Performance'
     pod 'Firebase/Auth'
+    pod 'Firebase/Database'
     pod 'FBSDKLoginKit'
     pod 'FBSDKCoreKit'
     pod 'FBSDKShareKit'

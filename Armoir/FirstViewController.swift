@@ -8,26 +8,60 @@
 
 import UIKit
 import FBSDKLoginKit
+import Firebase
+import FirebaseDatabase
 
 class FirstViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let loginButton = FBLoginButton()
-        //loginButton.delegate = self as! LoginButtonDelegate
-        loginButton.center = view.center
-        view.addSubview(loginButton)
-        //let loginButton = FBLoginButton(readPermissions: [ .publicProfile ])
-        // Do any additional setup after loading the view.
+//        let loginButton = FBLoginButton() commenting this out now bc the button isn't used
+//        loginButton.center = view.center
+//        view.addSubview(loginButton)
     }
     
     @IBAction func clickedFB(_ sender: Any) {
-       // let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-       // let nextViewController = storyBoard.instantiateViewController(withIdentifier: "navigationVC") as! UINavigationController
-        self.performSegue(withIdentifier: "toBegin", sender: self)
-        //        self.present(nextViewController, animated:true, completion:nil)
+        let ref = Database.database().reference()
+        var user = Auth.auth().currentUser
+        if user != nil {
+            ref.child("users").child(user!.uid).setValue(["username": user?.email, "display_name": user?.displayName])
+            self.performSegue(withIdentifier: "toBegin", sender: self)
+            return
+        }
+        
+        let fbLoginManager = LoginManager()
+        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+           if let error = error {
+               print("Failed to login: \(error.localizedDescription)")
+               return
+           }
+           
+            guard let accessToken = AccessToken.current else {
+               print("Failed to get access token")
+               return
+           }
+
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+           
+           // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+               if let error = error {
+                   print("Login error: \(error.localizedDescription)")
+                   let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                   let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                   alertController.addAction(okayAction)
+                   self.present(alertController, animated: true, completion: nil)
+                   
+                   return
+               }
+                var user = Auth.auth().currentUser
+                ref.child("users").child(user!.uid).setValue(["username": user?.displayName])
+                self.performSegue(withIdentifier: "toBegin", sender: self)
+           })
+
+        }
     }
+    
     
     /*
     // MARK: - Navigation
