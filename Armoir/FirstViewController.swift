@@ -55,7 +55,7 @@ class FirstViewController: UIViewController {
                    return
                }
                 var user = Auth.auth().currentUser
-                ref.child("users").child(user!.uid).setValue(["username": user?.displayName])
+                ref.child("users").child(user!.uid).setValue(["username": user?.displayName, "display_name": user?.displayName])
                 self.performSegue(withIdentifier: "toBegin", sender: self)
            })
 
