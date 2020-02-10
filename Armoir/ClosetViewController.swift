@@ -18,6 +18,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     let itemsPerRow: CGFloat = 2.0
     let currentUser = Auth.auth().currentUser
     var status_lending = true
+    var user = Auth.auth().currentUser
 
     @IBOutlet weak var tabPicker: UISegmentedControl!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -192,10 +193,11 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        var ref = Database.database().reference()
         //for clothes you are lending
         if (status_lending) {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
+            var closetRef = ref.child("users").child(user!.uid).child("closet")
             let i = currArray[indexPath.row]
             cell.itemName.text = i.name;
             let imgURL = i.image

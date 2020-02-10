@@ -51,8 +51,17 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         categoryDropDown2.show()
     }
     
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
     @IBAction func buttonTapped(_ sender: UIButton) {
-   // Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let ref = Database.database().reference()
+        var user = Auth.auth().currentUser
+        Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
         
         if (Description.text == "" || Price.text == "" || categoryButton.titleLabel!.text == "Category" || sizeButton.titleLabel!.text == "Size") {
             
@@ -61,14 +70,25 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         
         //let description: String = Description.text!
         //needs to be a double based on what they enter
-        var imageURL = ""
+            var imageURL = ""
+            let imageID = randomString(length:8)
+            let imageRef = storageRef.child("images/" + imageID);
+            var imageData = Data()
+            imageData = itemImage.jpegData(compressionQuality: 0.8)!
+            let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+              guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+              }
+            }
+               
         //if (!startWithCamera) {
             ImageRetriever().save(image: itemImage);
             imageURL = ImageRetriever().loadStr(fileName: "SavedImage" + String(numImgSaved))
             print(ImageRetriever().fileIsURL(fileName: imageURL))
         //}
 
-        print("URL: " + imageURL)
+//        print("URL: " + imageURL)
             /*if let price = Double(price.text) {
                 
             } else {
@@ -85,9 +105,15 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        if (imageURL != "") {}
+        if (imageID != "") {}
             let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: imageURL, color: "", size: itemSize, price: priceDouble, category: itemCategory)
         
+            //save to firebase database
+            let itemID = imageID
+            ref.child("items").child(itemID).setValue(["name": description, "owner": user?.uid, "borrowed": false, "borrowed_by": 0, "image": imageID, "color": "", "size": itemSize, "price": priceDouble, "category": itemCategory])
+            var currItemsRef = ref.child("users").child(user!.uid).child("closet")
+            ref.child("users/\(user!.uid)/closet/\(itemID)/").setValue(true)
+            
         //1. find index of currUser in all_users array
         var i = 0;
         var found = false;
@@ -101,10 +127,10 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         }
         //2. use the index to change the actual element in all users
         //print (all_users[i]) //testing before
-        var temp = all_users[i].closet
-        temp.append(new_item)
-        all_users[i].closet = temp
-        print(all_users[i]) // testing after
+//        var temp = all_users[i].closet
+//        temp.append(new_item)
+//        all_users[i].closet = temp
+//        print(all_users[i]) // testing after
         
         //to check if all_users updated
         //print(all_users)
