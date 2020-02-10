@@ -151,7 +151,7 @@ extension a_User: Codable {
 
 var all_users:[a_User] = []
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var browseViewController: UIViewController!
     
@@ -163,7 +163,11 @@ class MainViewController: UIViewController {
     
     var viewArray: [UIView]!
     
-    var selectedIndex: Int = 1
+    var selectedIndex: Int = 0
+    
+    @IBAction func uploadItemButton(_ sender: UIButton) {
+        self.showActionSheet();
+    }
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet var buttons: [UIButton]!
@@ -175,6 +179,57 @@ class MainViewController: UIViewController {
     @IBOutlet weak var newsView: UIView!
     
 
+    @objc func showActionSheet() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
+        let actionSheet = UIAlertController(title: "Import Image", message: "Take a picture or select one from your library.", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action:UIAlertAction) in
+            startWithCamera = true
+            imagePickerController.sourceType = .camera
+
+            self.present(imagePickerController, animated: true, completion: nil)
+            //self.performSegue(withIdentifier: "toCameraPage", sender: self)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action:UIAlertAction) in
+            startWithCamera = false
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var selectedImage: UIImage?
+        
+        // extract image from the picker and save it
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImage = editedImage
+            //ImageRetriever().save(image: editedImage);
+            itemImage = selectedImage!
+            dismiss(animated: true, completion: {
+                self.performSegue(withIdentifier: "toAddItemPage", sender: self)
+            })
+        } else if let originalImage = info[.originalImage] as? UIImage{
+            selectedImage = originalImage
+            //ImageRetriever().save(image: originalImage);
+            itemImage = selectedImage!
+            dismiss(animated: true, completion: {
+                self.performSegue(withIdentifier: "toAddItemPage", sender: self)
+            })
+        }
+    }
+    
 //    override func viewDidAppear(_ animated: Bool) {
 //        //1. read json from file: DONE
 //        var longJsonData = ""
@@ -213,7 +268,7 @@ class MainViewController: UIViewController {
         
         newsViewController = storyboard.instantiateViewController(withIdentifier: "NewsViewController")
         
-        viewControllers = [browseViewController, closetViewController, newsViewController]
+        viewControllers = [browseViewController, closetViewController]
         
         buttons[selectedIndex].isSelected = true
         didPressTab(buttons[selectedIndex])
@@ -230,11 +285,11 @@ class MainViewController: UIViewController {
             Analytics.logEvent("closet_tab_pressed", parameters: [
               "tab": (view)
             ])
-        } else {
+        } /*else {
             Analytics.logEvent("news_tab_pressed", parameters: [
               "tab": (view)
             ])
-        }
+        }*/
         selectedIndex = sender.tag
         buttons[previousIndex].isSelected = false
         viewArray[previousIndex].backgroundColor = UIColor(hue: 0.0778, saturation: 0.17, brightness: 0.81, alpha: 1.0)
