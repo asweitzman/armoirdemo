@@ -41,7 +41,6 @@
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
 		6250122221BAAE5B0015F10A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6250122121BAAE5B0015F10A /* SwiftyJSON.framework */; };
-		6409E25123F0DD84001AA5A4 /* FriendlyChatSwift in Resources */ = {isa = PBXBuildFile; fileRef = 6409E25023F0DD84001AA5A4 /* FriendlyChatSwift */; };
 		6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */; };
 		6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */; };
 		645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645905A423DE5DEE00930FD8 /* InboxViewController.swift */; };
@@ -120,7 +119,6 @@
 		6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6216B1DA21BAA73300AB5943 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6250122121BAAE5B0015F10A /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6409E25023F0DD84001AA5A4 /* FriendlyChatSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FriendlyChatSwift; path = "../../../Downloads/friendlychat-ios-master/ios-starter/swift-starter/FriendlyChatSwift"; sourceTree = "<group>"; };
 		6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConstants.swift; sourceTree = "<group>"; };
 		645905A423DE5DEE00930FD8 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 		1751F04D21B06E9F00F55356 /* Armoir */ = {
 			isa = PBXGroup;
 			children = (
-				6409E25023F0DD84001AA5A4 /* FriendlyChatSwift */,
 				1751F04E21B06E9F00F55356 /* AppDelegate.swift */,
 				7193F59521BA370700427907 /* Main.storyboard */,
 				179234B821BCEA4C00B391F5 /* FirstViewController.swift */,
@@ -411,7 +408,6 @@
 				17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */,
 				17F0ED8323F1102200904F3A /* WorkSans-Regular.ttf in Resources */,
 				1751F05921B06EA300F55356 /* LaunchScreen.storyboard in Resources */,
-				6409E25123F0DD84001AA5A4 /* FriendlyChatSwift in Resources */,
 				17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */,
 				17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */,
 				17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */,
