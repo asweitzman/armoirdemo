@@ -52,14 +52,12 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        
-        Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
+    Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
         
         if (Description.text == "" || Price.text == "" || categoryButton.titleLabel!.text == "Category" || sizeButton.titleLabel!.text == "Size") {
             
             missingDetailsLabel.isHidden = false
         } else {
-        
         
         //let description: String = Description.text!
         //needs to be a double based on what they enter
@@ -215,17 +213,17 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         self.Description.returnKeyType = UIReturnKeyType.done
         self.Description.autocorrectionType = .no
         missingDetailsLabel.isHidden = true
-        let icon = UIImage(named: "downarrow3")!
-        categoryButton.setImage(icon, for: .normal)
-        categoryButton.imageView?.contentMode = .scaleAspectFit
-        categoryButton.semanticContentAttribute = UIApplication.shared
-            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-        categoryButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: categoryButton.frame.size.width - categoryButton.titleLabel!.intrinsicContentSize.width, bottom: 0, right: 0)
-        sizeButton.setImage(icon, for: .normal)
-        sizeButton.imageView?.contentMode = .scaleAspectFit
-        sizeButton.semanticContentAttribute = UIApplication.shared
-            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-        sizeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: sizeButton.frame.size.width - sizeButton.titleLabel!.intrinsicContentSize.width, bottom: 0, right: 0)
+//        let icon = UIImage(named: "downarrow3")!
+//        categoryButton.setImage(icon, for: .normal)
+//        categoryButton.imageView?.contentMode = .scaleAspectFit
+//        categoryButton.semanticContentAttribute = UIApplication.shared
+//            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+//        categoryButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: categoryButton.frame.size.width - categoryButton.titleLabel!.intrinsicContentSize.width, bottom: 0, right: 0)
+//        sizeButton.setImage(icon, for: .normal)
+//        sizeButton.imageView?.contentMode = .scaleAspectFit
+//        sizeButton.semanticContentAttribute = UIApplication.shared
+//            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+//        sizeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: sizeButton.frame.size.width - sizeButton.titleLabel!.intrinsicContentSize.width, bottom: 0, right: 0)
         itemCategory = ""
         itemSize = ""
         
