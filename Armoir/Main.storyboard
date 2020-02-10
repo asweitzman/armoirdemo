@@ -938,11 +938,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rb4-dJ-lq7">
-                                        <rect key="frame" x="128" y="11" width="227" height="85"/>
+                                        <rect key="frame" x="128" y="53.333333333333329" width="227" height="42.666666666666671"/>
                                         <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Upload Item">
                                             <accessibilityTraits key="traits" button="YES" image="YES"/>
                                         </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42.670000000000002" id="Gx5-hR-YAh"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="17"/>
                                         <state key="normal" title="   Upload Item" image="camera">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1004,7 +1007,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KTq-5G-x5u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2120.8000000000002" y="-142.57871064467767"/>
+            <point key="canvasLocation" x="2120.8000000000002" y="-142.61083743842366"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="pje-Yq-dH5">
@@ -2223,7 +2226,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-k8-B9A">
-                                <rect key="frame" x="16.666666666666671" y="654" width="92" height="73"/>
+                                <rect key="frame" x="16.666666666666671" y="671" width="92" height="73"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="fl8-8H-rzs"/>
                                     <constraint firstAttribute="width" constant="92" id="lmq-iO-QlM"/>
@@ -2237,7 +2240,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Zh-tB-5J6">
-                                <rect key="frame" x="266.66666666666669" y="654" width="92" height="73"/>
+                                <rect key="frame" x="266.66666666666669" y="671" width="92" height="73"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="17W-LL-YZR"/>
                                     <constraint firstAttribute="width" constant="92" id="wNy-jt-JrS"/>
@@ -2251,19 +2254,12 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading-one" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-kG-pMB">
-                                <rect key="frame" x="143.66666666666666" y="654" width="88" height="88"/>
+                                <rect key="frame" x="143.66666666666666" y="671" width="88" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="PHR-v3-hZt"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="160" id="UmB-kD-g6K"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="88" id="YWw-iO-ZHE"/>
                                     <constraint firstAttribute="width" constant="88" id="aat-ZN-076"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clothes" translatesAutoresizingMaskIntoConstraints="NO" id="VbJ-is-cgu">
-                                <rect key="frame" x="0.0" y="233.66666666666663" width="375" height="437"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="473" id="awk-eK-hEB"/>
-                                    <constraint firstAttribute="width" constant="375" id="grE-im-t49"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="browse closets " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cwq-Su-Hfs">
@@ -2276,8 +2272,15 @@
                                 <fontDescription key="fontDescription" name="WorkSans-Bold" family="Work Sans" pointSize="100"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clothes" translatesAutoresizingMaskIntoConstraints="NO" id="VbJ-is-cgu">
+                                <rect key="frame" x="0.0" y="233.66666666666663" width="375" height="454"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="473" id="awk-eK-hEB"/>
+                                    <constraint firstAttribute="width" constant="375" id="grE-im-t49"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.85384362940000003" green="0.73842912910000003" blue="0.66665476560000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.80320733789999998" green="0.74214082960000005" blue="0.68234413859999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="9Zh-tB-5J6" firstAttribute="top" secondItem="VbJ-is-cgu" secondAttribute="bottom" constant="-16.666666666666629" id="1c2-M9-FXx"/>
                             <constraint firstItem="9Zh-tB-5J6" firstAttribute="leading" secondItem="O4K-kG-pMB" secondAttribute="trailing" constant="35" id="9TC-67-mLQ"/>
@@ -2338,7 +2341,7 @@
                                 <rect key="frame" x="136" y="659" width="102" height="63"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.83437341450000002" green="0.74227792020000005" blue="0.67449909450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.81486797330000005" green="0.74226629730000004" blue="0.67449957130000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="OlW-FA-WdM" firstAttribute="leading" secondItem="BeD-MN-ybG" secondAttribute="trailing" constant="29" id="25e-s1-jRI"/>
                             <constraint firstItem="OTU-UZ-f7T" firstAttribute="centerY" secondItem="bxy-Zb-i8f" secondAttribute="centerY" constant="-60" id="45G-Ow-igB"/>
@@ -2382,7 +2385,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading-three" translatesAutoresizingMaskIntoConstraints="NO" id="Vel-Ki-934">
-                                <rect key="frame" x="135" y="652" width="105" height="17"/>
+                                <rect key="frame" x="135" y="652" width="105.00000000000003" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="102" id="1s4-jO-95L"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="7O6-1n-ogp"/>
@@ -2415,7 +2418,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.83437341450000002" green="0.74227792020000005" blue="0.67449909450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.83043295149999996" green="0.73841470480000004" blue="0.66665536169999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="h0k-Me-Vmd" firstAttribute="centerY" secondItem="ziF-ys-6UI" secondAttribute="centerY" constant="-60" id="818-xB-TDj"/>
                             <constraint firstItem="c4d-IC-0dO" firstAttribute="leading" secondItem="Vel-Ki-934" secondAttribute="trailing" constant="-3" id="EGI-M9-q1Q"/>
@@ -2444,12 +2447,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJd-FM-vzM">
-                                <rect key="frame" x="52" y="674" width="271" height="45"/>
+                                <rect key="frame" x="52" y="681.66666666666663" width="271" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Bold" family="Work Sans" pointSize="28"/>
                                 <state key="normal" title="set up closet now &gt;">
                                     <color key="titleColor" red="0.50832957030000003" green="0.0029178732070000001" blue="0.1097909436" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="gBE-pl-xks" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="1b1-sW-5Da"/>
                                 </connections>
@@ -2479,18 +2487,18 @@
         <image name="CameraButton" width="132" height="126"/>
         <image name="Inbox" width="33" height="33"/>
         <image name="armoir logo" width="323" height="73"/>
-        <image name="borrow-clothes" width="316" height="510"/>
+        <image name="borrow-clothes" width="323" height="523"/>
         <image name="camera" width="42.666667938232422" height="42.666667938232422"/>
-        <image name="clothes" width="315" height="437"/>
+        <image name="clothes" width="328" height="454"/>
         <image name="distanceIcon" width="76" height="106"/>
         <image name="fb" width="800" height="300"/>
-        <image name="got-your-back" width="306" height="490"/>
+        <image name="got-your-back" width="320" height="505"/>
         <image name="hanger" width="170.66667175292969" height="170.66667175292969"/>
         <image name="jeanJacketCamera" width="640" height="1136"/>
-        <image name="lend-clothes" width="304" height="519"/>
-        <image name="loading-one" width="88" height="47"/>
-        <image name="loading-three" width="71" height="36"/>
-        <image name="loading-two" width="92" height="52"/>
+        <image name="lend-clothes" width="316" height="526"/>
+        <image name="loading-one" width="106" height="46"/>
+        <image name="loading-three" width="107" height="46"/>
+        <image name="loading-two" width="118" height="58"/>
         <image name="news-2" width="89" height="51"/>
         <image name="plus" width="128" height="128"/>
         <image name="search" width="42.666667938232422" height="42.666667938232422"/>
@@ -2498,7 +2506,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KpY-Yi-dgg"/>
-        <segue reference="b1s-60-Xry"/>
+        <segue reference="1b1-sW-5Da"/>
         <segue reference="jab-sZ-aSN"/>
         <segue reference="dTl-b8-yKo"/>
         <segue reference="Om7-qJ-M5f"/>

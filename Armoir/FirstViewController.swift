@@ -13,12 +13,12 @@ import FirebaseDatabase
 
 class FirstViewController: UIViewController {
     
-    override func viewDidLoad() {
+    /*override func viewDidLoad() {
         super.viewDidLoad()
 //        let loginButton = FBLoginButton() commenting this out now bc the button isn't used
 //        loginButton.center = view.center
 //        view.addSubview(loginButton)
-    }
+    }*/
     
     @IBAction func clickedFB(_ sender: Any) {
         let ref = Database.database().reference()
