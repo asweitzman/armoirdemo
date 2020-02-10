@@ -52,7 +52,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-    Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
+   // Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
         
         if (Description.text == "" || Price.text == "" || categoryButton.titleLabel!.text == "Category" || sizeButton.titleLabel!.text == "Size") {
             
