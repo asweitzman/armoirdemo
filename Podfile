@@ -7,7 +7,7 @@ target 'Armoir' do
 
   # Pods for Armoir
     pod 'SwiftyJSON', '~> 4.0'
-    pod 'DropDown', '2.3.2'
+    pod 'DropDown', '2.3.4'
     pod 'Firebase'
     pod 'Firebase/Analytics'
     pod 'Firebase/Performance'

@@ -10,7 +10,7 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - DropDown (2.3.2)
+  - DropDown (2.3.4)
   - FBSDKCoreKit (5.15.1):
     - FBSDKCoreKit/Basics (= 5.15.1)
     - FBSDKCoreKit/Core (= 5.15.1)
@@ -212,7 +212,7 @@ PODS:
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
-  - DropDown (= 2.3.2)
+  - DropDown (= 2.3.4)
   - FBSDKCoreKit
   - FBSDKCoreKit/Swift
   - FBSDKLoginKit
@@ -274,7 +274,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  DropDown: 7f87abecc28f9b4edad810fe1211c5c018c257e5
+  DropDown: f225ff0fd09dde064d17aa03db7e4d4e4ff40b6b
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   FBSDKShareKit: 259737eab3cc807087374553abdf588b3096ba55
@@ -308,6 +308,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 42500daaa7b2956b868ca6957156e2d16923349e
+PODFILE CHECKSUM: 4b2716df3cb980cdd5102707b0fbb5a29b070ce3
 
 COCOAPODS: 1.8.4
