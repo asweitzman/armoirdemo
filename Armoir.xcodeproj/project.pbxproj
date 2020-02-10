@@ -15,7 +15,6 @@
 		17040B1621B9FA760049C902 /* SearchItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17040B1521B9FA760049C902 /* SearchItemDetailViewController.swift */; };
 		1732E87623EB990A00E4F3E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1732E87523EB990A00E4F3E1 /* GoogleService-Info.plist */; };
 		1751F04F21B06E9F00F55356 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F04E21B06E9F00F55356 /* AppDelegate.swift */; };
-		1751F05921B06EA300F55356 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1751F05721B06EA300F55356 /* LaunchScreen.storyboard */; };
 		1751F06421B06EA400F55356 /* ArmoirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F06321B06EA400F55356 /* ArmoirTests.swift */; };
 		1751F06F21B06EA400F55356 /* ArmoirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F06E21B06EA400F55356 /* ArmoirUITests.swift */; };
 		1751F07D21B08B2100F55356 /* ProductBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F07C21B08B2100F55356 /* ProductBrowseViewController.swift */; };
@@ -35,9 +34,6 @@
 		17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */; };
 		17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */; };
 		2F4EB6A65C6E1331B9831F4D /* Pods_Armoir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */; };
-		34E3E97F23F0DB9900CFE8A2 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34E3E97E23F0DB9800CFE8A2 /* WorkSans-Regular.ttf */; };
-		34E3E98123F0DBA100CFE8A2 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34E3E98023F0DBA100CFE8A2 /* WorkSans-SemiBold.ttf */; };
-		34E3E98323F0DBAA00CFE8A2 /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34E3E98223F0DBAA00CFE8A2 /* WorkSans-Bold.ttf */; };
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
 		6250122221BAAE5B0015F10A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6250122121BAAE5B0015F10A /* SwiftyJSON.framework */; };
@@ -51,6 +47,7 @@
 		743BD5E921B9DEAB00855A1E /* BorrowedItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743BD5E821B9DEAB00855A1E /* BorrowedItemDetailViewController.swift */; };
 		743BD5EB21B9ECCF00855A1E /* LentItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743BD5EA21B9ECCF00855A1E /* LentItemViewController.swift */; };
 		7B6945BE58DA06E29302AE56 /* Pods_ArmoirUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E475E1EC01E3EA2A5F1B5702 /* Pods_ArmoirUITests.framework */; };
+		7D48658123F0F31E009C3E5A /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D48658023F0F31E009C3E5A /* WorkSans-Bold.ttf */; };
 		AC55E713F6E79D96E973E4A7 /* Pods_ArmoirTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3771DD3B476D4EA4BBBF13 /* Pods_ArmoirTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +78,6 @@
 		1732E87523EB990A00E4F3E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1751F04B21B06E9F00F55356 /* Armoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1751F04E21B06E9F00F55356 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1751F05821B06EA300F55356 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1751F05A21B06EA300F55356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1751F05F21B06EA400F55356 /* ArmoirTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArmoirTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1751F06321B06EA400F55356 /* ArmoirTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmoirTests.swift; sourceTree = "<group>"; };
@@ -109,9 +105,6 @@
 		17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
 		2BFD9C27390DC9FB9E7BC3FA /* Pods-Armoir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.release.xcconfig"; sourceTree = "<group>"; };
 		3461F10B23DE572A00D3DF81 /* GoogleService-Info old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info old.plist"; sourceTree = "<group>"; };
-		34E3E97E23F0DB9800CFE8A2 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../Desktop/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
-		34E3E98023F0DBA100CFE8A2 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../Desktop/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		34E3E98223F0DBAA00CFE8A2 /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Bold.ttf"; path = "../../../Desktop/Work_Sans/WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4C6EE03E84BA4F5E1E39930B /* Pods-ArmoirTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirTests/Pods-ArmoirTests.release.xcconfig"; sourceTree = "<group>"; };
 		6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +117,7 @@
 		743BD5E421B5FB8C00855A1E /* BorrowedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowedCell.swift; sourceTree = "<group>"; };
 		743BD5E821B9DEAB00855A1E /* BorrowedItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowedItemDetailViewController.swift; sourceTree = "<group>"; };
 		743BD5EA21B9ECCF00855A1E /* LentItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LentItemViewController.swift; sourceTree = "<group>"; };
+		7D48658023F0F31E009C3E5A /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Bold.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		85BC3CC017DAD85A6498EF3B /* Pods-Armoir.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.debug.xcconfig"; sourceTree = "<group>"; };
 		8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armoir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A07F9C725F3D2FE62A103FB /* Pods-ArmoirUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -209,7 +203,6 @@
 				17F0ED6723F0D4D300904F3A /* Fonts */,
 				17B3022D21B65735004E5EF8 /* images */,
 				1751F07E21B08BFD00F55356 /* ProductCell.swift */,
-				1751F05721B06EA300F55356 /* LaunchScreen.storyboard */,
 				1751F05A21B06EA300F55356 /* Info.plist */,
 				71388D7121B87D0B00232F7B /* StartViewController.swift */,
 				743BD5E821B9DEAB00855A1E /* BorrowedItemDetailViewController.swift */,
@@ -244,10 +237,8 @@
 				17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */,
 				17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */,
 				17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */,
+				7D48658023F0F31E009C3E5A /* WorkSans-Bold.ttf */,
 				17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */,
-				34E3E98023F0DBA100CFE8A2 /* WorkSans-SemiBold.ttf */,
-				34E3E98223F0DBAA00CFE8A2 /* WorkSans-Bold.ttf */,
-				34E3E97E23F0DB9800CFE8A2 /* WorkSans-Regular.ttf */,
 				17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */,
 				17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */,
 				17040B0921B775040049C902 /* Alike-Regular.ttf */,
@@ -395,18 +386,15 @@
 				1732E87623EB990A00E4F3E1 /* GoogleService-Info.plist in Resources */,
 				17040B0A21B775BD0049C902 /* Alike-Regular.ttf in Resources */,
 				179234B521BC745400B391F5 /* test2.json in Resources */,
-				34E3E98123F0DBA100CFE8A2 /* WorkSans-SemiBold.ttf in Resources */,
 				17B3022E21B65735004E5EF8 /* images in Resources */,
 				17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */,
-				1751F05921B06EA300F55356 /* LaunchScreen.storyboard in Resources */,
 				17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */,
-				34E3E97F23F0DB9900CFE8A2 /* WorkSans-Regular.ttf in Resources */,
-				34E3E98323F0DBAA00CFE8A2 /* WorkSans-Bold.ttf in Resources */,
 				17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */,
 				17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */,
 				17040B0821B76B180049C902 /* search.json in Resources */,
 				17F0ED7623F0D51600904F3A /* WorkSans-ExtraBold.ttf in Resources */,
 				17040B1221B796D40049C902 /* Assets.xcassets in Resources */,
+				7D48658123F0F31E009C3E5A /* WorkSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,17 +547,6 @@
 			targetProxy = 1751F06B21B06EA400F55356 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		1751F05721B06EA300F55356 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1751F05821B06EA300F55356 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1751F07121B06EA400F55356 /* Debug */ = {
