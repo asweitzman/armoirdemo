@@ -10,15 +10,35 @@ import UIKit
 import FBSDKLoginKit
 import Firebase
 import FirebaseDatabase
+import GoogleSignIn
 
 class FirstViewController: UIViewController {
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    var handle: AuthStateDidChangeListenerHandle?
     
-    /*override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-//        let loginButton = FBLoginButton() commenting this out now bc the button isn't used
-//        loginButton.center = view.center
-//        view.addSubview(loginButton)
-    }*/
+        //let loginButton = FBLoginButton() commenting this out now bc the button isn't used
+        //loginButton.center = view.center
+        //view.addSubview(loginButton)
+          //stuff for Google sign in
+              GIDSignIn.sharedInstance()?.presentingViewController = self
+              guard let signIn = GIDSignIn.sharedInstance() else { return }
+              if (signIn.hasPreviousSignIn()) {
+                signIn.restorePreviousSignIn()
+              }
+              handle = Auth.auth().addStateDidChangeListener() { (auth, user) in
+                if user != nil {
+                  self.performSegue(withIdentifier: "toBegin", sender: nil)
+                }
+              }
+          }
+          
+          deinit {
+          if let handle = handle {
+            Auth.auth().removeStateDidChangeListener(handle)
+          }
+          }
     
     @IBAction func clickedFB(_ sender: Any) {
         let ref = Database.database().reference()
@@ -42,7 +62,7 @@ class FirstViewController: UIViewController {
 
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
            
-           // Perform login by calling Firebase APIs
+            //Perform login by calling Firebase APIs
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                if let error = error {
                    print("Login error: \(error.localizedDescription)")
@@ -63,13 +83,12 @@ class FirstViewController: UIViewController {
     
     
     /*
-    // MARK: - Navigation
+     MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+         Get the new view controller using segue.destination.
+         Pass the selected object to the new view controller.
+    }*/
 
 }

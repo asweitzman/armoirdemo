@@ -276,22 +276,22 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let icon = UIImage(named: "downarrow3")!
-        categoryButton.setImage(icon, for: .normal)
-        categoryButton.imageView?.contentMode = .scaleAspectFit
-        categoryButton.semanticContentAttribute = UIApplication.shared
-            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-        categoryButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: categoryButton.frame.size.width - categoryButton.titleLabel!.intrinsicContentSize.width + 5, bottom: 0, right: 0)
-        filterButton.setImage(icon, for: .normal)
-        filterButton.imageView?.contentMode = .scaleAspectFit
-        filterButton.semanticContentAttribute = UIApplication.shared
-            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-        filterButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: filterButton.frame.size.width - filterButton.titleLabel!.intrinsicContentSize.width - 40, bottom: 0, right: 0)
-        sortByButton.setImage(icon, for: .normal)
-        sortByButton.imageView?.contentMode = .scaleAspectFit
-        sortByButton.semanticContentAttribute = UIApplication.shared
-            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-        sortByButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: sortByButton.frame.size.width - sortByButton.titleLabel!.intrinsicContentSize.width, bottom: 0, right: 0)
+//        let icon = UIImage(named: "downarrow3")!
+//        categoryButton.setImage(icon, for: .normal)
+//        categoryButton.imageView?.contentMode = .scaleAspectFit
+//        categoryButton.semanticContentAttribute = UIApplication.shared
+//            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+//        categoryButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: categoryButton.frame.size.width - categoryButton.titleLabel!.intrinsicContentSize.width + 5, bottom: 0, right: 0)
+//        filterButton.setImage(icon, for: .normal)
+//        filterButton.imageView?.contentMode = .scaleAspectFit
+//        filterButton.semanticContentAttribute = UIApplication.shared
+//            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+//        filterButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: filterButton.frame.size.width - filterButton.titleLabel!.intrinsicContentSize.width - 40, bottom: 0, right: 0)
+//        sortByButton.setImage(icon, for: .normal)
+//        sortByButton.imageView?.contentMode = .scaleAspectFit
+//        sortByButton.semanticContentAttribute = UIApplication.shared
+//            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+//        sortByButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: sortByButton.frame.size.width - sortByButton.titleLabel!.intrinsicContentSize.width, bottom: 0, right: 0)
         
         sortType = 0
         categorySet = false
