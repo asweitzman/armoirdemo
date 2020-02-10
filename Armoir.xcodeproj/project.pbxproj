@@ -27,6 +27,8 @@
 		17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D979E021B22BAA00E74816 /* MainViewController.swift */; };
 		17D979E321B2309F00E74816 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D979E221B2309F00E74816 /* ClosetViewController.swift */; };
 		17D979E521B230BE00E74816 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D979E421B230BE00E74816 /* NewsViewController.swift */; };
+		17EB94AB23F1293B0064E5A2 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17EB94AA23F1293A0064E5A2 /* WorkSans-Regular.ttf */; };
+		17EB94AD23F129450064E5A2 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17EB94AC23F129450064E5A2 /* WorkSans-SemiBold.ttf */; };
 		17F0ED7323F0D51600904F3A /* WorkSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */; };
 		17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */; };
 		17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */; };
@@ -99,6 +101,8 @@
 		17D979E021B22BAA00E74816 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		17D979E221B2309F00E74816 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetViewController.swift; sourceTree = "<group>"; };
 		17D979E421B230BE00E74816 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		17EB94AA23F1293A0064E5A2 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		17EB94AC23F129450064E5A2 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Black.ttf"; sourceTree = "<group>"; };
 		17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Thin.ttf"; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 				17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */,
 				17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */,
 				17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */,
+				17EB94AC23F129450064E5A2 /* WorkSans-SemiBold.ttf */,
+				17EB94AA23F1293A0064E5A2 /* WorkSans-Regular.ttf */,
 				17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */,
 				17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */,
 				17040B0921B775040049C902 /* Alike-Regular.ttf */,
@@ -393,10 +399,12 @@
 				1732E87623EB990A00E4F3E1 /* GoogleService-Info.plist in Resources */,
 				17040B0A21B775BD0049C902 /* Alike-Regular.ttf in Resources */,
 				179234B521BC745400B391F5 /* test2.json in Resources */,
+				17EB94AD23F129450064E5A2 /* WorkSans-SemiBold.ttf in Resources */,
 				17B3022E21B65735004E5EF8 /* images in Resources */,
 				17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */,
 				17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */,
 				17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */,
+				17EB94AB23F1293B0064E5A2 /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */,
 				17040B0821B76B180049C902 /* search.json in Resources */,
 				17F0ED7623F0D51600904F3A /* WorkSans-ExtraBold.ttf in Resources */,
