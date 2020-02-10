@@ -13,9 +13,6 @@
         <array key="WorkSans-Regular.ttf">
             <string>WorkSans-Regular</string>
         </array>
-        <array key="WorkSans-SemiBold.ttf">
-            <string>WorkSans-SemiBold</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Settings-->
@@ -927,7 +924,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="lHf-p4-AVO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1347,7 +1344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Fc-Sh-1dY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2121" y="1009"/>
+            <point key="canvasLocation" x="2247" y="1552"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Dw-F3-Ixn">
@@ -2241,11 +2238,11 @@
         <image name="settingsbutton" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KpY-Yi-dgg"/>
-        <segue reference="jab-sZ-aSN"/>
+        <segue reference="Bd7-2P-vBi"/>
+        <segue reference="6GD-De-Suz"/>
         <segue reference="dTl-b8-yKo"/>
         <segue reference="Om7-qJ-M5f"/>
-        <segue reference="43q-gw-GJD"/>
+        <segue reference="P0h-GW-DiH"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
 </document>

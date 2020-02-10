@@ -173,13 +173,13 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func loadProfImage() {
-        /*let url = currentUser?.photoURL
+        let url = currentUser?.photoURL
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)
         //let image = UIImage(named: currUser.profPic);
         self.profilePicture.image = image;
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
-        self.profilePicture.clipsToBounds = true;*/ 
+        self.profilePicture.clipsToBounds = true;
     }
     
     func showUserName() {
