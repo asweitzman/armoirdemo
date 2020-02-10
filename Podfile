@@ -19,6 +19,14 @@ target 'Armoir' do
     pod 'FBSDKCoreKit/Swift'
     pod 'FBSDKLoginKit/Swift'
     pod 'FBSDKShareKit/Swift'
+    pod 'MessageKit'
+    pod 'Firebase/InAppMessaging'#added, probs unnecessary
+    pod 'Firebase/Messaging' #added
+    pod 'Firebase/Firestore' #added
+    pod 'Firebase/Core' #added
+    pod 'Firebase/Storage' #added
+    pod 'GoogleSignIn'
+    pod 'Firebase/Database'
 
   target 'ArmoirTests' do
     inherit! :search_paths

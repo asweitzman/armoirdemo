@@ -32,15 +32,18 @@
 		17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */; };
 		17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */; };
 		17F0ED7623F0D51600904F3A /* WorkSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */; };
-		17F0ED7723F0D51600904F3A /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6E23F0D51500904F3A /* WorkSans-Regular.ttf */; };
-		17F0ED7823F0D51600904F3A /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED6F23F0D51500904F3A /* WorkSans-Bold.ttf */; };
 		17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */; };
 		17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */; };
-		17F0ED7B23F0D51600904F3A /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7223F0D51600904F3A /* WorkSans-SemiBold.ttf */; };
 		2F4EB6A65C6E1331B9831F4D /* Pods_Armoir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */; };
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
 		6250122221BAAE5B0015F10A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6250122121BAAE5B0015F10A /* SwiftyJSON.framework */; };
+		6409E25123F0DD84001AA5A4 /* FriendlyChatSwift in Resources */ = {isa = PBXBuildFile; fileRef = 6409E25023F0DD84001AA5A4 /* FriendlyChatSwift */; };
+		6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */; };
+		6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */; };
+		6409E25923F0E961001AA5A4 /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6409E25823F0E961001AA5A4 /* WorkSans-Bold.ttf */; };
+		6409E25B23F0E96E001AA5A4 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6409E25A23F0E96E001AA5A4 /* WorkSans-Regular.ttf */; };
+		6409E25D23F0E979001AA5A4 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6409E25C23F0E979001AA5A4 /* WorkSans-SemiBold.ttf */; };
 		645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645905A423DE5DEE00930FD8 /* InboxViewController.swift */; };
 		71388D7221B87D0B00232F7B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71388D7121B87D0B00232F7B /* StartViewController.swift */; };
 		7193F59621BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
@@ -105,11 +108,8 @@
 		17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Thin.ttf"; sourceTree = "<group>"; };
 		17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-ExtraBold.ttf"; sourceTree = "<group>"; };
-		17F0ED6E23F0D51500904F3A /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
-		17F0ED6F23F0D51500904F3A /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Bold.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Light.ttf"; sourceTree = "<group>"; };
 		17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
-		17F0ED7223F0D51600904F3A /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		2BFD9C27390DC9FB9E7BC3FA /* Pods-Armoir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.release.xcconfig"; sourceTree = "<group>"; };
 		3461F10B23DE572A00D3DF81 /* GoogleService-Info old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info old.plist"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +117,12 @@
 		6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6216B1DA21BAA73300AB5943 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6250122121BAAE5B0015F10A /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6409E25023F0DD84001AA5A4 /* FriendlyChatSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FriendlyChatSwift; path = "../../../Downloads/friendlychat-ios-master/ios-starter/swift-starter/FriendlyChatSwift"; sourceTree = "<group>"; };
+		6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConstants.swift; sourceTree = "<group>"; };
+		6409E25823F0E961001AA5A4 /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Bold.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Bold.ttf"; sourceTree = "<group>"; };
+		6409E25A23F0E96E001AA5A4 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		6409E25C23F0E979001AA5A4 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		645905A423DE5DEE00930FD8 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		71388D7121B87D0B00232F7B /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7193F59521BA370700427907 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -187,10 +193,13 @@
 		1751F04D21B06E9F00F55356 /* Armoir */ = {
 			isa = PBXGroup;
 			children = (
+				6409E25023F0DD84001AA5A4 /* FriendlyChatSwift */,
 				1751F04E21B06E9F00F55356 /* AppDelegate.swift */,
 				7193F59521BA370700427907 /* Main.storyboard */,
 				179234B821BCEA4C00B391F5 /* FirstViewController.swift */,
+				6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */,
 				17040B1521B9FA760049C902 /* SearchItemDetailViewController.swift */,
+				6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */,
 				17040B0F21B78D000049C902 /* CameraViewController.swift */,
 				17040B0D21B77BD80049C902 /* AddItemViewController.swift */,
 				176F559021B746BA00FFF556 /* SignUpViewController.swift */,
@@ -242,13 +251,13 @@
 			isa = PBXGroup;
 			children = (
 				17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */,
-				17F0ED6F23F0D51500904F3A /* WorkSans-Bold.ttf */,
 				17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */,
 				17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */,
+				6409E25C23F0E979001AA5A4 /* WorkSans-SemiBold.ttf */,
 				17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */,
+				6409E25A23F0E96E001AA5A4 /* WorkSans-Regular.ttf */,
+				6409E25823F0E961001AA5A4 /* WorkSans-Bold.ttf */,
 				17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */,
-				17F0ED6E23F0D51500904F3A /* WorkSans-Regular.ttf */,
-				17F0ED7223F0D51600904F3A /* WorkSans-SemiBold.ttf */,
 				17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */,
 				17040B0921B775040049C902 /* Alike-Regular.ttf */,
 			);
@@ -294,6 +303,7 @@
 				1751F04821B06E9F00F55356 /* Frameworks */,
 				1751F04921B06E9F00F55356 /* Resources */,
 				909DFF59F7CFADDDD3BE0B86 /* [CP] Embed Pods Frameworks */,
+				22FF467BC4558932B9EC55DD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -393,19 +403,20 @@
 				17F0ED7323F0D51600904F3A /* WorkSans-Black.ttf in Resources */,
 				7193F59621BA370700427907 /* Main.storyboard in Resources */,
 				1732E87623EB990A00E4F3E1 /* GoogleService-Info.plist in Resources */,
+				6409E25923F0E961001AA5A4 /* WorkSans-Bold.ttf in Resources */,
 				17040B0A21B775BD0049C902 /* Alike-Regular.ttf in Resources */,
-				17F0ED7B23F0D51600904F3A /* WorkSans-SemiBold.ttf in Resources */,
 				179234B521BC745400B391F5 /* test2.json in Resources */,
-				17F0ED7723F0D51600904F3A /* WorkSans-Regular.ttf in Resources */,
 				17B3022E21B65735004E5EF8 /* images in Resources */,
 				17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */,
 				1751F05921B06EA300F55356 /* LaunchScreen.storyboard in Resources */,
-				17F0ED7823F0D51600904F3A /* WorkSans-Bold.ttf in Resources */,
+				6409E25123F0DD84001AA5A4 /* FriendlyChatSwift in Resources */,
 				17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */,
 				17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */,
 				17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */,
 				17040B0821B76B180049C902 /* search.json in Resources */,
 				17F0ED7623F0D51600904F3A /* WorkSans-ExtraBold.ttf in Resources */,
+				6409E25D23F0E979001AA5A4 /* WorkSans-SemiBold.ttf in Resources */,
+				6409E25B23F0E96E001AA5A4 /* WorkSans-Regular.ttf in Resources */,
 				17040B1221B796D40049C902 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +456,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		22FF467BC4558932B9EC55DD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Armoir/Pods-Armoir-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Armoir/Pods-Armoir-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Armoir/Pods-Armoir-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		909DFF59F7CFADDDD3BE0B86 /* [CP] Embed Pods Frameworks */ = {
@@ -513,6 +541,7 @@
 				17D979E321B2309F00E74816 /* ClosetViewController.swift in Sources */,
 				743BD5EB21B9ECCF00855A1E /* LentItemViewController.swift in Sources */,
 				1751F04F21B06E9F00F55356 /* AppDelegate.swift in Sources */,
+				6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */,
 				71388D7221B87D0B00232F7B /* StartViewController.swift in Sources */,
 				6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */,
 				17D979E521B230BE00E74816 /* NewsViewController.swift in Sources */,
@@ -525,6 +554,7 @@
 				17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */,
 				743BD5E921B9DEAB00855A1E /* BorrowedItemDetailViewController.swift in Sources */,
 				645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */,
+				6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */,
 				1751F07D21B08B2100F55356 /* ProductBrowseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,7 +723,8 @@
 			baseConfigurationReference = 85BC3CC017DAD85A6498EF3B /* Pods-Armoir.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JRJVB7D2S2;
 				INFOPLIST_FILE = Armoir/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -703,7 +734,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs194h.Armoir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Armoir Development Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -715,7 +746,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CQRZ4E7K9U;
+				DEVELOPMENT_TEAM = JRJVB7D2S2;
 				INFOPLIST_FILE = Armoir/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
