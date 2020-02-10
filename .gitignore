@@ -5,3 +5,14 @@ Pods/
 /.DS_Store
 ./DS_Store
 Armoir.xcworkspace/xcuserdata/*
+## Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+
+### Xcode Patch ###
+**/xcshareddata/WorkspaceSettings.xcsettings
+## User settings
+xcuserdata/
