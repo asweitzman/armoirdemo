@@ -18,6 +18,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     let itemsPerRow: CGFloat = 2.0
     let currentUser = Auth.auth().currentUser
     var status_lending = true
+    var user = Auth.auth().currentUser
 
     @IBOutlet weak var tabPicker: UISegmentedControl!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -173,13 +174,13 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func loadProfImage() {
-        /*let url = currentUser?.photoURL
+        let url = currentUser?.photoURL
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)
         //let image = UIImage(named: currUser.profPic);
         self.profilePicture.image = image;
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
-        self.profilePicture.clipsToBounds = true;*/ 
+        self.profilePicture.clipsToBounds = true;
     }
     
     func showUserName() {
@@ -192,10 +193,11 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        var ref = Database.database().reference()
         //for clothes you are lending
         if (status_lending) {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
+            var closetRef = ref.child("users").child(user!.uid).child("closet")
             let i = currArray[indexPath.row]
             cell.itemName.text = i.name;
             let imgURL = i.image

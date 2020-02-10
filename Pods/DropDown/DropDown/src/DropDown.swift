@@ -288,12 +288,12 @@ public final class DropDown: UIView {
 	/**
 	The option of the show animation. Only change the caller. To change all drop down's use the static var.
 	*/
-    public var animationEntranceOptions: UIView.AnimationOptions = DropDown.animationEntranceOptions
+	public var animationEntranceOptions: UIViewAnimationOptions = DropDown.animationEntranceOptions
 	
 	/**
 	The option of the hide animation. Only change the caller. To change all drop down's use the static var.
 	*/
-    public var animationExitOptions: UIView.AnimationOptions = DropDown.animationExitOptions
+	public var animationExitOptions: UIViewAnimationOptions = DropDown.animationExitOptions
 
 	/**
 	The downScale transformation of the tableview when the DropDown is appearing
@@ -730,7 +730,7 @@ extension DropDown {
 		for index in 0..<dataSource.count {
 			configureCell(templateCell, at: index)
 			templateCell.bounds.size.height = cellHeight
-            let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
+			let width = templateCell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).width
 			
 			if width > maxWidth {
 				maxWidth = width
@@ -812,7 +812,7 @@ extension DropDown {
 
 		let visibleWindow = UIWindow.visibleWindow()
 		visibleWindow?.addSubview(self)
-        visibleWindow?.bringSubviewToFront(self)
+		visibleWindow?.bringSubview(toFront: self)
 
 		self.translatesAutoresizingMaskIntoConstraints = false
 		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
@@ -1117,12 +1117,12 @@ extension DropDown {
 		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(keyboardUpdate),
-            name: UIResponder.keyboardWillShowNotification,
+			name: NSNotification.Name.UIKeyboardWillShow,
 			object: nil)
 		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(keyboardUpdate),
-            name: UIResponder.keyboardWillHideNotification,
+			name: NSNotification.Name.UIKeyboardWillHide,
 			object: nil)
 	}
 
