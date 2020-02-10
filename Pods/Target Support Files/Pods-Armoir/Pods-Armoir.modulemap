@@ -1,6 +1,0 @@
-framework module Pods_Armoir {
-  umbrella header "Pods-Armoir-umbrella.h"
-
-  export *
-  module * { export * }
-}

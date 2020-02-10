@@ -1,6 +1,0 @@
-framework module Pods_ArmoirTests {
-  umbrella header "Pods-ArmoirTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
