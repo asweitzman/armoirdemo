@@ -93,7 +93,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         //}
         
 
-//        print("URL: " + imageURL)
+        print("URL: " + imageURL)
             /*if let price = Double(price.text) {
 
             } else {
@@ -136,12 +136,12 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         //2. use the index to change the actual element in all users
         //print (all_users[i]) //testing before
  
-        /*var temp = all_users[i].closet
+        var temp = all_users[i].closet
          
         temp.append(new_item)
         all_users[i].closet = temp
-        print(all_users[i]) // testing after*/
-/*
+        print(all_users[i]) // testing after
+
         //to check if all_users updated
         //print(all_users)
 
@@ -220,7 +220,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
 
 
         
-        let new_item = Item(item_id: numItems+1, name: "Jean Jacket", owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: "jeanJacketFinal", color: "red", size: "M", price: price, category: category)
+       /* let new_item = Item(item_id: numItems+1, name: "Jean Jacket", owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: "jeanJacketFinal", color: "red", size: "M", price: price, category: category)
 
   */
  /*let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: imageURL, color: color, size: "S", price: price, category: "shirt")

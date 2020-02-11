@@ -41,7 +41,12 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.profileImage.image = UIImage(named: "images/rhea.png")
-
+        if let url = currentUser?.photoURL {
+            let data = try? Data(contentsOf: url)
+            let image = try? UIImage(data: data!)
+            self.profileImage.image = image as! UIImage;
+        }
+        
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
         self.profileImage.clipsToBounds = true
         makeButtonsRound()

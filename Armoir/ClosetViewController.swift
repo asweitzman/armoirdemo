@@ -11,12 +11,14 @@ import Firebase
 
 var documentsURL: URL = NSURLComponents().url!
 
+let currentUser = Auth.auth().currentUser
+
 class ClosetViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     let itemsPerRow: CGFloat = 2.0
-    let currentUser = Auth.auth().currentUser
+    //let currentUser = Auth.auth().currentUser
     var status_lending = true
     var user = Auth.auth().currentUser
 
@@ -174,13 +176,15 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func loadProfImage() {
-        //let url = currentUser?.photoURL
-       // let data = try? Data(contentsOf: url!)
-       //let image = try? UIImage(data: data!)
-        //let image = UIImage(named: currUser.profPic);
-        //self.profilePicture.image = image;
-        //self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
-//        self.profilePicture.clipsToBounds = true;
+        if let url = currentUser?.photoURL {
+            let data = try? Data(contentsOf: url)
+            //let image = UIImage(named: currUser.profPic);
+            let image = try? UIImage(data: data!)
+            self.profilePicture.image = image as! UIImage;
+        }
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
+        self.profilePicture.clipsToBounds = true;
+        
     }
     
     func showUserName() {
@@ -197,7 +201,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         //for clothes you are lending
         if (status_lending) {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
-            var closetRef = ref.child("users").child(user!.uid).child("closet")
+//            var closetRef = ref.child("users").child(user!.uid).child("closet")
             let i = currArray[indexPath.row]
             cell.itemName.text = i.name;
             let imgURL = i.image

@@ -11,6 +11,7 @@ import UIKit
 
 class BorrowedItemDetailViewController: UIViewController {
     
+    @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var sizeDetail: UILabel!
     @IBOutlet weak var priceDetail: UILabel!
     @IBOutlet weak var userName: UILabel!
@@ -20,6 +21,7 @@ class BorrowedItemDetailViewController: UIViewController {
     @IBOutlet weak var itemDescrip: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        reminderButton.isHidden = true
         for i in currArray {
             if (i.item_id == currItem) {
                 priceDetail.text = "$" + String(i.price) + "/day";
@@ -42,9 +44,10 @@ class BorrowedItemDetailViewController: UIViewController {
                 if (i.borrowed) {
                     userID = i.borrowed_by;
                     distanceText.text = "Borrowed by";
-
+                    reminderButton.isHidden = false;
                 } else {
                     distanceText.text = "Currently available";
+                    reminderButton.isHidden = true;
                 }
                 var user: a_User;
                 /*var myStructArray:[a_User] = [];
@@ -58,15 +61,19 @@ class BorrowedItemDetailViewController: UIViewController {
                 for stru in all_users {
                     if stru.user_ID == userID {
                         user = stru;
+                        var image = UIImage(named: user.profPic);
                         if (i.borrowed) {
                             userName.text = user.owner;
 
                         } else {
                             userName.text = "Owned by you";
-
-
+                            if let url = currentUser?.photoURL {
+                                let data = try? Data(contentsOf: url)
+                                image = try! UIImage(data: data!)
+                                self.profPic.image = image as! UIImage;
+                            }
                         }
-                        let image = UIImage(named: user.profPic);
+                        
                         self.profPic.image = image;
                         self.profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
                         self.profPic.clipsToBounds = true;
