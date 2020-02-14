@@ -12,13 +12,14 @@ import Firebase
 var documentsURL: URL = NSURLComponents().url!
 
 let currentUser = Auth.auth().currentUser
+let storageRef = Storage.storage().reference()
 
 class ClosetViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     let itemsPerRow: CGFloat = 2.0
-    //let currentUser = Auth.auth().currentUser
+
     var status_lending = true
     var user = Auth.auth().currentUser
 
@@ -101,86 +102,100 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func loadData() {
-        
-        //1. read json from file: DONE
-        var longJsonData = ""
-        //let url = Bundle.main.url(forResource: "search", withExtension: "json")!
-       // let url = URL(string: fullDestPathString)
-        do {
-            let jsonData = try Data(contentsOf: fullDestPath)
-            try all_users = JSONDecoder().decode([a_User].self, from: jsonData);
-
-        }
-        catch {
-            print("read error:")
-            print(error)
-        }
-
-        //2. when adding, add to the all_users array: to do in code
-
-
-        //3. then, encode it to be in json
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        do {
-            let data = try encoder.encode(all_users)
-            longJsonData = String(data: data, encoding: .utf8)!
-            //print(String(data: data, encoding: .utf8)!)
-            print("DONE ENCODING")
-        }
-        catch {
-            print("array didn't work");
-        }
-        //print(longJsonData)
-
-        //4. write to search.json with new encoded string
-        let text = longJsonData
-         do {
-             try text.write(toFile: fullDestPathString, atomically: true, encoding: String.Encoding.utf8)
-             print(fullDestPathString)
-         }
-         catch {
-            print("write error:")
-             print(error)
-         }
-        
-//        let path = "test2" //this is the file. we will write to and read from it
-//        print("continuing");
-//        let text = longJsonData //just a text
-//        if let fileURL = Bundle.main.url(forResource: path, withExtension: "json") {
-//            //print(fileURL)
-//            //writing
-//            do {
-//                try text.write(to: fileURL, atomically: false, encoding: .utf8)
-//                print("tried to write")
-//                let url = Bundle.main.url(forResource: "search", withExtension: "json")!
-//                do {
-//                    let jsonData = try Data(contentsOf: url)
-//                    all_users = try JSONDecoder().decode([a_User].self, from: jsonData);
-//                    //print(newArray)
-//                }
-//                catch {
-//                    print(error)
-//                }
-//            }
-//            catch {
-//                print ("oh no");
-//            }
-//        }
-        
-        for user_instance in all_users {
-            if user_instance.user_ID == user_num {
-                currUser = user_instance;
+            let ref = Database.database().reference()
+            //let currUser = Auth.auth().currentUser
+            //1. read json from file: DONE
+            var longJsonData = ""
+            //let url = Bundle.main.url(forResource: "search", withExtension: "json")!
+           // let url = URL(string: fullDestPathString)
+            do {
+                //let jsonData = try Data(contentsOf: fullDestPath)
+                let user = ref.child("users").child(currentUser!.uid)
+                user.observeSingleEvent(of: .value) { (snapshot) in
+                    let value = snapshot.value as! [String : Any]
+                    let json = try? JSONSerialization.data(withJSONObject: value, options: [])
+                    if let JSONString = String(data: json!, encoding: String.Encoding.utf8) {
+                       print("json string: " + JSONString)
+                    }
+                    do {
+                        try firebaseUser = JSONDecoder().decode(firebase_User.self, from: json!)
+                    } catch let error {
+                        print("there is an error")
+                        print(error)
+                    }
+                }
+                //try all_users = JSONDecoder().decode([a_User].self, from: jsonData);
             }
+            catch {
+                print("read error:")
+                print(error)
+            }
+
+            //2. when adding, add to the all_users array: to do in code
+
+
+            //3. then, encode it to be in json
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            do {
+                let data = try encoder.encode(all_users)
+                longJsonData = String(data: data, encoding: .utf8)!
+                //print(String(data: data, encoding: .utf8)!)
+                print("DONE ENCODING")
+            }
+            catch {
+                print("array didn't work");
+            }
+            //print(longJsonData)
+
+            //4. write to search.json with new encoded string
+            let text = longJsonData
+             do {
+                 try text.write(toFile: fullDestPathString, atomically: true, encoding: String.Encoding.utf8)
+                 print(fullDestPathString)
+             }
+             catch {
+                print("write error:")
+                 print(error)
+             }
+            
+    //        let path = "test2" //this is the file. we will write to and read from it
+    //        print("continuing");
+    //        let text = longJsonData //just a text
+    //        if let fileURL = Bundle.main.url(forResource: path, withExtension: "json") {
+    //            //print(fileURL)
+    //            //writing
+    //            do {
+    //                try text.write(to: fileURL, atomically: false, encoding: .utf8)
+    //                print("tried to write")
+    //                let url = Bundle.main.url(forResource: "search", withExtension: "json")!
+    //                do {
+    //                    let jsonData = try Data(contentsOf: url)
+    //                    all_users = try JSONDecoder().decode([a_User].self, from: jsonData);
+    //                    //print(newArray)
+    //                }
+    //                catch {
+    //                    print(error)
+    //                }
+    //            }
+    //            catch {
+    //                print ("oh no");
+    //            }
+    //        }
+            
+    //        for user_instance in all_users {
+    //            if user_instance.user_ID == user_num {
+    //                currUser = user_instance;
+    //            }
+    //        }
         }
-    }
     
     func loadProfImage() {
         if let url = currentUser?.photoURL {
             let data = try? Data(contentsOf: url)
             //let image = UIImage(named: currUser.profPic);
             let image = try? UIImage(data: data!)
-            self.profilePicture.image = image as! UIImage;
+            self.profilePicture.image = image as! UIImage
         }
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
         self.profilePicture.clipsToBounds = true;
@@ -192,7 +207,8 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currArray.count
+        //return currArray.count
+        return currFirebaseArray.count
     }
 
     
@@ -202,15 +218,26 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         if (status_lending) {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
 //            var closetRef = ref.child("users").child(user!.uid).child("closet")
-            let i = currArray[indexPath.row]
+            //let i = currArray[indexPath.row]
+            let i = currFirebaseArray[indexPath.row]
             cell.itemName.text = i.name;
-            let imgURL = i.image
+            let imageRef = storageRef.child("images/" + String(i.image))
+            imageRef.downloadURL { url, error in
+              if let error = error {
+                print("image download error")
+              } else {
+                let data = try? Data(contentsOf: url!)
+                let image = try? UIImage(data: data!)
+                cell.img_display.image = image as! UIImage;
+              }
+            }
+/*            let imgURL = i.image
             if (ImageRetriever().fileIsURL(fileName: imgURL)) {
                 cell.img_display.image = ImageRetriever().loadImg(fileURL: URL(string: imgURL)!)
             } else {
                 cell.img_display.image = UIImage(named: i.image);
             }
-            cell.img_display.contentMode = .scaleAspectFit;
+*/          cell.img_display.contentMode = .scaleAspectFit;
             cell.img_display.layer.borderWidth = 1;
             if (i.borrowed) {
                 cell.backgroundColor = UIColor(hue: 0.0028, saturation: 0, brightness: 0.82, alpha: 1.0)
@@ -225,20 +252,33 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         } // for borrowing clothes
         else {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "borrowingCell",for: indexPath) as! BorrowedCell
-            let i = currArray[indexPath.row]
-            let imgURL = i.image
+            //let i = currArray[indexPath.row]
+            let i = currFirebaseArray[indexPath.row]
+/*            let imgURL = i.image
             if (ImageRetriever().fileIsURL(fileName: imgURL)) {
                 cell.img_display.image = ImageRetriever().loadImg(fileURL: URL(string: imgURL)!)
             } else {
                 
                 cell.img_display.image = UIImage(named: i.image);
+    
+            }
+ */
+            let imageRef = storageRef.child("images/" + String(i.image))
+            imageRef.downloadURL { url, error in
+              if let error = error {
+                print("image download error")
+              } else {
+                let data = try? Data(contentsOf: url!)
+                let image = try? UIImage(data: data!)
+                cell.img_display.image = image as! UIImage;
+              }
             }
             cell.img_display.contentMode = .scaleAspectFit;
             cell.img_display.layer.borderWidth = 1;
             cell.dist_display.text = "1.2 mi";
             cell.due_display.text = "Due in 10 days";
             cell.due_display.textColor = UIColor.black;
-            cell.price_display.text = String(i.price);
+            cell.price_display.text = String(format: "%f", i.price);
             cell.backgroundColor = UIColor.white
             return cell
         }
@@ -248,7 +288,8 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
 
 
     func loadLending() {
-        currArray = currUser.closet;
+        //currArray = currUser.closet;
+        currFirebaseArray = firebaseUser.closet;
         status_lending = true;
     }
     
@@ -259,7 +300,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         case 0:
             loadLending();
         case 1:
-            currArray = currUser.borrowed;
+            //currArray = currUser.borrowed;
             status_lending = false;
         default:
             break
@@ -268,7 +309,8 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currItem = currArray[indexPath.row].item_id;
+        //currItem = currArray[indexPath.row].item_id;
+        currItem = currFirebaseArray[indexPath.row].item_id
 
     }
     

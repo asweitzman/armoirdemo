@@ -14,8 +14,11 @@ var itemImage: UIImage = UIImage()
 var startWithCamera: Bool = Bool()
 var currItem: Int = 0
 var user_num = 123;
-var currUser = a_User(user_ID: 123, profPic: "", owner: "", borrowed: [], closet: []);
-var currArray: [Item] = [];
+var currUser = a_User(user_ID: 123, profPic: "", owner: "", closet: [], borrowed: []);
+var firebaseUser = firebase_User(username: "", display_name: "", closet: []);
+var currArray: [Item] = []
+var closetItem = closet_item(item_id: 0, borrowed: false, borrowed_by: 0, category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
+var currFirebaseArray: [closet_item] = []
 var longJsonData: String = ""
 var fullDestPathString: String = ""
 var fullDestPath: URL = NSURLComponents().url!
@@ -59,7 +62,34 @@ struct Item: Codable {
     }
 }
 
-
+struct closet_item: Codable {
+    let item_id: Int;
+    var borrowed: Bool;
+    var borrowed_by: Int;
+    var category: String;
+    var color: String;
+    var image: String;
+    var name: String;
+    var owner: String;
+    var price: Int;
+    var size: String;
+    //var distance: Double
+    
+    init(item_id: Int, borrowed: Bool, borrowed_by: Int, category: String, color: String, image: String,
+         name: String, owner: String, price: Int, size: String) {
+        self.item_id = item_id;
+        self.borrowed = borrowed;
+        self.borrowed_by = borrowed_by;
+        self.category = category;
+        self.color = color;
+        self.image = image;
+        self.name = name;
+        self.owner = owner;
+        self.price = price;
+        self.size = size;
+        //self.distance = 1.2
+    }
+}
 
 struct a_User {
     let user_ID: Int
@@ -69,7 +99,7 @@ struct a_User {
     var borrowed: [Item]
     var closet: [Item]
     
-    init(user_ID: Int, profPic: String, owner: String, borrowed:[Item], closet: [Item]) {
+    init(user_ID: Int, profPic: String, owner: String, closet: [Item] , borrowed: [Item]) {
         self.user_ID = user_ID;
         self.profPic = profPic;
         self.owner = owner;
@@ -78,6 +108,26 @@ struct a_User {
         self.distance = "1.2 mi";
     }
 }
+
+struct firebase_User: Codable {
+    //let user_ID: String
+    let username: String
+    var display_name: String
+    //var distance: String
+    //var borrowed: [closet_item]
+    var closet: [closet_item]
+    //var distance: String
+    
+    init(username: String, display_name: String, closet: [closet_item]) {
+        //self.user_ID = "123"
+        self.username = username;
+        self.display_name = display_name;
+        self.closet = closet;
+        //self.borrowed = [];
+        //self.distance = "1.2 mi";
+    }
+}
+
 //DONT WORRY ABOUT THIS
 extension a_User: Codable {
     enum userStructKeys: String, CodingKey { // declaring our keys
@@ -142,7 +192,7 @@ extension a_User: Codable {
             let item = Item(item_id: item_id, name: i_name, owner: owner, borrowed: borrowed_b, borrowed_by: borrowed_by, image: image, color: color, size: size, price: price, category: category);
             closet.append(item);
         }
-        self.init(user_ID: user_ID,profPic: profPic, owner: owner, borrowed: borrowed, closet: closet) // initializing our struct
+        self.init(user_ID: user_ID,profPic: profPic, owner: owner, closet: closet, borrowed: borrowed) // initializing our struct
         
     }
 }

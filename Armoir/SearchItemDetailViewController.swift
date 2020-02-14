@@ -44,7 +44,7 @@ class SearchItemDetailViewController: UIViewController {
                 it_i = 0
             }
             for it in u.closet {
-                if (it.item_id == chosenItem["item_id"].int) {
+                if (it.item_id == chosenItem.item_id) {
                     found = true
                 }
                 if (!found) {
@@ -142,28 +142,35 @@ class SearchItemDetailViewController: UIViewController {
 
         override func viewDidLoad() {
             super.viewDidLoad()
-           
+            let currentUser = Auth.auth().currentUser
             print(chosenItem)
-            itemSize.text = "Size: " + chosenItem["size"].string!
-            itemDescrip.text = chosenItem["name"].string
-            if let imageStr = chosenItem["image"].string {
-                itemImage.image = UIImage(named:  imageStr)
+            itemSize.text = "Size: " + chosenItem.size
+            itemDescrip.text = chosenItem.size
+            let imageRef = storageRef.child("images/\(chosenItem.image)/")
+            imageRef.downloadURL { url, error in
+              if let error = error {
+                print("image download error")
+              } else {
+                let data = try? Data(contentsOf: url!)
+                let image = try? UIImage(data: data!)
+                self.itemImage.image = image as! UIImage;
+              }
             }
-            if let currPrice = chosenItem["price"].int {
-                priceDetail.text = "$" + String(currPrice) + "/day";
-            }
-            distanceText.text = chosenItem["distance"].string! + " mi"
+            let currPrice = chosenItem.price 
+            priceDetail.text = "$" + String(currPrice) + "/day";
+
+            //distanceText.text = String(chosenItem.distance) + " mi"
             itemImage.clipsToBounds = true;
-            for (_,user) in readableJSON {
-                if (user["user_ID"].int == chosenItem["owner"].int) {
-                    if let imageStr = user["profPic"].string {
-                        profPic.image = UIImage(named: imageStr)
-                        profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
-                        profPic.clipsToBounds = true;
-                    }
-                    userName.text = user["owner"].string
-                }
-            }
+//            for (_,user) in readableJSON {
+//                if (currentUser!.uid == chosenItem.owner) {
+//                    if let imageStr = user["profPic"].string {
+//                        profPic.image = UIImage(named: imageStr)
+//                        profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
+//                        profPic.clipsToBounds = true;
+//                    }
+//                    userName.text = currentUser.uid
+//                }
+//            }
             
             /*for i in currArray {
                 if (i.item_id == chosenItem["item_id"].int) {
