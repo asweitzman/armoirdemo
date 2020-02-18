@@ -38,11 +38,11 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currItem = data[indexPath.row].item_id
         if (data[indexPath.row].borrowed!) {
-            currArray = currUser.borrowed
+            //currArray = currUser.borrowed
             performSegue(withIdentifier: "goToItemYouBorrowed",
                          sender: self)
         } else {
-            currArray = currUser.closet
+            //currArray = currUser.closet
             performSegue(withIdentifier: "goToItemYouLent",
                          sender: self)
         }
@@ -95,12 +95,14 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let item_id = item.item_id
                 var prof = ""
                 var profileimg = UIImage(named: item.image)
+                /*
                 for u in all_users { //changed from users
                     if (u.user_ID == item.borrowed_by) {
                         prof = u.owner
                         profileimg = UIImage(named: u.profPic)!
                     }
                 }
+ */
                 let dst = item.distance
                 let msg = prof + " borrowed "+"\""+item.name+"\" from your closet";
                 data.append(Cell(productImage: productimg, profileImage: profileimg, profile: prof, distance: dst, message: msg, borrowed: false, item_id: item_id))

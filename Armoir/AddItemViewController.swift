@@ -57,14 +57,23 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
       return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
+    func addItem(itemNumber: Int, description: String, owner: String, imageID: String, size: String, price: Double, category: String, itemID: Int) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        print("item id 2: " + String(itemID))
+        let item = ["item_id": itemNumber, "name": description, "owner": "dpJP8TbwfmYPez221rTyiD84vNf1", "borrowed": false, "borrowed_by": 0, "image": imageID, "color": "", "size": size, "price": price, "category": category, "distance": 1.2] as [String : Any]
+        ref.child("items").child(String(itemNumber)).setValue(item)
+        var currItemsRef = ref.child("users").child(user!.uid).child("closet")
+        ref.child("users/\(user!.uid)/closet/\(itemID)/").setValue(item)
+    }
+    
     @IBAction func buttonTapped(_ sender: UIButton) {
-        /*
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let ref = Database.database().reference()
         var user = Auth.auth().currentUser
         Analytics.logEvent("add_item_button_pressed", parameters: ["item" : "pressed"])
-*/
+
         if (Description.text == "" || Price.text == "" || categoryButton.titleLabel!.text == "Category" || sizeButton.titleLabel!.text == "Size") {
 
             missingDetailsLabel.isHidden = false
@@ -73,19 +82,17 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         //let description: String = Description.text!
         //needs to be a double based on what they enter
 
-         var imageURL = ""
-        /*
-            let imageID = randomString(length:8)
-            let imageRef = storageRef.child("images/" + imageID);
-            var imageData = Data()
-            imageData = itemImage.jpegData(compressionQuality: 0.8)!
-            let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
-              guard let metadata = metadata else {
-                // Uh-oh, an error occurred!
-                return
-              }
-            }
-*/
+        var imageURL = ""
+        let imageID = randomString(length:8)
+        let imageRef = storageRef.child("images/" + imageID);
+        var imageData = Data()
+        imageData = itemImage.jpegData(compressionQuality: 0.8)!
+        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+          guard let metadata = metadata else {
+            // Uh-oh, an error occurred!
+            return
+          }
+        }
         //if (!startWithCamera) {
             ImageRetriever().save(image: itemImage);
             imageURL = ImageRetriever().loadStr(fileName: "SavedImage" + String(numImgSaved))
@@ -113,15 +120,30 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
 //        if (imageID != "") {}
         
        // if (imageURL != "") {}
-            let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: imageURL, color: "", size: itemSize, price: priceDouble, category: itemCategory)
+            //let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: "0", image: imageURL, color: "", size: itemSize, price: priceDouble, category: itemCategory)
         
 
             //save to firebase database
-//            let itemID = imageID
-//            ref.child("items").child(itemID).setValue(["name": description, "owner": user?.uid, "borrowed": false, "borrowed_by": 0, "image": imageID, "color": "", "size": itemSize, "price": priceDouble, "category": itemCategory])
-//            var currItemsRef = ref.child("users").child(user!.uid).child("closet")
-//            ref.child("users/\(user!.uid)/closet/\(itemID)/").setValue(true)
-
+            var itemID = 0
+            var itemNumber = 0
+            let closetRef = ref.child("users").child(user!.uid).child("closet")
+            let itemsRef = ref.child("items")
+            let group = DispatchGroup()
+            group.enter()
+            group.enter()
+            group.notify(queue: .main) {
+                self.addItem(itemNumber: itemNumber, description: description, owner: user!.uid, imageID: imageID, size: itemSize, price: priceDouble, category: itemCategory, itemID: itemID)
+            }
+            closetRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                itemID = Int(snapshot.childrenCount)
+                print("item id 1: " + String(itemID))
+                group.leave()
+            }
+            itemsRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                itemNumber = Int(snapshot.childrenCount)
+                group.leave()
+            }
+/*
         //1. find index of currUser in all_users array
         var i = 0;
         var found = false;
@@ -144,7 +166,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
 
         //to check if all_users updated
         //print(all_users)
-
+*/
         //encode to json
         var text = "" //just a text
         let encoder = JSONEncoder()
@@ -225,12 +247,12 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
   */
  /*let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: imageURL, color: color, size: "S", price: price, category: "shirt")
 */
-        for var u in all_users {
+/*        for var u in all_users {
             if (u.user_ID == currUser.user_ID) {
                 u.closet.append(new_item)
             }
         }
-        
+*/
         //currUser.closet.append(new_item)
         numImgSaved += 1
 

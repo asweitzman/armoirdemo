@@ -9,11 +9,13 @@
 import UIKit
 import SwiftyJSON
 import DropDown
+import Firebase
 
 var clickedIndex:Int = Int()
 var productImageURLs:[String] = [String]()
 var readableJSON:JSON = JSON()
-var itemData:[JSON] = [JSON]()
+var allItems = [closet_item]()
+var itemData:[closet_item] = [closet_item]()
 var otherUsers:[a_User] = [];
 var currCategory:Int = Int()
 var categories:[String] = [String]()
@@ -24,12 +26,13 @@ let sortByDropDown:DropDown = DropDown()
 var keywords:[String] = [String]()
 var categorySet:Bool = Bool()
 var currSizeIndex:Int = Int()
-var chosenItem:JSON = JSON()
+var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
 var sortType:Int = Int()
 var currUserJSON:JSON = JSON()
 
 class ProductBrowseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
-    var fullArray: [Item] = [];
+    
+    var fullArray: [closet_item] = [];
     
     @IBOutlet weak var myCollectionView: UICollectionView!
     
@@ -85,27 +88,81 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func getData() {
-        if let path = Bundle.main.path(forResource: "search", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                readableJSON = try JSON(data: data)
-            } catch {
-                print("Error reading json file")
+//        if let path = Bundle.main.path(forResource: "search", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                readableJSON = try JSON(data: data)
+//            } catch {
+//                print("Error reading json file")
+//            }
+//        }
+        
+        let ref = Database.database().reference()
+        do {
+            //let jsonData = try Data(contentsOf: fullDestPath)
+            let user = ref.child("items")
+            user.observeSingleEvent(of: .value) { (snapshot) in
+                let value = snapshot.value 
+                //readableJSON = try? JSONSerialization.jsonObject(with: value, options: [])
+                let json = try? JSONSerialization.data(withJSONObject: value, options: [])
+                if let JSONString = String(data: json!, encoding: String.Encoding.utf8) {
+                   print("json string: " + JSONString)
+                }
+                do {
+                    allItems = try JSONDecoder().decode([closet_item].self, from: json!)
+                } catch let error {
+                    print(error)
+                }
             }
+            //try all_users = JSONDecoder().decode([a_User].self, from: jsonData);
         }
+        catch {
+            print("read error:")
+            print(error)
+        }
+ 
+        //2. when adding, add to the all_users array: to do in code
+
+
+        //3. then, encode it to be in json
+/*        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        do {
+            let data = try encoder.encode(all_users)
+            longJsonData = String(data: data, encoding: .utf8)!
+            //print(String(data: data, encoding: .utf8)!)
+            print("DONE ENCODING")
+        }
+        catch {
+            print("array didn't work");
+        }
+        //print(longJsonData)
+
+        //4. write to search.json with new encoded string
+        let text = longJsonData
+         do {
+             try text.write(toFile: fullDestPathString, atomically: true, encoding: String.Encoding.utf8)
+             print(fullDestPathString)
+         }
+         catch {
+            print("write error:")
+             print(error)
+         }
+ */
     }
 
-    func sortPriceLowHigh(this:JSON, that:JSON) -> Bool {
-        return  this["price"].int! < that["price"].int!
+    func sortPriceLowHigh(this:closet_item, that:closet_item) -> Bool {
+        return  this.price < that.price
     }
     
-    func sortPriceHighLow(this:JSON, that:JSON) -> Bool {
-        return  this["price"].int! > that["price"].int!
+    func sortPriceHighLow(this:closet_item, that:closet_item) -> Bool {
+        return  this.price > that.price
     }
     
-    func sortDistanceLowHigh(this:JSON, that:JSON) -> Bool {
-        let thisDist = this["distance"].string!
-        let thatDist = that["distance"].string!
+/*
+    func sortDistanceLowHigh(this:firebase_User, that:firebase_User) -> Bool {
+        let thisDist = this.distance
+        let thatDist = that.distance
         let thisDistNS = thisDist as NSString
         let thatDistNS = thatDist as NSString
         let thisDistArr = thisDistNS.components(separatedBy: " ")
@@ -116,72 +173,107 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         
         return Double(thisDistFirst)! < Double(thatDistFirst)!
     }
+*/
     
     func reloadData() {
         itemData = []
-        for (_,user) in readableJSON {
+        let currentUser = Auth.auth().currentUser
+/*        for (_,user) in readableJSON {
             if (user["user_ID"].int == currUser.user_ID) {
                 currUserJSON = user
             }
         }
+*/
+//        for (_,user) in readableJSON {
+//            if (user["user_ID"].int != currUser.user_ID) {
+//                for (_,item) in user["closet"] {
+//                    var alreadyBorrowed = false
+//                    for (_,borrowedItem) in currUserJSON["borrowed"] {
+//                        if (item == borrowedItem) { alreadyBorrowed = true }
+//                    }
+//                    if (!alreadyBorrowed) {
+//                        var keywordMatch = true
+//                        if (!keywords.isEmpty && keywords[0] != "") {
+//                            keywordMatch = false
+//                            let itemName = item["name"].string!
+//                            let nameWords = itemName.lowercased().components(separatedBy: " ")
+//                            for word in nameWords {
+//                                for keyword in keywords {
+//                                    if (word == keyword) { keywordMatch = true }
+//                                }
+//                            }
+//                        } else {
+//                            keywordMatch = true
+//                        }
+//
+//                        if(keywordMatch) {
+//                            if (categorySet) {
+//
+//                                if(item["category"].string! == categories[currCategory]) {
+//
+//                                    if (currSizeIndex == 5) {
+//                                        itemData.append(item)
+//                                    } else if (item["size"].string! == sizes[currSizeIndex]) {
+//                                        itemData.append(item)
+//                                    }
+//
+//                                }
+//
+//                            } else {
+//
+//                                if (currSizeIndex == 5) {
+//                                    itemData.append(item)
+//                                } else if (item["size"].string! == sizes[currSizeIndex]) {
+//                                    itemData.append(item)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
         
-        for (_,user) in readableJSON {
-            if (user["user_ID"].int != currUser.user_ID) {
-                for (_,item) in user["closet"] {
-                    var alreadyBorrowed = false
-                    for (_,borrowedItem) in currUserJSON["borrowed"] {
-                        if (item == borrowedItem) { alreadyBorrowed = true }
-                    }
-                    if (!alreadyBorrowed) {
-                        var keywordMatch = true
-                        if (!keywords.isEmpty && keywords[0] != "") {
-                            keywordMatch = false
-                            let itemName = item["name"].string!
-                            let nameWords = itemName.lowercased().components(separatedBy: " ")
-                            for word in nameWords {
-                                for keyword in keywords {
-                                    if (word == keyword) { keywordMatch = true }
-                                }
-                            }
-                        } else {
-                            keywordMatch = true
+        for item in allItems {
+            if item.owner != currentUser!.uid {
+                var keywordMatch = true
+                if (!keywords.isEmpty && keywords[0] != "") {
+                    keywordMatch = false
+                    let itemName = item.name
+                    let nameWords = itemName.lowercased().components(separatedBy: " ")
+                    for word in nameWords {
+                        for keyword in keywords {
+                            if (word == keyword) { keywordMatch = true }
                         }
-                        
-                        if(keywordMatch) {
-                            if (categorySet) {
-                            
-                                if(item["category"].string! == categories[currCategory]) {
-                            
-                                    if (currSizeIndex == 5) {
-                                        itemData.append(item)
-                                    } else if (item["size"].string! == sizes[currSizeIndex]) {
-                                        itemData.append(item)
-                                    }
-                                
-                                }
-
-                            } else {
-
-                                if (currSizeIndex == 5) {
-                                    itemData.append(item)
-                                } else if (item["size"].string! == sizes[currSizeIndex]) {
-                                    itemData.append(item)
-                                }
+                    }
+                } else {
+                    keywordMatch = true
+                }
+                if(keywordMatch) {
+                    if (categorySet) {
+                        if(item.category == categories[currCategory]) {
+                            if (currSizeIndex == 5) {
+                                itemData.append(item)
+                            } else if (item.size == sizes[currSizeIndex]) {
+                                itemData.append(item)
                             }
+                        }
+                    } else {
+                        if (currSizeIndex == 5) {
+                            itemData.append(item)
+                        } else if (item.size == sizes[currSizeIndex]) {
+                            itemData.append(item)
                         }
                     }
                 }
             }
         }
-        
         if (sortType == 0) {
             itemData.sort(by: sortPriceLowHigh)
         } else if (sortType == 1) {
             itemData.sort(by: sortPriceHighLow)
         } else if (sortType == 2) {
-            itemData.sort(by: sortDistanceLowHigh)
+            //itemData.sort(by: sortDistanceLowHigh)
         }
-        
         myCollectionView.reloadData()
     }
    
@@ -195,7 +287,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             print("array didn't work");
         }
         for stru in myStructArray { */
-        for stru in all_users {
+/*        for stru in all_users {
             if stru.user_ID != user_num {
                 otherUsers.append(stru);
             }
@@ -210,7 +302,13 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
                 }
             }
         }
-
+*/
+        let currUserID = Auth.auth().currentUser!.uid
+        for item in allItems {
+            if item.owner != currUserID {
+                fullArray.append(item)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -219,7 +317,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         chosenItem = itemData[indexPath.row]
-        currItem = chosenItem["item_id"].int!
+        currItem = chosenItem.item_id
         self.performSegue(withIdentifier: "toItemDetail", sender: self)
     }
     
@@ -229,13 +327,22 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         
         let currItem = itemData[indexPath.row]
         //print(currItem)
-        cell.productImage.image = UIImage(named: currItem["image"].string!)
-        if let imageStr = currItem["image"].string {
-            cell.productImage.image = UIImage(named: imageStr)
+//        cell.productImage.image = UIImage(named: currItem["image"].string!)
+//        if let imageStr = currItem["image"].string {
+//            cell.productImage.image = UIImage(named: imageStr)
+//        }
+        let imageRef = storageRef.child("images/" + String(currItem.image))
+        imageRef.downloadURL { url, error in
+          if let error = error {
+            print("image download error")
+          } else {
+            let data = try? Data(contentsOf: url!)
+            let image = try? UIImage(data: data!)
+            cell.productImage.image = image as! UIImage;
+          }
         }
-        if let currPrice = currItem["price"].int {
-            cell.productPrice.text = "$" + String(currPrice) + "/day";
-        }
+        let currPrice = currItem.price
+        cell.productPrice.text = "$" + String(currPrice) + "/day";
 
         cell.productImage.contentMode = .scaleAspectFit;
         //cell.productImage.layer.borderWidth = 1;
@@ -423,4 +530,3 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     */
 
 }
-
