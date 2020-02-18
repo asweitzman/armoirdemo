@@ -114,8 +114,8 @@ struct firebase_User: Codable {
     let username: String
     var display_name: String
     //var distance: String
-    var borrowed: [closet_item]
-    var closet: [closet_item]
+    var borrowed: [closet_item]?
+    var closet: [closet_item]?
     //var distance: String
     
     init(username: String, display_name: String, closet: [closet_item], borrowed: [closet_item]) {

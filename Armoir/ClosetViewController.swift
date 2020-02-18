@@ -46,7 +46,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func loadBorrowing() {
-        currFirebaseArray = firebaseUser.borrowed;
+        currFirebaseArray = firebaseUser.borrowed ?? [];
         status_lending = false;
     }
     
@@ -289,7 +289,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
 
     func loadLending() {
         //currArray = currUser.closet;
-        currFirebaseArray = firebaseUser.closet;
+        currFirebaseArray = firebaseUser.closet ?? [];
         status_lending = true;
     }
     
@@ -300,7 +300,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         case 0:
             loadLending();
         case 1:
-            currFirebaseArray = firebaseUser.borrowed;
+            currFirebaseArray = firebaseUser.borrowed ?? [];
             status_lending = false;
         default:
             break
