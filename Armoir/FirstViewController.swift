@@ -22,16 +22,16 @@ class FirstViewController: UIViewController {
         //loginButton.center = view.center
         //view.addSubview(loginButton)
           //stuff for Google sign in
-              GIDSignIn.sharedInstance()?.presentingViewController = self
-              guard let signIn = GIDSignIn.sharedInstance() else { return }
-              if (signIn.hasPreviousSignIn()) {
-                signIn.restorePreviousSignIn()
-              }
-              handle = Auth.auth().addStateDidChangeListener() { (auth, user) in
-                if user != nil {
-                  self.performSegue(withIdentifier: "toBegin", sender: nil)
-                }
-              }
+//              GIDSignIn.sharedInstance()?.presentingViewController = self
+//              guard let signIn = GIDSignIn.sharedInstance() else { return }
+//              if (signIn.hasPreviousSignIn()) {
+//                signIn.restorePreviousSignIn()
+//              }
+//              handle = Auth.auth().addStateDidChangeListener() { (auth, user) in
+//                if user != nil {
+//                  self.performSegue(withIdentifier: "toBegin", sender: nil)
+//                }
+//              }
           }
           
           deinit {
