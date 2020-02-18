@@ -44,7 +44,6 @@ class FirstViewController: UIViewController {
         let ref = Database.database().reference()
         var user = Auth.auth().currentUser
         if user != nil {
-            ref.child("users").child(user!.uid).child("borrowed").setValue([])
             self.performSegue(withIdentifier: "toBegin", sender: self)
             return
         }

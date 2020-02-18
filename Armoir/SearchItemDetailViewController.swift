@@ -19,22 +19,33 @@ class SearchItemDetailViewController: UIViewController {
         @IBOutlet weak var itemDescrip: UILabel!
     @IBOutlet weak var itemSize: UILabel!
     
+    func addItem(itemID: Int) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        let item = ["item_id": chosenItem.item_id, "name": chosenItem.name, "owner": chosenItem.owner, "borrowed": true, "borrowed_by": user?.uid, "image": chosenItem.image, "color": "", "size": chosenItem.size, "price": chosenItem.price, "category": chosenItem.category, "distance": 1.2] as [String : Any]
+        ref.child("users/\(user!.uid)/borrowed/\(itemID)/").setValue(item)
+    }
+    
     @IBAction func borrowItemButton(_ sender: Any) {
         
-        // set as borrowed
-            //alex way
-            //chosenItem["borrowed"].bool = true;
-          //  chosenItem["borrowed_by"].int = currUser.user_ID
-        
-            //rhea way
-            for var i in currArray {
-                if (i.item_id == currItem) {
-                    i.borrowed = true
-                    i.borrowed_by = currUser.user_ID
-                    currUser.borrowed.append(i)  //add to the borrowers borrowed array
-                }
+        var ref = Database.database().reference()
+        var currUser = Auth.auth().currentUser
+        ref.child("items").child(String(currItem)).child("borrowed").setValue(true)
+    ref.child("items").child(String(currItem)).child("borrowed_by").setValue(currentUser?.uid)
+        var borrowedRef = ref.child("users").child(currentUser!.uid).child("borrowed")
+        let group = DispatchGroup()
+        group.enter()
+        var itemID = 0
+        group.notify(queue: .main) {
+            self.addItem(itemID: itemID)
+        }
+        borrowedRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                itemID = Int(snapshot.childrenCount)
+                print("item id 1: " + String(itemID))
+                group.leave()
             }
         
+ /*
         //1. find index of item in all_users array
         var i = 0;
         var it_i = 0;
@@ -135,7 +146,7 @@ class SearchItemDetailViewController: UIViewController {
         self.present(alert, animated: true)
         
 
-        
+ */
 
     }
     

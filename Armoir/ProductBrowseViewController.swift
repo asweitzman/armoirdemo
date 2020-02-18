@@ -26,7 +26,7 @@ let sortByDropDown:DropDown = DropDown()
 var keywords:[String] = [String]()
 var categorySet:Bool = Bool()
 var currSizeIndex:Int = Int()
-var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: 0, category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
+var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
 var sortType:Int = Int()
 var currUserJSON:JSON = JSON()
 
@@ -96,6 +96,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
 //                print("Error reading json file")
 //            }
 //        }
+        
         let ref = Database.database().reference()
         do {
             //let jsonData = try Data(contentsOf: fullDestPath)
@@ -119,7 +120,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             print("read error:")
             print(error)
         }
-
+ 
         //2. when adding, add to the all_users array: to do in code
 
 

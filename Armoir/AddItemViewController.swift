@@ -61,8 +61,8 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         print("item id 2: " + String(itemID))
-        let item = ["item_id": itemNumber, "name": description, "owner": user?.uid, "borrowed": false, "borrowed_by": 0, "image": imageID, "color": "", "size": size, "price": price, "category": category, "distance": 1.2] as [String : Any]
-        ref.child("items").child(String(itemID)).setValue(item)
+        let item = ["item_id": itemNumber, "name": description, "owner": "dpJP8TbwfmYPez221rTyiD84vNf1", "borrowed": false, "borrowed_by": 0, "image": imageID, "color": "", "size": size, "price": price, "category": category, "distance": 1.2] as [String : Any]
+        ref.child("items").child(String(itemNumber)).setValue(item)
         var currItemsRef = ref.child("users").child(user!.uid).child("closet")
         ref.child("users/\(user!.uid)/closet/\(itemID)/").setValue(item)
     }
@@ -120,7 +120,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
 //        if (imageID != "") {}
         
        // if (imageURL != "") {}
-            let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: imageURL, color: "", size: itemSize, price: priceDouble, category: itemCategory)
+            //let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: "0", image: imageURL, color: "", size: itemSize, price: priceDouble, category: itemCategory)
         
 
             //save to firebase database
@@ -247,12 +247,12 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
   */
  /*let new_item = Item(item_id: numItems+1, name: description, owner: currUser.user_ID, borrowed: false, borrowed_by: 0, image: imageURL, color: color, size: "S", price: price, category: "shirt")
 */
-        for var u in all_users {
+/*        for var u in all_users {
             if (u.user_ID == currUser.user_ID) {
                 u.closet.append(new_item)
             }
         }
-        
+*/
         //currUser.closet.append(new_item)
         numImgSaved += 1
 

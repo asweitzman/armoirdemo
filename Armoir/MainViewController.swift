@@ -15,9 +15,9 @@ var startWithCamera: Bool = Bool()
 var currItem: Int = 0
 var user_num = 123;
 var currUser = a_User(user_ID: 123, profPic: "", owner: "", closet: [], borrowed: []);
-var firebaseUser = firebase_User(username: "", display_name: "", closet: []);
-var currArray: [Item] = []
-var closetItem = closet_item(item_id: 0, borrowed: false, borrowed_by: 0, category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
+var firebaseUser = firebase_User(username: "", display_name: "", closet: [], borrowed: []);
+var currArray: [closet_item] = []
+var closetItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
 var currFirebaseArray: [closet_item] = []
 var longJsonData: String = ""
 var fullDestPathString: String = ""
@@ -65,7 +65,7 @@ struct Item: Codable {
 struct closet_item: Codable {
     let item_id: Int;
     var borrowed: Bool;
-    var borrowed_by: Int;
+    var borrowed_by: String;
     var category: String;
     var color: String;
     var image: String;
@@ -75,7 +75,7 @@ struct closet_item: Codable {
     var size: String;
     //var distance: Double
     
-    init(item_id: Int, borrowed: Bool, borrowed_by: Int, category: String, color: String, image: String,
+    init(item_id: Int, borrowed: Bool, borrowed_by: String, category: String, color: String, image: String,
          name: String, owner: String, price: Int, size: String) {
         self.item_id = item_id;
         self.borrowed = borrowed;
@@ -114,16 +114,16 @@ struct firebase_User: Codable {
     let username: String
     var display_name: String
     //var distance: String
-    //var borrowed: [closet_item]
+    var borrowed: [closet_item]
     var closet: [closet_item]
     //var distance: String
     
-    init(username: String, display_name: String, closet: [closet_item]) {
+    init(username: String, display_name: String, closet: [closet_item], borrowed: [closet_item]) {
         //self.user_ID = "123"
         self.username = username;
         self.display_name = display_name;
         self.closet = closet;
-        //self.borrowed = [];
+        self.borrowed = closet;
         //self.distance = "1.2 mi";
     }
 }
