@@ -26,7 +26,7 @@ class BorrowedItemDetailViewController: UIViewController {
             if (i.item_id == currItem) {
                 priceDetail.text = "$" + String(i.price) + "/day";
                 sizeDetail.text = i.size;
-                distanceText.text = i.distance;
+                //distanceText.text = i.distance;
                 //let imageI = UIImage(named: i.image);
                 
                 let imgURL = i.image
@@ -42,7 +42,7 @@ class BorrowedItemDetailViewController: UIViewController {
                 itemDescrip.text = i.name;
                 var userID = i.owner;
                 if (i.borrowed) {
-                    userID = i.borrowed_by;
+                    userID = String(i.borrowed_by);
                     distanceText.text = "Borrowed by";
                     reminderButton.isHidden = false;
                 } else {
@@ -59,7 +59,7 @@ class BorrowedItemDetailViewController: UIViewController {
                 }
                 for stru in myStructArray { */
                 for stru in all_users {
-                    if stru.user_ID == userID {
+                    if String(stru.user_ID) == userID {
                         user = stru;
                         var image = UIImage(named: user.profPic);
                         if (i.borrowed) {

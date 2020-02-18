@@ -21,14 +21,25 @@ class LentItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         daysLeft.text = "10 days left";
-        for i in currArray {
+        for i in currFirebaseArray {
             if (i.item_id == currItem) {
                 priceDisplay.text = "$" + String(i.price) + "/day";
-                distDisplay.text = i.distance;
+                //distDisplay.text = i.distance;
                 sizeDetail.text = i.size;
-                let imageI = UIImage(named: i.image);
-                self.imgDisplay.image = imageI;
-                self.imgDisplay.clipsToBounds = true;
+                let imageRef = storageRef.child("images/" + String(i.image))
+                imageRef.downloadURL { url, error in
+                  if let error = error {
+                    print("image download error")
+                  } else {
+                    let data = try? Data(contentsOf: url!)
+                    let image = try? UIImage(data: data!)
+                    self.imgDisplay.image = image as! UIImage
+                    self.imgDisplay.clipsToBounds = true;
+                  }
+                }
+//                let imageI = UIImage(named: i.image);
+//                self.imgDisplay.image = imageI;
+//                self.imgDisplay.clipsToBounds = true;
                 itemDescrip.text = i.name;
                 let userID = i.owner;
                 var user: a_User;
@@ -40,16 +51,16 @@ class LentItemViewController: UIViewController {
                  print("array didn't work");
                  }
                  for stru in myStructArray { */
-                for stru in all_users {
-                    if stru.user_ID == userID {
-                        user = stru;
-                        userName.text = user.owner;
-                        let image = UIImage(named: user.profPic);
-                        self.profPic.image = image;
-                        self.profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
-                        self.profPic.clipsToBounds = true;
-                    }
-                }
+//                for stru in all_users {
+//                    if stru.user_ID == userID {
+//                        user = stru;
+//                        userName.text = user.owner;
+//                        let image = UIImage(named: user.profPic);
+//                        self.profPic.image = image;
+//                        self.profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
+//                        self.profPic.clipsToBounds = true;
+//                    }
+//                }
                 
                 
                 

@@ -19,22 +19,33 @@ class SearchItemDetailViewController: UIViewController {
         @IBOutlet weak var itemDescrip: UILabel!
     @IBOutlet weak var itemSize: UILabel!
     
+    func addItem(itemID: Int) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        let item = ["item_id": chosenItem.item_id, "name": chosenItem.name, "owner": chosenItem.owner, "borrowed": true, "borrowed_by": user?.uid, "image": chosenItem.image, "color": "", "size": chosenItem.size, "price": chosenItem.price, "category": chosenItem.category, "distance": 1.2] as [String : Any]
+        ref.child("users/\(user!.uid)/borrowed/\(itemID)/").setValue(item)
+    }
+    
     @IBAction func borrowItemButton(_ sender: Any) {
         
-        // set as borrowed
-            //alex way
-            //chosenItem["borrowed"].bool = true;
-          //  chosenItem["borrowed_by"].int = currUser.user_ID
-        
-            //rhea way
-            for var i in currArray {
-                if (i.item_id == currItem) {
-                    i.borrowed = true
-                    i.borrowed_by = currUser.user_ID
-                    currUser.borrowed.append(i)  //add to the borrowers borrowed array
-                }
+        var ref = Database.database().reference()
+        var currUser = Auth.auth().currentUser
+        ref.child("items").child(String(currItem)).child("borrowed").setValue(true)
+    ref.child("items").child(String(currItem)).child("borrowed_by").setValue(currentUser?.uid)
+        var borrowedRef = ref.child("users").child(currentUser!.uid).child("borrowed")
+        let group = DispatchGroup()
+        group.enter()
+        var itemID = 0
+        group.notify(queue: .main) {
+            self.addItem(itemID: itemID)
+        }
+        borrowedRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                itemID = Int(snapshot.childrenCount)
+                print("item id 1: " + String(itemID))
+                group.leave()
             }
         
+ /*
         //1. find index of item in all_users array
         var i = 0;
         var it_i = 0;
@@ -44,7 +55,7 @@ class SearchItemDetailViewController: UIViewController {
                 it_i = 0
             }
             for it in u.closet {
-                if (it.item_id == chosenItem["item_id"].int) {
+                if (it.item_id == chosenItem.item_id) {
                     found = true
                 }
                 if (!found) {
@@ -135,35 +146,42 @@ class SearchItemDetailViewController: UIViewController {
         self.present(alert, animated: true)
         
 
-        
+ */
 
     }
     
 
         override func viewDidLoad() {
             super.viewDidLoad()
-           
+            let currentUser = Auth.auth().currentUser
             print(chosenItem)
-            itemSize.text = "Size: " + chosenItem["size"].string!
-            itemDescrip.text = chosenItem["name"].string
-            if let imageStr = chosenItem["image"].string {
-                itemImage.image = UIImage(named:  imageStr)
+            itemSize.text = "Size: " + chosenItem.size
+            itemDescrip.text = chosenItem.size
+            let imageRef = storageRef.child("images/\(chosenItem.image)/")
+            imageRef.downloadURL { url, error in
+              if let error = error {
+                print("image download error")
+              } else {
+                let data = try? Data(contentsOf: url!)
+                let image = try? UIImage(data: data!)
+                self.itemImage.image = image as! UIImage;
+              }
             }
-            if let currPrice = chosenItem["price"].int {
-                priceDetail.text = "$" + String(currPrice) + "/day";
-            }
-            distanceText.text = chosenItem["distance"].string! + " mi"
+            let currPrice = chosenItem.price 
+            priceDetail.text = "$" + String(currPrice) + "/day";
+
+            //distanceText.text = String(chosenItem.distance) + " mi"
             itemImage.clipsToBounds = true;
-            for (_,user) in readableJSON {
-                if (user["user_ID"].int == chosenItem["owner"].int) {
-                    if let imageStr = user["profPic"].string {
-                        profPic.image = UIImage(named: imageStr)
-                        profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
-                        profPic.clipsToBounds = true;
-                    }
-                    userName.text = user["owner"].string
-                }
-            }
+//            for (_,user) in readableJSON {
+//                if (currentUser!.uid == chosenItem.owner) {
+//                    if let imageStr = user["profPic"].string {
+//                        profPic.image = UIImage(named: imageStr)
+//                        profPic.layer.cornerRadius = self.profPic.frame.size.width / 2;
+//                        profPic.clipsToBounds = true;
+//                    }
+//                    userName.text = currentUser.uid
+//                }
+//            }
             
             /*for i in currArray {
                 if (i.item_id == chosenItem["item_id"].int) {
