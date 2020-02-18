@@ -1,4 +1,4 @@
-
+/*
 import Photos
 import UIKit
 
@@ -26,7 +26,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var clientTable: UITableView!
     override func viewDidLoad() {    super.viewDidLoad()
 
-    self.clientTable.register(UITableViewCell.self, forCellReuseIdentifier: "tableViewCell")
+    /*self.clientTable.register(UITableViewCell.self, forCellReuseIdentifier: "tableViewCell")*/
 
     configureDatabase()
     configureStorage()
@@ -146,7 +146,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     guard let uid = Auth.auth().currentUser?.uid else { return }
 
     // if it's a photo from the library, not an image from the camera
-    if #available(iOS 8.0, *), let referenceURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as? URL {
+    if #available(iOS 8.0, *), let referenceURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.UIImagePickerController.InfoKey.phAsset)] as? URL {
       let assets = PHAsset.fetchAssets(withALAssetURLs: [referenceURL], options: nil)
       let asset = assets.firstObject
       asset?.requestContentEditingInput(with: nil, completionHandler: { [weak self] (contentEditingInput, info) in
@@ -207,3 +207,4 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
     return input.rawValue
 }
+ */
