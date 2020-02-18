@@ -204,6 +204,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
 //            var closetRef = ref.child("users").child(user!.uid).child("closet")
             let i = currArray[indexPath.row]
             cell.itemName.text = i.name;
+            cell.backgroundColor = UIColor(red: 252, green: 246, blue: 240, alpha: 1)
             let imgURL = i.image
             if (ImageRetriever().fileIsURL(fileName: imgURL)) {
                 cell.img_display.image = ImageRetriever().loadImg(fileURL: URL(string: imgURL)!)
