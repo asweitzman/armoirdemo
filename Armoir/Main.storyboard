@@ -2811,9 +2811,8 @@ the planet</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="cht-Ys-QDK" firstAttribute="bottom" secondItem="Fww-c1-PmD" secondAttribute="bottom" constant="33.999999999999773" id="3Oc-qR-50t"/>
-                            <constraint firstItem="Fww-c1-PmD" firstAttribute="leading" secondItem="cht-Ys-QDK" secondAttribute="leading" constant="0.064142897460442327" id="9Rx-EV-iLD"/>
+                            <constraint firstItem="Fww-c1-PmD" firstAttribute="leading" secondItem="cht-Ys-QDK" secondAttribute="leading" constant="-15" id="9Rx-EV-iLD"/>
                             <constraint firstItem="cht-Ys-QDK" firstAttribute="top" secondItem="Fww-c1-PmD" secondAttribute="top" id="pDG-5T-8Yk"/>
-                            <constraint firstItem="cht-Ys-QDK" firstAttribute="centerX" secondItem="Fww-c1-PmD" secondAttribute="centerX" id="wsC-Gp-Dy6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fww-c1-PmD"/>
                     </view>
@@ -2841,9 +2840,9 @@ the planet</string>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Xqs-ch-u9X" firstAttribute="centerX" secondItem="HTf-kA-DrW" secondAttribute="centerX" id="Jhi-88-9IS"/>
-                            <constraint firstItem="Xqs-ch-u9X" firstAttribute="leading" secondItem="HTf-kA-DrW" secondAttribute="leading" constant="16" id="WcK-FR-J9o"/>
-                            <constraint firstItem="Xqs-ch-u9X" firstAttribute="centerY" secondItem="HTf-kA-DrW" secondAttribute="centerY" id="pF3-1q-933"/>
+                            <constraint firstItem="Xqs-ch-u9X" firstAttribute="top" secondItem="HTf-kA-DrW" secondAttribute="top" constant="60" id="AeY-67-D15"/>
+                            <constraint firstItem="HTf-kA-DrW" firstAttribute="trailing" secondItem="Xqs-ch-u9X" secondAttribute="trailing" id="OQq-O3-p5H"/>
+                            <constraint firstItem="Xqs-ch-u9X" firstAttribute="leading" secondItem="HTf-kA-DrW" secondAttribute="leading" constant="-20" id="QE9-xY-egv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HTf-kA-DrW"/>
                     </view>
