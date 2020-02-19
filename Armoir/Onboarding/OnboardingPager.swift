@@ -1,4 +1,9 @@
 import UIKit
+
+var backgroundColor: UIColor = UIColor()
+var grayColor: UIColor = UIColor()
+var beige2: UIColor = UIColor()
+
 class OnboardingPager : UIPageViewController {
 
     func getStepZero() -> StepZero {
@@ -16,12 +21,13 @@ class OnboardingPager : UIPageViewController {
     override func viewDidLoad() {
         dataSource = self
         setViewControllers([getStepZero()], direction: .forward, animated: false, completion: nil)
-        let background = hexStringToUIColor(hex: "#FCF6F0")
+        backgroundColor = hexStringToUIColor(hex: "#FCF6F0")
+        beige2 = hexStringToUIColor(hex: "#DED7CF")
         let black = hexStringToUIColor(hex: "#424242")
-        let gray = hexStringToUIColor(hex: "#E4DFD9")
-        view.backgroundColor = background
+        grayColor = hexStringToUIColor(hex: "#E4DFD9")
+        view.backgroundColor = backgroundColor
         let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
-        pageControl.pageIndicatorTintColor = gray
+        pageControl.pageIndicatorTintColor = grayColor
         pageControl.currentPageIndicatorTintColor = black
     }
     

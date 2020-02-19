@@ -346,8 +346,9 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
 
         cell.productImage.contentMode = .scaleAspectFit;
         //cell.productImage.layer.borderWidth = 1;
-        cell.productDistance.text = currItem["distance"].string! + " mi";
-        cell.backgroundColor = hexStringToUIColor(hex: "#FCF6F0")
+        //cell.productDistance.text = currItem["distance"].string! + " mi";
+        cell.backgroundColor = .white
+        //cell.backgroundColor = hexStringToUIColor(hex: "#FCF6F0")
         return cell
     }
     

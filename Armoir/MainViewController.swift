@@ -342,8 +342,10 @@ class MainViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         }*/
         selectedIndex = sender.tag
         buttons[previousIndex].isSelected = false
-        viewArray[previousIndex].backgroundColor = UIColor(hue: 0.0778, saturation: 0.17, brightness: 0.81, alpha: 1.0)
-        viewArray[selectedIndex].backgroundColor = UIColor(hue: 0.075, saturation: 0.19, brightness: 0.76, alpha: 1.0)
+        //viewArray[previousIndex].backgroundColor = UIColor(hue: 0.0778, saturation: 0.17, brightness: 0.81, alpha: 1.0)
+        //viewArray[selectedIndex].backgroundColor = UIColor(hue: 0.075, saturation: 0.19, brightness: 0.76, alpha: 1.0)
+        viewArray[previousIndex].backgroundColor = grayColor
+        viewArray[selectedIndex].backgroundColor = beige2
         let previousVC = viewControllers[previousIndex]
         previousVC.willMove(toParent: nil)
         previousVC.view.removeFromSuperview()
