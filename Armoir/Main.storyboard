@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wRE-vz-pzR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wRE-vz-pzR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,6 @@
         <!--Settings-->
         <scene sceneID="B5G-tH-o1F">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tbH-vl-ezO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsViewController" id="rlv-nD-C9r" customClass="SettingsViewController" customModule="Armoir" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s2W-os-hig">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -113,7 +112,7 @@
                                 <state key="normal" title="Invite Friends"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YC7-on-Nex">
-                                <rect key="frame" x="257" y="252" width="137" height="85"/>
+                                <rect key="frame" x="257" y="252" width="186" height="85"/>
                                 <color key="backgroundColor" red="0.89766186479999999" green="0.87507593630000002" blue="0.84705561399999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="186" id="ZQh-F8-Qng"/>
@@ -122,7 +121,7 @@
                                 <state key="normal" title="Change Password"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QA-Wp-pns">
-                                <rect key="frame" x="257" y="159" width="137" height="85"/>
+                                <rect key="frame" x="257" y="159" width="186" height="85"/>
                                 <color key="backgroundColor" red="0.89766186479999999" green="0.87507593630000002" blue="0.84705561399999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="17"/>
                                 <state key="normal" title="Change Username"/>
@@ -168,6 +167,7 @@
                         <outlet property="saveChanges" destination="Mkq-1D-Pg2" id="B4f-2W-2h1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tbH-vl-ezO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3061.5999999999999" y="549.01477832512319"/>
         </scene>
@@ -176,11 +176,11 @@
             <objects>
                 <viewController title="New Item" id="McH-PY-hkW" customClass="AddItemViewController" customModule="Armoir" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FGS-gP-6Z3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSQ-bL-rHC">
-                                <rect key="frame" x="15" y="56" width="384" height="652"/>
+                                <rect key="frame" x="15" y="88" width="384" height="674"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LoS-rq-Gba">
                                         <rect key="frame" x="15" y="10" width="354" height="225"/>
@@ -373,15 +373,15 @@
             <objects>
                 <viewController storyboardIdentifier="mainVC" id="Uu3-UR-JAw" customClass="MainViewController" customModule="Armoir" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zmm-6Y-YRs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ZS-tf-CGe">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" red="0.99175029989999997" green="0.96527308229999997" blue="0.93725162740000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EC-kA-0UD" userLabel="Bottom Bar">
-                                <rect key="frame" x="0.0" y="748" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URT-HN-nbT" userLabel="Search View">
                                         <rect key="frame" x="0.0" y="0.0" width="138" height="60"/>
@@ -519,7 +519,7 @@
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="pL3-mH-qIj">
-                            <rect key="frame" x="157" y="8" width="100" height="40"/>
+                            <rect key="frame" x="157" y="2" width="100" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="armoir_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8HT-2J-KZ4">
@@ -2753,11 +2753,11 @@ the planet</string>
                         <viewControllerLayoutGuide type="bottom" id="wIE-K8-pYW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qMD-9v-eWh" userLabel="Root">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="messages" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yYg-Pd-QNd">
-                                <rect key="frame" x="19.5" y="53" width="375" height="758"/>
+                                <rect key="frame" x="19.5" y="96" width="375" height="758"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="758" id="0Ck-PR-HUu"/>
                                     <constraint firstAttribute="width" constant="375" id="YfQ-8e-Ue7"/>
@@ -2790,11 +2790,11 @@ the planet</string>
             <objects>
                 <viewController id="Wqw-vc-rpZ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kvq-2Q-EP9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="markAsExchanged" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cht-Ys-QDK">
-                                <rect key="frame" x="0.0" y="56" width="375" height="820"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="R8k-OG-Q01"/>
                                     <constraint firstAttribute="height" constant="702" id="xnq-aU-xMj"/>
@@ -2828,11 +2828,11 @@ the planet</string>
             <objects>
                 <viewController id="pYb-hV-UCX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kpN-37-yHM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirmed" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xqs-ch-u9X">
-                                <rect key="frame" x="16" y="22" width="383" height="820"/>
+                                <rect key="frame" x="16" y="65" width="383" height="820"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="820" id="7BE-TI-Jy8"/>
                                     <constraint firstAttribute="width" constant="343" id="Ql1-jn-ow3"/>
@@ -2889,7 +2889,7 @@ the planet</string>
     <inferredMetricsTieBreakers>
         <segue reference="KpY-Yi-dgg"/>
         <segue reference="jab-sZ-aSN"/>
-        <segue reference="dTl-b8-yKo"/>
+        <segue reference="dRt-X9-h8d"/>
         <segue reference="PCX-mb-E7O"/>
         <segue reference="43q-gw-GJD"/>
     </inferredMetricsTieBreakers>

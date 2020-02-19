@@ -19,8 +19,6 @@
 		1751F06F21B06EA400F55356 /* ArmoirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F06E21B06EA400F55356 /* ArmoirUITests.swift */; };
 		1751F07D21B08B2100F55356 /* ProductBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F07C21B08B2100F55356 /* ProductBrowseViewController.swift */; };
 		1751F07F21B08BFD00F55356 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F07E21B08BFD00F55356 /* ProductCell.swift */; };
-		1762C3D223FC9F3400911F74 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1762C3D123FC9F3400911F74 /* WorkSans-SemiBold.ttf */; };
-		1762C3D423FC9F7600911F74 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1762C3D323FC9F7600911F74 /* WorkSans-Regular.ttf */; };
 		176F559121B746BA00FFF556 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F559021B746BA00FFF556 /* SignUpViewController.swift */; };
 		179234B521BC745400B391F5 /* test2.json in Resources */ = {isa = PBXBuildFile; fileRef = 179234B421BC745400B391F5 /* test2.json */; };
 		179234B721BCCDF700B391F5 /* ImageRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179234B621BCCDF700B391F5 /* ImageRetriever.swift */; };
@@ -42,6 +40,8 @@
 		17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */; };
 		17F0ED7D23F10C1000904F3A /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */; };
 		2F4EB6A65C6E1331B9831F4D /* Pods_Armoir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */; };
+		34EBCF7123FCC0F000228169 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34EBCF7023FCC0F000228169 /* WorkSans-Regular.ttf */; };
+		34EBCF7323FCC10000228169 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34EBCF7223FCC10000228169 /* WorkSans-SemiBold.ttf */; };
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
 		6250122221BAAE5B0015F10A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6250122121BAAE5B0015F10A /* SwiftyJSON.framework */; };
@@ -98,8 +98,6 @@
 		1751F07E21B08BFD00F55356 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		175D4F9E23E24ACB001EB119 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		175D4F9F23E24ACB001EB119 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1762C3D123FC9F3400911F74 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		1762C3D323FC9F7600911F74 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		176F559021B746BA00FFF556 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		179234B421BC745400B391F5 /* test2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test2.json; sourceTree = "<group>"; };
 		179234B621BCCDF700B391F5 /* ImageRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRetriever.swift; sourceTree = "<group>"; };
@@ -122,6 +120,8 @@
 		17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		2BFD9C27390DC9FB9E7BC3FA /* Pods-Armoir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.release.xcconfig"; sourceTree = "<group>"; };
 		3461F10B23DE572A00D3DF81 /* GoogleService-Info old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info old.plist"; sourceTree = "<group>"; };
+		34EBCF7023FCC0F000228169 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../Desktop/Work_Sans 2/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		34EBCF7223FCC10000228169 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../Desktop/Work_Sans 2/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4C6EE03E84BA4F5E1E39930B /* Pods-ArmoirTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirTests/Pods-ArmoirTests.release.xcconfig"; sourceTree = "<group>"; };
 		6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -268,12 +268,12 @@
 				17E7E74423FB7F7A00281AA7 /* Marcellus-Regular.ttf */,
 				17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */,
 				7D48658423F12DF3009C3E5A /* Alike-Regular.ttf */,
+				34EBCF7023FCC0F000228169 /* WorkSans-Regular.ttf */,
 				17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */,
+				34EBCF7223FCC10000228169 /* WorkSans-SemiBold.ttf */,
 				17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */,
 				17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */,
 				17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */,
-				1762C3D323FC9F7600911F74 /* WorkSans-Regular.ttf */,
-				1762C3D123FC9F3400911F74 /* WorkSans-SemiBold.ttf */,
 				17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */,
 				17F0ED6C23F0D51500904F3A /* WorkSans-Thin.ttf */,
 				17040B0921B775040049C902 /* Alike-Regular.ttf */,
@@ -417,7 +417,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1762C3D423FC9F7600911F74 /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7323F0D51600904F3A /* WorkSans-Black.ttf in Resources */,
 				17E7E74523FB7F7A00281AA7 /* Marcellus-Regular.ttf in Resources */,
 				7D48658523F12DF3009C3E5A /* Alike-Regular.ttf in Resources */,
@@ -427,12 +426,13 @@
 				179234B521BC745400B391F5 /* test2.json in Resources */,
 				17B3022E21B65735004E5EF8 /* images in Resources */,
 				17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */,
+				34EBCF7123FCC0F000228169 /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */,
 				17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */,
 				17F0ED7523F0D51600904F3A /* WorkSans-Thin.ttf in Resources */,
 				17040B0821B76B180049C902 /* search.json in Resources */,
 				17F0ED7623F0D51600904F3A /* WorkSans-ExtraBold.ttf in Resources */,
-				1762C3D223FC9F3400911F74 /* WorkSans-SemiBold.ttf in Resources */,
+				34EBCF7323FCC10000228169 /* WorkSans-SemiBold.ttf in Resources */,
 				17040B1221B796D40049C902 /* Assets.xcassets in Resources */,
 				17F0ED7D23F10C1000904F3A /* WorkSans-Bold.ttf in Resources */,
 			);

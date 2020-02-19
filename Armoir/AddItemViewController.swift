@@ -61,7 +61,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         print("item id 2: " + String(itemID))
-        let item = ["item_id": itemNumber, "name": description, "owner": "dpJP8TbwfmYPez221rTyiD84vNf1", "borrowed": false, "borrowed_by": 0, "image": imageID, "color": "", "size": size, "price": price, "category": category, "distance": 1.2] as [String : Any]
+        let item = ["item_id": itemNumber, "name": description, "owner": user!.uid, "borrowed": false, "borrowed_by": "0", "image": imageID, "color": "", "size": size, "price": price, "category": category, "distance": 1.2] as [String : Any]
         ref.child("items").child(String(itemNumber)).setValue(item)
         var currItemsRef = ref.child("users").child(user!.uid).child("closet")
         ref.child("users/\(user!.uid)/closet/\(itemID)/").setValue(item)
