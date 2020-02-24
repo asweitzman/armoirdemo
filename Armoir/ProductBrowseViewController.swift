@@ -303,12 +303,13 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             }
         }
 */
-        let currUserID = Auth.auth().currentUser!.uid
+        //let currentUser = Auth.auth().currentUser
+       /* let currUserID = Auth.auth().currentUser!.uid
         for item in allItems {
             if item.owner != currUserID {
                 fullArray.append(item)
             }
-        }
+        }*/
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

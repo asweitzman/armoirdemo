@@ -112,7 +112,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
                 //let jsonData = try Data(contentsOf: fullDestPath)
                 let user = ref.child("users").child(currentUser!.uid)
                 user.observeSingleEvent(of: .value) { (snapshot) in
-                    let value = snapshot.value as! [String : Any]
+                    if let value = snapshot.value as? [String : Any] {
                     let json = try? JSONSerialization.data(withJSONObject: value, options: [])
                     if let JSONString = String(data: json!, encoding: String.Encoding.utf8) {
                        print("json string: " + JSONString)
@@ -122,6 +122,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
                     } catch let error {
                         print("there is an error")
                         print(error)
+                    }
                     }
                 }
                 //try all_users = JSONDecoder().decode([a_User].self, from: jsonData);
