@@ -44,8 +44,11 @@
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
 		6250122221BAAE5B0015F10A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6250122121BAAE5B0015F10A /* SwiftyJSON.framework */; };
 		6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */; };
-		6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */; };
+		640D7A3224049F7400929536 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640D7A3124049F7400929536 /* ChatMessageCell.swift */; };
+		640D7A372404A08B00929536 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640D7A362404A08B00929536 /* ChatsViewController.swift */; };
 		645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645905A423DE5DEE00930FD8 /* InboxViewController.swift */; };
+		645BA3F32407A3EC002D1AA0 /* ChatPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BA3F22407A3EB002D1AA0 /* ChatPreviewViewController.swift */; };
+		645BA3F52407A3FA002D1AA0 /* ChatPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BA3F42407A3FA002D1AA0 /* ChatPreviewCell.swift */; };
 		64A8C3EB23FCC5DC0068B873 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */; };
 		64A8C3ED23FCC5E50068B873 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */; };
 		7193F59621BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
@@ -126,8 +129,12 @@
 		6216B1DA21BAA73300AB5943 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6250122121BAAE5B0015F10A /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConstants.swift; sourceTree = "<group>"; };
+		640D7A3124049F7400929536 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		640D7A3324049FFC00929536 /* FakeChat */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FakeChat; path = "../../../../Downloads/FakeChat-master/FakeChat"; sourceTree = "<group>"; };
+		640D7A362404A08B00929536 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		645905A423DE5DEE00930FD8 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		645BA3F22407A3EB002D1AA0 /* ChatPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPreviewViewController.swift; sourceTree = "<group>"; };
+		645BA3F42407A3FA002D1AA0 /* ChatPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPreviewCell.swift; sourceTree = "<group>"; };
 		64A8C3E823FCC4410068B873 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -206,7 +213,6 @@
 				179234B821BCEA4C00B391F5 /* FirstViewController.swift */,
 				6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */,
 				17040B1521B9FA760049C902 /* SearchItemDetailViewController.swift */,
-				6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */,
 				17040B0F21B78D000049C902 /* CameraViewController.swift */,
 				17040B0D21B77BD80049C902 /* AddItemViewController.swift */,
 				176F559021B746BA00FFF556 /* SignUpViewController.swift */,
@@ -230,6 +236,10 @@
 				743BD5EA21B9ECCF00855A1E /* LentItemViewController.swift */,
 				6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */,
 				645905A423DE5DEE00930FD8 /* InboxViewController.swift */,
+				645BA3F22407A3EB002D1AA0 /* ChatPreviewViewController.swift */,
+				645BA3F42407A3FA002D1AA0 /* ChatPreviewCell.swift */,
+				640D7A3124049F7400929536 /* ChatMessageCell.swift */,
+				640D7A362404A08B00929536 /* ChatsViewController.swift */,
 			);
 			path = Armoir;
 			sourceTree = "<group>";
@@ -266,6 +276,7 @@
 		17F0ED6723F0D4D300904F3A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				640D7A3324049FFC00929536 /* FakeChat */,
 				17E7E74423FB7F7A00281AA7 /* Marcellus-Regular.ttf */,
 				17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */,
 				7D48658423F12DF3009C3E5A /* Alike-Regular.ttf */,
@@ -561,7 +572,6 @@
 				17D979E321B2309F00E74816 /* ClosetViewController.swift in Sources */,
 				743BD5EB21B9ECCF00855A1E /* LentItemViewController.swift in Sources */,
 				1751F04F21B06E9F00F55356 /* AppDelegate.swift in Sources */,
-				6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */,
 				6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */,
 				17D979E521B230BE00E74816 /* NewsViewController.swift in Sources */,
 				179234B921BCEA4C00B391F5 /* FirstViewController.swift in Sources */,
@@ -572,11 +582,15 @@
 				17040B1621B9FA760049C902 /* SearchItemDetailViewController.swift in Sources */,
 				176F559121B746BA00FFF556 /* SignUpViewController.swift in Sources */,
 				17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */,
+				645BA3F32407A3EC002D1AA0 /* ChatPreviewViewController.swift in Sources */,
+				640D7A372404A08B00929536 /* ChatsViewController.swift in Sources */,
 				743BD5E921B9DEAB00855A1E /* BorrowedItemDetailViewController.swift in Sources */,
 				17E7E73A23FB741E00281AA7 /* StepZero.swift in Sources */,
 				17E7E73C23FB749900281AA7 /* StepOne.swift in Sources */,
 				645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */,
+				640D7A3224049F7400929536 /* ChatMessageCell.swift in Sources */,
 				6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */,
+				645BA3F52407A3FA002D1AA0 /* ChatPreviewCell.swift in Sources */,
 				1751F07D21B08B2100F55356 /* ProductBrowseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
