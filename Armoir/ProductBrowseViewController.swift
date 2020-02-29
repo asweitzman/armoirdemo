@@ -46,6 +46,21 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     
     @IBOutlet weak var searchFieldText: UISearchBar!
     
+    let imageCache = NSCache<NSString, UIImage>()
+    
+    func downloadImage(imageName: String, url: URL) -> UIImage{
+        let imageRef = storageRef.child("images/" + String(imageName))
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+              return cachedImage
+        }
+        let data = try? Data(contentsOf: url)
+        let image = UIImage(data: data!)
+        let thumb1 = image?.resized(withPercentage: 0.5)
+        self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
+        return thumb1 as! UIImage;
+    }
+
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         //searchActive = false;
         searchFieldText.endEditing(true)
@@ -86,6 +101,8 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     @IBAction func sortByClicked(_ sender: Any) {
         sortByDropDown.show()
     }
+    
+
     
     func getData() {
 //        if let path = Bundle.main.path(forResource: "search", ofType: "json") {
@@ -333,14 +350,22 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
 //            cell.productImage.image = UIImage(named: imageStr)
 //        }
         let imageRef = storageRef.child("images/" + String(currItem.image))
+//        imageRef.downloadURL { url, error in
+//          if let error = error {
+//            print("image download error")
+//          } else {
+//            let data = try? Data(contentsOf: url!)
+//            let image = UIImage(data: data!)
+//            let thumb1 = image?.resized(withPercentage: 0.5)
+//            cell.productImage.image = thumb1 as! UIImage;
+//          }
+//        }
         imageRef.downloadURL { url, error in
-          if let error = error {
-            print("image download error")
-          } else {
-            let data = try? Data(contentsOf: url!)
-            let image = try? UIImage(data: data!)
-            cell.productImage.image = image as! UIImage;
-          }
+            if let error = error {
+                print("image url error")
+            } else {
+                cell.productImage.image = self.downloadImage(imageName: String(currItem.image), url: url!)
+            }
         }
         let currPrice = currItem.price
         cell.productPrice.text = "$" + String(currPrice) + "/day";
@@ -513,10 +538,8 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             self?.reloadData()
         }
     }
-    
 
-    
-    
+
     /*func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //currItem = fullArray[indexPath.row].item_id;
         currItem = itemData[indexPath.row]["item_id"].int!

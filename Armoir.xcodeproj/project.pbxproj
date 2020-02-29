@@ -40,14 +40,15 @@
 		17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */; };
 		17F0ED7D23F10C1000904F3A /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */; };
 		2F4EB6A65C6E1331B9831F4D /* Pods_Armoir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */; };
+		34EBCF752407349100228169 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBCF742407349100228169 /* UIImageExtension.swift */; };
+		34EBCF772409CCAB00228169 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34EBCF762409CCAB00228169 /* WorkSans-Regular.ttf */; };
+		34EBCF792409CCBA00228169 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34EBCF782409CCB900228169 /* WorkSans-SemiBold.ttf */; };
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
 		6250122221BAAE5B0015F10A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6250122121BAAE5B0015F10A /* SwiftyJSON.framework */; };
 		6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */; };
 		6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */; };
 		645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645905A423DE5DEE00930FD8 /* InboxViewController.swift */; };
-		64A8C3EB23FCC5DC0068B873 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */; };
-		64A8C3ED23FCC5E50068B873 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */; };
 		7193F59621BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
 		7193F59721BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
 		7193F59821BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
@@ -120,6 +121,9 @@
 		17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		2BFD9C27390DC9FB9E7BC3FA /* Pods-Armoir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.release.xcconfig"; sourceTree = "<group>"; };
 		3461F10B23DE572A00D3DF81 /* GoogleService-Info old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info old.plist"; sourceTree = "<group>"; };
+		34EBCF742407349100228169 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		34EBCF762409CCAB00228169 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../Desktop/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		34EBCF782409CCB900228169 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../Desktop/Work_Sans 2/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4C6EE03E84BA4F5E1E39930B /* Pods-ArmoirTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirTests/Pods-ArmoirTests.release.xcconfig"; sourceTree = "<group>"; };
 		6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -128,9 +132,6 @@
 		6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConstants.swift; sourceTree = "<group>"; };
 		645905A423DE5DEE00930FD8 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
-		64A8C3E823FCC4410068B873 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
-		64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		7193F59521BA370700427907 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		743BD5E221B5E64400855A1E /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		743BD5E421B5FB8C00855A1E /* BorrowedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowedCell.swift; sourceTree = "<group>"; };
@@ -230,6 +231,7 @@
 				743BD5EA21B9ECCF00855A1E /* LentItemViewController.swift */,
 				6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */,
 				645905A423DE5DEE00930FD8 /* InboxViewController.swift */,
+				34EBCF742407349100228169 /* UIImageExtension.swift */,
 			);
 			path = Armoir;
 			sourceTree = "<group>";
@@ -269,11 +271,10 @@
 				17E7E74423FB7F7A00281AA7 /* Marcellus-Regular.ttf */,
 				17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */,
 				7D48658423F12DF3009C3E5A /* Alike-Regular.ttf */,
+				34EBCF762409CCAB00228169 /* WorkSans-Regular.ttf */,
+				34EBCF782409CCB900228169 /* WorkSans-SemiBold.ttf */,
 				17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */,
-				64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */,
-				64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */,
 				17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */,
-				64A8C3E823FCC4410068B873 /* WorkSans-Regular.ttf */,
 				17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */,
 				17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */,
 				17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */,
@@ -419,9 +420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64A8C3ED23FCC5E50068B873 /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7323F0D51600904F3A /* WorkSans-Black.ttf in Resources */,
-				64A8C3EB23FCC5DC0068B873 /* WorkSans-SemiBold.ttf in Resources */,
 				17E7E74523FB7F7A00281AA7 /* Marcellus-Regular.ttf in Resources */,
 				7D48658523F12DF3009C3E5A /* Alike-Regular.ttf in Resources */,
 				7193F59621BA370700427907 /* Main.storyboard in Resources */,
@@ -436,6 +435,8 @@
 				17040B0821B76B180049C902 /* search.json in Resources */,
 				17F0ED7623F0D51600904F3A /* WorkSans-ExtraBold.ttf in Resources */,
 				17040B1221B796D40049C902 /* Assets.xcassets in Resources */,
+				34EBCF792409CCBA00228169 /* WorkSans-SemiBold.ttf in Resources */,
+				34EBCF772409CCAB00228169 /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7D23F10C1000904F3A /* WorkSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +573,7 @@
 				17040B1621B9FA760049C902 /* SearchItemDetailViewController.swift in Sources */,
 				176F559121B746BA00FFF556 /* SignUpViewController.swift in Sources */,
 				17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */,
+				34EBCF752407349100228169 /* UIImageExtension.swift in Sources */,
 				743BD5E921B9DEAB00855A1E /* BorrowedItemDetailViewController.swift in Sources */,
 				17E7E73A23FB741E00281AA7 /* StepZero.swift in Sources */,
 				17E7E73C23FB749900281AA7 /* StepOne.swift in Sources */,
