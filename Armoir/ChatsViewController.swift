@@ -81,7 +81,8 @@ class ChatsViewController: UIViewController {
         
         messageDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String, String>
-            guard let message = snapshotValue["message"], let sender = snapshotValue["sender"] else {return}
+            guard let message = snapshotValue["message"] else {return}
+            guard let sender = snapshotValue["sender"] else {return}
             let isIncoming = (sender == Auth.auth().currentUser?.displayName ? false : true)
             let chatMessage = MessageModel.init(message: message, sender: sender, isIncoming: isIncoming)
             self.addNewRow(with: chatMessage)

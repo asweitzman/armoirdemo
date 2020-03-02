@@ -86,7 +86,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         let imageID = randomString(length:8)
         let imageRef = storageRef.child("images/" + imageID);
         var imageData = Data()
-        imageData = itemImage.jpegData(compressionQuality: 0.8)!
+            imageData = itemImage.jpegData(compressionQuality: 0.5)!
         let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
           guard let metadata = metadata else {
             // Uh-oh, an error occurred!

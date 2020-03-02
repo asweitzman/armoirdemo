@@ -55,7 +55,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         }
         let data = try? Data(contentsOf: url)
         let image = UIImage(data: data!)
-        let thumb1 = image?.resized(By: 0.2)
+        let thumb1 = image?.resized(By: 0.25)
         self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
         return thumb1 as! UIImage;
     }

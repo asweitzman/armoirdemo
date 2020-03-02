@@ -18,6 +18,8 @@ class SearchItemDetailViewController: UIViewController {
         @IBOutlet weak var itemImage: UIImageView!
         @IBOutlet weak var itemDescrip: UILabel!
     @IBOutlet weak var itemSize: UILabel!
+     let chatMessageDB = Database.database().reference().child("Messages")
+    var owner = ""
     
     func addItem(itemID: Int) {
         let ref = Database.database().reference()
@@ -31,8 +33,45 @@ class SearchItemDetailViewController: UIViewController {
         var ref = Database.database().reference()
         var currUser = Auth.auth().currentUser
         ref.child("items").child(String(currItem)).child("borrowed").setValue(true)
-    ref.child("items").child(String(currItem)).child("borrowed_by").setValue(currentUser?.uid)
+        ref.child("items").child(String(currItem)).child("borrowed_by").setValue(currentUser?.uid)
         var borrowedRef = ref.child("users").child(currentUser!.uid).child("borrowed")
+        
+        var requestMessageString = ""
+        let itemref = Database.database().reference().child("items").child(String(currItem))
+        let chatsDb = ref.child("chats")
+        let chatPreviewDict = ["senderName": Auth.auth().currentUser?.displayName, "receiverName" : self.owner ]
+        chatsDb.childByAutoId().setValue(chatPreviewDict) { (error, reference) in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            }
+            else {
+                print("chat preview added")
+            }
+        }
+        itemref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String : AnyObject]
+            let receiverName = snapshotValue["owner"]
+            let name = snapshotValue["name"] as! String
+            requestMessageString = "Hi, I'd like to borrow your " + name
+            let chatMessageDict = ["sender": Auth.auth().currentUser?.displayName, "message" : requestMessageString]
+            self.chatMessageDB.childByAutoId().setValue(chatMessageDict) { (error, reference) in
+                if error != nil {
+                    print(error?.localizedDescription as Any)
+                }
+                else {
+                    print("request sent")
+                }
+            }
+        }
+        let alert = UIAlertController(title: "Sent request to borrow this item! Check your inbox for updates.", message: "", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            
+            _ = self.navigationController?.popViewControllers(viewsToPop: 1)}))
+        self.present(alert, animated: true)
+            /*let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SearchItemDetailVC") as! SearchItemDetailViewController
+            self.present(nextViewController, animated:true, completion:nil)*/
         let group = DispatchGroup()
         group.enter()
         var itemID = 0
@@ -44,6 +83,8 @@ class SearchItemDetailViewController: UIViewController {
                 print("item id 1: " + String(itemID))
                 group.leave()
             }
+        //ref.child("Messages").child("sender").setValue(currUser)
+        //ref.child("Messages").child("")
         
  /*
         //1. find index of item in all_users array
@@ -164,6 +205,7 @@ class SearchItemDetailViewController: UIViewController {
                 let ownerVal = snapshotValue[chosenItem.owner] as! [String: AnyObject]
                 let usernameString = ownerVal["display_name"] as! String
                 self.userName.text = usernameString
+                self.owner = usernameString
                 let imageUrl = ownerVal["profPic"] as! String
                 let profRef = storageRef.child("images/\(imageUrl)")
                 profRef.downloadURL { url, error in

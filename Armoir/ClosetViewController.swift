@@ -383,7 +383,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
             cell.dist_display.text = "1.2 mi";
             cell.due_display.text = "Due in 10 days";
             cell.due_display.textColor = UIColor.black;
-            cell.price_display.text = String(format: "%f", i.price);
+            cell.price_display.text = "$" + String(i.price) + "/day";
             cell.backgroundColor = UIColor.white
             return cell
         }
@@ -391,6 +391,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     func loadCloset() {
         currFirebaseArray = firebaseUser.closet ?? [];
+        loadLentArray()
         status_lending = false;
         status_borrowing = false;
         status_closet = true;
@@ -399,6 +400,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     func loadLending() {
         //currArray = currUser.closet;
         currFirebaseArray = firebaseUser.closet ?? [];
+        loadLentArray()
         status_lending = true;
         status_borrowing = false;
         status_closet = false;
