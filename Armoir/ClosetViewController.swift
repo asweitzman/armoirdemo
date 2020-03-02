@@ -19,6 +19,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     let itemsPerRow: CGFloat = 2.0
+    let imageCache = NSCache<NSString, UIImage>()
 
     var status_lending = true
     var user = Auth.auth().currentUser
@@ -43,6 +44,18 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
             loadBorrowing()
         }
         viewOfItems.reloadData()
+    }
+    
+    func downloadImage(imageName: String, url: URL) -> UIImage{
+        let imageRef = storageRef.child("images/" + String(imageName))
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+              return cachedImage
+        }
+        let data = try? Data(contentsOf: url)
+        let image = UIImage(data: data!)
+        let thumb1 = image?.resized(By: 0.5)
+        self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
+        return thumb1 as! UIImage;
     }
     
     func loadBorrowing() {
@@ -224,14 +237,21 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
             cell.itemName.text = i.name;
             cell.backgroundColor = UIColor(red: 252, green: 246, blue: 240, alpha: 1)
             let imageRef = storageRef.child("images/" + String(i.image))
+//            imageRef.downloadURL { url, error in
+//              if let error = error {
+//                print("image download error")
+//              } else {
+//                let data = try? Data(contentsOf: url!)
+//                let image = try? UIImage(data: data!)
+//                cell.img_display.image = image as! UIImage;
+//              }
+//            }
             imageRef.downloadURL { url, error in
-              if let error = error {
-                print("image download error")
-              } else {
-                let data = try? Data(contentsOf: url!)
-                let image = try? UIImage(data: data!)
-                cell.img_display.image = image as! UIImage;
-              }
+                if let error = error {
+                    print("image url error")
+                } else {
+                    cell.img_display.image = self.downloadImage(imageName: String(i.image), url: url!)
+                }
             }
 /*            let imgURL = i.image
             if (ImageRetriever().fileIsURL(fileName: imgURL)) {
