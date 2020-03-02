@@ -13,6 +13,8 @@
 		17040B1021B78D000049C902 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17040B0F21B78D000049C902 /* CameraViewController.swift */; };
 		17040B1221B796D40049C902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17040B1121B796D40049C902 /* Assets.xcassets */; };
 		17040B1621B9FA760049C902 /* SearchItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17040B1521B9FA760049C902 /* SearchItemDetailViewController.swift */; };
+		172040102407321900C83CF6 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1720400F2407321900C83CF6 /* WorkSans-Regular.ttf */; };
+		172040122407322200C83CF6 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 172040112407322200C83CF6 /* WorkSans-SemiBold.ttf */; };
 		1732E87623EB990A00E4F3E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1732E87523EB990A00E4F3E1 /* GoogleService-Info.plist */; };
 		1751F04F21B06E9F00F55356 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F04E21B06E9F00F55356 /* AppDelegate.swift */; };
 		1751F06421B06EA400F55356 /* ArmoirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F06321B06EA400F55356 /* ArmoirTests.swift */; };
@@ -46,8 +48,6 @@
 		6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */; };
 		6409E25723F0E2F2001AA5A4 /* ChatConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */; };
 		645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645905A423DE5DEE00930FD8 /* InboxViewController.swift */; };
-		64A8C3EB23FCC5DC0068B873 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */; };
-		64A8C3ED23FCC5E50068B873 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */; };
 		7193F59621BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
 		7193F59721BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
 		7193F59821BA370700427907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7193F59521BA370700427907 /* Main.storyboard */; };
@@ -84,6 +84,8 @@
 		17040B0F21B78D000049C902 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		17040B1121B796D40049C902 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17040B1521B9FA760049C902 /* SearchItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemDetailViewController.swift; sourceTree = "<group>"; };
+		1720400F2407321900C83CF6 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		172040112407322200C83CF6 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		1732E87523EB990A00E4F3E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1751F04B21B06E9F00F55356 /* Armoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1751F04E21B06E9F00F55356 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,9 +130,6 @@
 		6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6409E25623F0E2F2001AA5A4 /* ChatConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConstants.swift; sourceTree = "<group>"; };
 		645905A423DE5DEE00930FD8 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
-		64A8C3E823FCC4410068B873 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
-		64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-SemiBold.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		7193F59521BA370700427907 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		743BD5E221B5E64400855A1E /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		743BD5E421B5FB8C00855A1E /* BorrowedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowedCell.swift; sourceTree = "<group>"; };
@@ -270,10 +269,9 @@
 				17F0ED6A23F0D51400904F3A /* WorkSans-Black.ttf */,
 				7D48658423F12DF3009C3E5A /* Alike-Regular.ttf */,
 				17F0ED6D23F0D51500904F3A /* WorkSans-ExtraBold.ttf */,
-				64A8C3EC23FCC5E50068B873 /* WorkSans-Regular.ttf */,
-				64A8C3EA23FCC5DC0068B873 /* WorkSans-SemiBold.ttf */,
+				172040112407322200C83CF6 /* WorkSans-SemiBold.ttf */,
 				17F0ED6B23F0D51500904F3A /* WorkSans-ExtraLight.ttf */,
-				64A8C3E823FCC4410068B873 /* WorkSans-Regular.ttf */,
+				1720400F2407321900C83CF6 /* WorkSans-Regular.ttf */,
 				17F0ED7023F0D51600904F3A /* WorkSans-Light.ttf */,
 				17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */,
 				17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */,
@@ -419,9 +417,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64A8C3ED23FCC5E50068B873 /* WorkSans-Regular.ttf in Resources */,
+				172040122407322200C83CF6 /* WorkSans-SemiBold.ttf in Resources */,
 				17F0ED7323F0D51600904F3A /* WorkSans-Black.ttf in Resources */,
-				64A8C3EB23FCC5DC0068B873 /* WorkSans-SemiBold.ttf in Resources */,
 				17E7E74523FB7F7A00281AA7 /* Marcellus-Regular.ttf in Resources */,
 				7D48658523F12DF3009C3E5A /* Alike-Regular.ttf in Resources */,
 				7193F59621BA370700427907 /* Main.storyboard in Resources */,
@@ -429,6 +426,7 @@
 				17040B0A21B775BD0049C902 /* Alike-Regular.ttf in Resources */,
 				179234B521BC745400B391F5 /* test2.json in Resources */,
 				17B3022E21B65735004E5EF8 /* images in Resources */,
+				172040102407321900C83CF6 /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */,
 				17F0ED7423F0D51600904F3A /* WorkSans-ExtraLight.ttf in Resources */,
 				17F0ED7923F0D51600904F3A /* WorkSans-Light.ttf in Resources */,
