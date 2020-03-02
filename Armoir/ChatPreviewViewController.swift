@@ -56,6 +56,8 @@ class ChatPreviewViewController: UIViewController {
     func getMessages() {
         
         chatsDB.observe(.childAdded) { (snapshot) in
+            let name = snapshot.key
+            print(name)
             let snapshotValue = snapshot.value as! Dictionary<String, String>
             guard let sender = snapshotValue["senderName"], let receiver = snapshotValue["receiverName"] else {return}
             print("here: ")

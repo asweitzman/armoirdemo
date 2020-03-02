@@ -55,7 +55,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         }
         let data = try? Data(contentsOf: url)
         let image = UIImage(data: data!)
-        let thumb1 = image?.resized(withPercentage: 0.5)
+        let thumb1 = image?.resized(By: 0.5)
         self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
         return thumb1 as! UIImage;
     }
@@ -175,7 +175,6 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     func sortPriceHighLow(this:closet_item, that:closet_item) -> Bool {
         return  this.price > that.price
     }
-    
 /*
     func sortDistanceLowHigh(this:firebase_User, that:firebase_User) -> Bool {
         let thisDist = this.distance
@@ -430,7 +429,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         sortType = 0
         categorySet = false
         currSizeIndex = 5
-        categories = ["shirt", "pant", "skirt", "shorts", "dress", "none"]
+        categories = ["Shirt", "Pants", "Skirt", "Shorts", "Dress", "Outerwear"]
         sizes = ["XS", "S", "M", "L", "XL"]
         getData()
         loadData()
@@ -499,20 +498,18 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func initCategoryDropDown() {
-        let capsCategories = ["Shirts", "Pants", "Skirts", "Shorts", "Dresses", "All items"]
+        let capsCategories = ["Shirt", "Pants", "Skirts", "Shorts", "Dresses", "Outerwear", "All items"]
         categoryDropDown.dataSource = capsCategories
         
         categoryDropDown.selectionAction = { [weak self] (index: Int, _: String) in
-            if (index == 5) {
+            if (index == (capsCategories.count-1)) {
                 categorySet = false
                 self?.reloadData()
-                self?.showingLabel.text = "Showing: All Items"
                 self?.categoryButton.titleLabel!.text = "All items"
             } else {
                 categorySet = true
                 //print(index)
                 currCategory = index
-                self?.showingLabel.text = "Showing: " + capsCategories[index]
                 self?.categoryButton.titleLabel!.text = capsCategories[index]
                 self?.reloadData()
             }
@@ -554,4 +551,29 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
     */
 
+}
+
+extension UIImage {
+
+    func resized(By coefficient:CGFloat) -> UIImage? {
+
+        guard coefficient >= 0 && coefficient <= 1 else {
+
+            print("The coefficient must be a floating point number between 0 and 1")
+            return nil
+        }
+
+        let newWidth = size.width * coefficient
+        let newHeight = size.height * coefficient
+
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+
+        draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return newImage
+    }
 }
