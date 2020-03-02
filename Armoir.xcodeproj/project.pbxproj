@@ -125,6 +125,7 @@
 		3461F10B23DE572A00D3DF81 /* GoogleService-Info old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info old.plist"; sourceTree = "<group>"; };
 		34DCFE0D240CA65000487B72 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../Desktop/Work_Sans 2/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		34DCFE0F240CA65D00487B72 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		34DCFE11240CD68800487B72 /* FakeChat */ = {isa = PBXFileReference; lastKnownFileType = text; name = FakeChat; path = "../../../Downloads/FakeChat-master/FakeChat"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4C6EE03E84BA4F5E1E39930B /* Pods-ArmoirTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirTests/Pods-ArmoirTests.release.xcconfig"; sourceTree = "<group>"; };
 		6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 				17040B0721B76B180049C902 /* search.json */,
 				179234B421BC745400B391F5 /* test2.json */,
 				743BD5E421B5FB8C00855A1E /* BorrowedCell.swift */,
+				34DCFE11240CD68800487B72 /* FakeChat */,
 				1732E87523EB990A00E4F3E1 /* GoogleService-Info.plist */,
 				3461F10B23DE572A00D3DF81 /* GoogleService-Info old.plist */,
 				17040B1121B796D40049C902 /* Assets.xcassets */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LentItemViewController: UIViewController {
 
@@ -18,6 +19,7 @@ class LentItemViewController: UIViewController {
     @IBOutlet weak var priceDisplay: UILabel!
     @IBOutlet weak var imgDisplay: UIImageView!
     @IBOutlet weak var itemDescrip: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         daysLeft.text = "10 days left";
@@ -41,8 +43,27 @@ class LentItemViewController: UIViewController {
 //                self.imgDisplay.image = imageI;
 //                self.imgDisplay.clipsToBounds = true;
                 itemDescrip.text = i.name;
-                let userID = i.owner;
-                var user: a_User;
+                distDisplay.text = String(i.distance) + " mi"
+                //code to read username from the database
+                let ref = Database.database().reference().child("users")
+                ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                    let snapshotValue = snapshot.value as! [String : AnyObject]
+                    let ownerVal = snapshotValue[i.owner] as! [String: AnyObject]
+                    let usernameString = ownerVal["display_name"] as! String
+                    self.userName.text = usernameString
+                    let imageUrl = ownerVal["profPic"] as! String
+                    let profRef = storageRef.child("images/\(imageUrl)")
+                    profRef.downloadURL { url, error in
+                      if let error = error {
+                        print("image download error")
+                      } else {
+                        let data = try? Data(contentsOf: url!)
+                        let image = try? UIImage(data: data!)
+                        self.profPic.image = image as! UIImage;
+                      }
+                    }
+                }
+
                 /*var myStructArray:[a_User] = [];
                  do {
                  try myStructArray = JSONDecoder().decode([a_User].self, from: json);
