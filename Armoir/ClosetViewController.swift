@@ -10,6 +10,11 @@ import UIKit
 import Firebase
 
 var documentsURL: URL = NSURLComponents().url!
+var status_borrowing = false
+var status_lending = false
+var status_closet = false
+var lentArray: [closet_item] = []
+var closetArray: [closet_item] = []
 
 let currentUser = Auth.auth().currentUser
 let storageRef = Storage.storage().reference()
@@ -18,16 +23,9 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     @IBOutlet weak var noItemsLabel: UILabel!
     
-    var lentArray: [closet_item] = []
-    var closetArray: [closet_item] = []
-    
     let sectionInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     let itemsPerRow: CGFloat = 2.0
     let imageCache = NSCache<NSString, UIImage>()
-
-    var status_borrowing = false
-    var status_lending = false
-    var status_closet = true
     
     var user = Auth.auth().currentUser
 
@@ -44,18 +42,29 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        loadData()
-        loadLentArray()
-        if (status_lending) {
-            loadLending()
+        //loadData()
+        print("view did appear")
+        
+        switch tabPicker.selectedSegmentIndex {
+            case 0:
+                status_lending = true
+                status_borrowing = false
+                status_closet = false
+                loadLending();
+            case 1:
+                status_closet = true
+                status_borrowing = false
+                status_lending = false
+                loadCloset();
+            case 2:
+                status_borrowing = true
+                status_lending = false
+                status_closet = false
+                loadBorrowing();
+            default:
+                break
         }
-        if (status_borrowing) {
-            loadBorrowing()
-        }
-        if (status_closet) {
-            loadCloset()
-        }
-        viewOfItems.reloadData()
+        self.viewOfItems.reloadData();
     }
     
     func downloadImage(imageName: String, url: URL) -> UIImage{
@@ -65,7 +74,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         }
         let data = try? Data(contentsOf: url)
         let image = UIImage(data: data!)
-        let thumb1 = image?.resized(By: 0.5)
+        let thumb1 = image?.resized(By: 0.2)
         self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
         return thumb1 as! UIImage;
     }
@@ -125,6 +134,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+        viewOfItems.reloadData()
     }
     
     func loadData() {
@@ -234,8 +244,13 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return currArray.count
-        return currFirebaseArray.count
+        if (status_lending) {
+            return lentArray.count
+        } else if (status_closet) {
+            return closetArray.count
+        } else {
+            return currFirebaseArray.count
+        }
     }
 
     
@@ -272,7 +287,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
             cell.img_display.contentMode = .scaleAspectFit;
 //            cell.img_display.layer.borderWidth = 1;
             cell.backgroundColor = UIColor.white
-            cell.due_display.text = "Not borrowed";
+            cell.due_display.text = "$" + String(i.price) + "/day";
             cell.due_display.textColor = UIColor.black
             
             return cell
@@ -395,6 +410,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         status_lending = false;
         status_borrowing = false;
         status_closet = true;
+        self.viewOfItems.reloadData()
     }
 
     func loadLending() {
@@ -404,6 +420,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         status_lending = true;
         status_borrowing = false;
         status_closet = false;
+        self.viewOfItems.reloadData()
     }
     
     
@@ -417,20 +434,27 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         case 2:
             loadBorrowing();
         default:
-            loadCloset()
+            break
         }
        self.viewOfItems.reloadData();
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //currItem = currArray[indexPath.row].item_id;
-        currItem = currFirebaseArray[indexPath.row].item_id
-
+        if (status_lending) {
+            currItem = lentArray[indexPath.row].item_id
+        } else if (status_closet) {
+            loadCloset()
+            currItem = closetArray[indexPath.row].item_id
+        } else {
+            currItem = currFirebaseArray[indexPath.row].item_id
+        }
     }
     
     func loadLentArray() {
         let closetArr = firebaseUser.closet ?? [];
-        
+        lentArray = []
+        closetArray = []
         for item in closetArr {
             if (item.borrowed) {
                 lentArray.append(item)
@@ -438,11 +462,11 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
                 closetArray.append(item)
             }
         }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("view did load")
         let fileManager = FileManager.default
                 // Move '/Documents/filename.hello.swift' to  '/Documents/Folder/filename/hello.swift'
         do {
@@ -455,8 +479,9 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
               print("it did not worked\(error)")
         }
         loadData();
-        loadLentArray();
         loadCloset();
+        print("closet array:")
+        print(closetArray)
         loadProfImage();
         showUserName();
         uploadButton.imageView?.contentMode = .scaleAspectFit;

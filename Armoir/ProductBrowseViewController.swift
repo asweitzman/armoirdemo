@@ -333,6 +333,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        reloadData()
         return itemData.count
     }
     

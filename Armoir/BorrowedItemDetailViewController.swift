@@ -19,9 +19,20 @@ class BorrowedItemDetailViewController: UIViewController {
     @IBOutlet weak var distanceText: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemDescrip: UILabel!
+    let imageCache = NSCache<NSString, UIImage>()
+       
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         reminderButton.isHidden = true
+        
+        if (status_lending) {
+            currArray = lentArray
+        } else if (status_closet) {
+            currArray = closetArray
+        }
+        
+        
         for i in currArray {
             if (i.item_id == currItem) {
                 priceDetail.text = "$" + String(i.price) + "/day";
@@ -29,24 +40,33 @@ class BorrowedItemDetailViewController: UIViewController {
                 //distanceText.text = i.distance;
                 //let imageI = UIImage(named: i.image);
                 
-                let imgURL = i.image
-                if (ImageRetriever().fileIsURL(fileName: imgURL)) {
-                    self.itemImage.image = ImageRetriever().loadImg(fileURL: URL(string: imgURL)!)
-                } else {
-                    self.itemImage.image = UIImage(named: i.image);
+                let imageRef = storageRef.child("images/" + String(i.image))
+                imageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("image url error")
+                    } else {
+                        self.itemImage.image = self.downloadImage(imageName: String(i.image), url: url!)
+                    }
                 }
+                
+//                let imgURL = i.image
+//                if (ImageRetriever().fileIsURL(fileName: imgURL)) {
+//                    self.itemImage.image = ImageRetriever().loadImg(fileURL: URL(string: imgURL)!)
+//                } else {
+//                    self.itemImage.image = UIImage(named: i.image);
+//                }
                 
                 
                 //self.itemImage.image = imageI;
                 self.itemImage.clipsToBounds = true;
                 itemDescrip.text = i.name;
                 var userID = i.owner;
-                if (i.borrowed) {
+                if (status_lending) {
                     userID = String(i.borrowed_by);
                     distanceText.text = "Borrowed by";
                     reminderButton.isHidden = false;
                 } else {
-                    distanceText.text = "Currently available";
+                    distanceText.text = "Not borrowed";
                     reminderButton.isHidden = true;
                 }
                 var user: a_User;
@@ -58,11 +78,13 @@ class BorrowedItemDetailViewController: UIViewController {
                     print("array didn't work");
                 }
                 for stru in myStructArray { */
+                userName.text = "Owned by you"
+                
                 for stru in all_users {
                     if String(stru.user_ID) == userID {
                         user = stru;
                         var image = UIImage(named: user.profPic);
-                        if (i.borrowed) {
+                        if (status_lending) {
                             userName.text = user.owner;
 
                         } else {
@@ -88,6 +110,18 @@ class BorrowedItemDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    func downloadImage(imageName: String, url: URL) -> UIImage{
+        let imageRef = storageRef.child("images/" + String(imageName))
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+              return cachedImage
+        }
+        let data = try? Data(contentsOf: url)
+        let image = UIImage(data: data!)
+        let thumb1 = image?.resized(By: 0.2)
+        self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
+        return thumb1 as! UIImage;
+    }
     
     /*
      // MARK: - Navigation
