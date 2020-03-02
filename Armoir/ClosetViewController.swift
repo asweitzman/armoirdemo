@@ -231,6 +231,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         //for clothes you are lending
         if (status_lending) {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
+            cell.contentView.layer.borderWidth = 0.0
 //            var closetRef = ref.child("users").child(user!.uid).child("closet")
             //let i = currArray[indexPath.row]
             let i = currFirebaseArray[indexPath.row]
@@ -297,10 +298,10 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
             }
             cell.img_display.contentMode = .scaleAspectFit;
             cell.img_display.layer.borderWidth = 1;
-            cell.dist_display.text = "1.2 mi";
+            cell.dist_display.text = String(i.distance) + " mi";
             cell.due_display.text = "Due in 10 days";
             cell.due_display.textColor = UIColor.black;
-            cell.price_display.text = String(format: "%f", i.price);
+            cell.price_display.text = "$" + String(i.price) + "/day";
             cell.backgroundColor = UIColor.white
             return cell
         }
