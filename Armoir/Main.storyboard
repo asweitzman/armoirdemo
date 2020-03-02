@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plt-bR-gyC">
-                                <rect key="frame" x="0.0" y="56" width="414" height="82"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkU-Ip-HUa">
                                         <rect key="frame" x="115" y="27.5" width="201" height="27"/>
@@ -75,7 +75,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Khb-uK-E2K">
-                                <rect key="frame" x="44" y="171" width="79" height="79"/>
+                                <rect key="frame" x="44" y="115" width="79" height="79"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Khb-uK-E2K" secondAttribute="height" multiplier="48:48" id="7gn-vg-I9R"/>
                                 </constraints>
@@ -86,13 +86,13 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSW-Pt-WIV">
-                                <rect key="frame" x="20" y="275" width="127" height="43"/>
+                                <rect key="frame" x="20" y="219" width="127" height="43"/>
                                 <color key="backgroundColor" red="0.89766186479999999" green="0.87507593630000002" blue="0.84705561399999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="17"/>
                                 <state key="normal" title="Change Picture"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0o5-pB-gHr">
-                                <rect key="frame" x="20" y="380" width="127" height="39"/>
+                                <rect key="frame" x="20" y="324" width="127" height="39"/>
                                 <color key="backgroundColor" red="0.25926578039999998" green="0.40468230840000002" blue="0.69936054940000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="Qrg-Bm-Vk8"/>
@@ -103,7 +103,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ML-uI-OBm">
-                                <rect key="frame" x="20" y="326" width="127" height="43"/>
+                                <rect key="frame" x="20" y="270" width="127" height="43"/>
                                 <color key="backgroundColor" red="0.89766186479999999" green="0.87507593630000002" blue="0.84705561399999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="NAR-v0-4Qw"/>
@@ -112,7 +112,7 @@
                                 <state key="normal" title="Invite Friends"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YC7-on-Nex">
-                                <rect key="frame" x="158" y="214.5" width="186" height="35.5"/>
+                                <rect key="frame" x="158" y="158.5" width="186" height="35.5"/>
                                 <color key="backgroundColor" red="0.89766186479999999" green="0.87507593630000002" blue="0.84705561399999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="186" id="ZQh-F8-Qng"/>
@@ -121,7 +121,7 @@
                                 <state key="normal" title="Change Password"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QA-Wp-pns">
-                                <rect key="frame" x="158" y="171" width="186" height="35.5"/>
+                                <rect key="frame" x="158" y="115" width="186" height="35.5"/>
                                 <color key="backgroundColor" red="0.89766186479999999" green="0.87507593630000002" blue="0.84705561399999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="17"/>
                                 <state key="normal" title="Change Username"/>
@@ -2786,7 +2786,7 @@ the planet</string>
         <scene sceneID="LI0-nY-nlP">
             <objects>
                 <viewController id="V7Z-R2-b6X" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HS2-Di-vGH">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="HS2-Di-vGH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -2797,7 +2797,7 @@ the planet</string>
                                     <constraint firstAttribute="width" constant="433" id="E2e-nR-aHG"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNN-2G-2Kz">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNN-2G-2Kz">
                                 <rect key="frame" x="71.5" y="710" width="271" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -2979,7 +2979,7 @@ the planet</string>
         <segue reference="6GD-De-Suz"/>
         <segue reference="dTl-b8-yKo"/>
         <segue reference="PCX-mb-E7O"/>
-        <segue reference="VHW-aS-TXT"/>
+        <segue reference="P0h-GW-DiH"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
 </document>

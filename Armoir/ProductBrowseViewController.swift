@@ -26,7 +26,7 @@ let sortByDropDown:DropDown = DropDown()
 var keywords:[String] = [String]()
 var categorySet:Bool = Bool()
 var currSizeIndex:Int = Int()
-var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
+var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "", distance: 0)
 var sortType:Int = Int()
 var currUserJSON:JSON = JSON()
 
@@ -168,6 +168,10 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
  */
     }
 
+    func sortDistanceLowHigh(this:closet_item, that:closet_item) -> Bool {
+        return this.distance < that.distance
+    }
+    
     func sortPriceLowHigh(this:closet_item, that:closet_item) -> Bool {
         return  this.price < that.price
     }
@@ -288,7 +292,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         } else if (sortType == 1) {
             itemData.sort(by: sortPriceHighLow)
         } else if (sortType == 2) {
-            //itemData.sort(by: sortDistanceLowHigh)
+            itemData.sort(by: sortDistanceLowHigh)
         }
         myCollectionView.reloadData()
     }
@@ -368,7 +372,9 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         }
         let currPrice = currItem.price
         cell.productPrice.text = "$" + String(currPrice) + "/day";
-
+        let dist = currItem.distance
+        let distString = String(format: "%.1f", dist)
+        cell.productDistance.text = distString + " mi."
         cell.productImage.contentMode = .scaleAspectFit;
         //cell.productImage.layer.borderWidth = 1;
         //cell.productDistance.text = currItem["distance"].string! + " mi";

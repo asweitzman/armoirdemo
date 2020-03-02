@@ -5,14 +5,14 @@
 //  Created by alex weitzman on 11/30/18.
 //  Copyright © 2018 CS147. All rights reserved.
 //
-
+/*
 import UIKit
 
 struct Cell{
     let productImage : UIImage?
     let profileImage : UIImage?
     let profile : String?
-    let distance : String?
+    let distance : Double?
     let message : String?
     let borrowed: Bool?
     let item_id: Int
@@ -157,3 +157,4 @@ class NewsTableViewCell: UITableViewCell{
     
     @IBOutlet weak var reminderButton: UIButton!
 }
+*/

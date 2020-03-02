@@ -5,7 +5,7 @@
 //  Created by Ellen Roper on 1/24/20.
 //  Copyright © 2020 CS147. All rights reserved.
 //
-
+/*
 import UIKit
 
 
@@ -198,3 +198,4 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
  @IBOutlet weak var message: UILabel!
  
  }*/
+*/
