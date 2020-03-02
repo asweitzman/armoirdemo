@@ -21,7 +21,7 @@ target 'Armoir' do
     pod 'FBSDKLoginKit/Swift'
     pod 'FBSDKShareKit/Swift'
     pod 'MessageKit'
-    pod 'Firebase/InAppMessaging'#added, probs unnecessary
+    #pod 'Firebase/InAppMessaging'#added, probs unnecessary
     pod 'Firebase/Messaging' #added
     pod 'Firebase/Firestore' #added
     pod 'Firebase/Core' #added

@@ -26,7 +26,7 @@ let sortByDropDown:DropDown = DropDown()
 var keywords:[String] = [String]()
 var categorySet:Bool = Bool()
 var currSizeIndex:Int = Int()
-var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "")
+var chosenItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "0", category: "", color: "", image: "", name: "", owner: "", price: 0, size: "", distance: 0)
 var sortType:Int = Int()
 var currUserJSON:JSON = JSON()
 
@@ -45,6 +45,21 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     @IBOutlet weak var sortByButton: UIButton!
     
     @IBOutlet weak var searchFieldText: UISearchBar!
+    
+    let imageCache = NSCache<NSString, UIImage>()
+    
+    func downloadImage(imageName: String, url: URL) -> UIImage{
+        let imageRef = storageRef.child("images/" + String(imageName))
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+              return cachedImage
+        }
+        let data = try? Data(contentsOf: url)
+        let image = UIImage(data: data!)
+        let thumb1 = image?.resized(By: 0.2)
+        self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
+        return thumb1 as! UIImage;
+    }
+
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         //searchActive = false;
@@ -86,6 +101,8 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     @IBAction func sortByClicked(_ sender: Any) {
         sortByDropDown.show()
     }
+    
+
     
     func getData() {
 //        if let path = Bundle.main.path(forResource: "search", ofType: "json") {
@@ -151,6 +168,10 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
  */
     }
 
+    func sortDistanceLowHigh(this:closet_item, that:closet_item) -> Bool {
+        return this.distance < that.distance
+    }
+    
     func sortPriceLowHigh(this:closet_item, that:closet_item) -> Bool {
         return  this.price < that.price
     }
@@ -158,7 +179,6 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     func sortPriceHighLow(this:closet_item, that:closet_item) -> Bool {
         return  this.price > that.price
     }
-    
 /*
     func sortDistanceLowHigh(this:firebase_User, that:firebase_User) -> Bool {
         let thisDist = this.distance
@@ -272,7 +292,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         } else if (sortType == 1) {
             itemData.sort(by: sortPriceHighLow)
         } else if (sortType == 2) {
-            //itemData.sort(by: sortDistanceLowHigh)
+            itemData.sort(by: sortDistanceLowHigh)
         }
         myCollectionView.reloadData()
     }
@@ -333,18 +353,28 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
 //            cell.productImage.image = UIImage(named: imageStr)
 //        }
         let imageRef = storageRef.child("images/" + String(currItem.image))
+//        imageRef.downloadURL { url, error in
+//          if let error = error {
+//            print("image download error")
+//          } else {
+//            let data = try? Data(contentsOf: url!)
+//            let image = UIImage(data: data!)
+//            let thumb1 = image?.resized(withPercentage: 0.5)
+//            cell.productImage.image = thumb1 as! UIImage;
+//          }
+//        }
         imageRef.downloadURL { url, error in
-          if let error = error {
-            print("image download error")
-          } else {
-            let data = try? Data(contentsOf: url!)
-            let image = try? UIImage(data: data!)
-            cell.productImage.image = image as! UIImage;
-          }
+            if let error = error {
+                print("image url error")
+            } else {
+                cell.productImage.image = self.downloadImage(imageName: String(currItem.image), url: url!)
+            }
         }
         let currPrice = currItem.price
         cell.productPrice.text = "$" + String(currPrice) + "/day";
-
+        let dist = currItem.distance
+        let distString = String(format: "%.1f", dist)
+        cell.productDistance.text = distString + " mi."
         cell.productImage.contentMode = .scaleAspectFit;
         //cell.productImage.layer.borderWidth = 1;
         //cell.productDistance.text = currItem["distance"].string! + " mi";
@@ -405,7 +435,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         sortType = 0
         categorySet = false
         currSizeIndex = 5
-        categories = ["shirt", "pant", "skirt", "shorts", "dress", "none"]
+        categories = ["Shirt", "Pants", "Skirt", "Shorts", "Dress", "Outerwear"]
         sizes = ["XS", "S", "M", "L", "XL"]
         getData()
         loadData()
@@ -474,20 +504,18 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func initCategoryDropDown() {
-        let capsCategories = ["Shirts", "Pants", "Skirts", "Shorts", "Dresses", "All items"]
+        let capsCategories = ["Shirt", "Pants", "Skirts", "Shorts", "Dresses", "Outerwear", "All items"]
         categoryDropDown.dataSource = capsCategories
         
         categoryDropDown.selectionAction = { [weak self] (index: Int, _: String) in
-            if (index == 5) {
+            if (index == (capsCategories.count-1)) {
                 categorySet = false
                 self?.reloadData()
-                self?.showingLabel.text = "Showing: All Items"
                 self?.categoryButton.titleLabel!.text = "All items"
             } else {
                 categorySet = true
                 //print(index)
                 currCategory = index
-                self?.showingLabel.text = "Showing: " + capsCategories[index]
                 self?.categoryButton.titleLabel!.text = capsCategories[index]
                 self?.reloadData()
             }
@@ -513,10 +541,8 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             self?.reloadData()
         }
     }
-    
 
-    
-    
+
     /*func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //currItem = fullArray[indexPath.row].item_id;
         currItem = itemData[indexPath.row]["item_id"].int!
@@ -531,4 +557,29 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
     */
 
+}
+
+extension UIImage {
+
+    func resized(By coefficient:CGFloat) -> UIImage? {
+
+        guard coefficient >= 0 && coefficient <= 1 else {
+
+            print("The coefficient must be a floating point number between 0 and 1")
+            return nil
+        }
+
+        let newWidth = size.width * coefficient
+        let newHeight = size.height * coefficient
+
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+
+        draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return newImage
+    }
 }

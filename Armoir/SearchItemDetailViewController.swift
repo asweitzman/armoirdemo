@@ -22,7 +22,7 @@ class SearchItemDetailViewController: UIViewController {
     func addItem(itemID: Int) {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
-        let item = ["item_id": chosenItem.item_id, "name": chosenItem.name, "owner": chosenItem.owner, "borrowed": true, "borrowed_by": user?.uid, "image": chosenItem.image, "color": "", "size": chosenItem.size, "price": chosenItem.price, "category": chosenItem.category, "distance": 1.2] as [String : Any]
+        let item = ["item_id": chosenItem.item_id, "name": chosenItem.name, "owner": chosenItem.owner, "borrowed": true, "borrowed_by": user?.uid, "image": chosenItem.image, "color": "", "size": chosenItem.size, "price": chosenItem.price, "category": chosenItem.category, "distance": chosenItem.distance] as [String : Any]
         ref.child("users/\(user!.uid)/borrowed/\(itemID)/").setValue(item)
     }
     
@@ -154,9 +154,33 @@ class SearchItemDetailViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             let currentUser = Auth.auth().currentUser
-            print(chosenItem)
             itemSize.text = "Size: " + chosenItem.size
-            itemDescrip.text = chosenItem.size
+            itemDescrip.text = chosenItem.name
+            
+            //code to read username from the database
+            let ref = Database.database().reference().child("users")
+            ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                let snapshotValue = snapshot.value as! [String : AnyObject]
+                let ownerVal = snapshotValue[chosenItem.owner] as! [String: AnyObject]
+                let usernameString = ownerVal["display_name"] as! String
+                self.userName.text = usernameString
+                let imageUrl = ownerVal["profPic"] as! String
+                let profRef = storageRef.child("images/\(imageUrl)")
+                profRef.downloadURL { url, error in
+                  if let error = error {
+                    print("image download error")
+                  } else {
+                    let data = try? Data(contentsOf: url!)
+                    let image = try? UIImage(data: data!)
+                    self.profPic.image = image as! UIImage;
+                  }
+                }
+            }
+            
+            
+            let dist = chosenItem.distance
+            let distString = String(format: "%.1f", dist) + " mi."
+            distanceText.text = distString
             let imageRef = storageRef.child("images/\(chosenItem.image)/")
             imageRef.downloadURL { url, error in
               if let error = error {

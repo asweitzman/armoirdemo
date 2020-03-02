@@ -21,6 +21,8 @@
 
 #include "Firestore/core/src/firebase/firestore/remote/grpc_connection.h"
 #include "Firestore/core/src/firebase/firestore/remote/grpc_util.h"
+#include "Firestore/core/src/firebase/firestore/util/log.h"
+#include "Firestore/core/src/firebase/firestore/util/status.h"
 
 namespace firebase {
 namespace firestore {
@@ -84,7 +86,7 @@ using internal::BufferedWriter;
 GrpcStream::GrpcStream(
     std::unique_ptr<grpc::ClientContext> context,
     std::unique_ptr<grpc::GenericClientAsyncReaderWriter> call,
-    AsyncQueue* worker_queue,
+    const std::shared_ptr<util::AsyncQueue>& worker_queue,
     GrpcConnection* grpc_connection,
     GrpcStreamObserver* observer)
     : context_{std::move(NOT_NULL(context))},
@@ -96,6 +98,7 @@ GrpcStream::GrpcStream(
 }
 
 GrpcStream::~GrpcStream() {
+  LOG_DEBUG("GrpcStream('%s'): destroying stream", this);
   HARD_ASSERT(completions_.empty(),
               "GrpcStream is being destroyed without proper shutdown");
   MaybeUnregister();
@@ -125,11 +128,11 @@ void GrpcStream::Read() {
     return;
   }
 
-  GrpcCompletion* completion =
-      NewCompletion(Type::Read, [this](const GrpcCompletion* completion) {
+  auto completion = NewCompletion(
+      Type::Read, [this](const std::shared_ptr<GrpcCompletion>& completion) {
         OnRead(*completion->message());
       });
-  call_->Read(completion->message(), completion);
+  call_->Read(completion->message(), completion.get());
 }
 
 void GrpcStream::Write(grpc::ByteBuffer&& message) {
@@ -148,19 +151,24 @@ void GrpcStream::MaybeWrite(absl::optional<BufferedWrite> maybe_write) {
   }
 
   BufferedWrite write = std::move(maybe_write).value();
-  GrpcCompletion* completion =
-      NewCompletion(Type::Write, [this](const GrpcCompletion*) { OnWrite(); });
+  auto completion = NewCompletion(
+      Type::Write,
+      [this](const std::shared_ptr<GrpcCompletion>&) { OnWrite(); });
   *completion->message() = write.message;
 
-  call_->Write(*completion->message(), write.options, completion);
+  call_->Write(*completion->message(), write.options, completion.get());
 }
 
 void GrpcStream::FinishImmediately() {
+  LOG_DEBUG("GrpcStream('%s'): finishing without notifying observers", this);
+
   Shutdown();
   UnsetObserver();
 }
 
 void GrpcStream::FinishAndNotify(const Status& status) {
+  LOG_DEBUG("GrpcStream('%s'): finishing and notifying observers", this);
+
   Shutdown();
 
   if (observer_) {
@@ -173,22 +181,30 @@ void GrpcStream::FinishAndNotify(const Status& status) {
 }
 
 void GrpcStream::Shutdown() {
+  LOG_DEBUG("GrpcStream('%s'): shutting down; completions: %s, is finished: %s",
+            this, completions_.size(), is_grpc_call_finished_);
+
   MaybeUnregister();
-  if (completions_.empty()) {
-    // Nothing to cancel -- either the call was already finished, or it has
-    // never been started.
-    return;
+
+  // If completions are empty but the call hasn't been finished, it means this
+  // stream has never started. Calling `Finish` on the underlying gRPC call is
+  // invalid if it wasn't started previously.
+  if (!completions_.empty() && !is_grpc_call_finished_) {
+    // Important: during normal operation, the stream always has a pending read
+    // operation, so `Shutdown` would hang indefinitely if we didn't cancel the
+    // `context_`. However, if the stream has already failed, avoid canceling
+    // the context to avoid overwriting the status captured during the
+    // `OnOperationFailed`.
+
+    context_->TryCancel();
+    FinishGrpcCall({});
   }
 
-  // Important: since the stream always has a pending read operation,
-  // cancellation has to be called, or else the read would hang forever, and
-  // finish operation will never get completed.
-  // (on the other hand, when an operation fails, cancellation should not be
-  // called, otherwise the real failure cause will be overwritten by status
-  // "canceled".)
-  context_->TryCancel();
-  FinishCall({});
-  // Wait until "finish" is off the queue.
+  // Drain the completions -- `Shutdown` guarantees to bring the stream into
+  // destructible state. Two possibilities here:
+  // - completions are empty -- nothing to block on;
+  // - the only completion is "finish" (whether enqueued by this function or
+  //   previously) -- "finish" is a very fast operation.
   FastFinishCompletionsBlocking();
 }
 
@@ -199,57 +215,74 @@ void GrpcStream::MaybeUnregister() {
   }
 }
 
-void GrpcStream::FinishCall(const OnSuccess& callback) {
+void GrpcStream::FinishGrpcCall(const OnSuccess& callback) {
+  LOG_DEBUG("GrpcStream('%s'): finishing the underlying call", this);
+
+  HARD_ASSERT(!is_grpc_call_finished_, "FinishGrpcCall called twice");
+  is_grpc_call_finished_ = true;
+
   // All completions issued by this call must be taken off the queue before
   // finish operation can be enqueued.
   FastFinishCompletionsBlocking();
-  GrpcCompletion* completion = NewCompletion(Type::Finish, callback);
-  call_->Finish(completion->status(), completion);
+  auto completion = NewCompletion(Type::Finish, callback);
+  call_->Finish(completion->status(), completion.get());
 }
 
 void GrpcStream::FastFinishCompletionsBlocking() {
+  LOG_DEBUG("GrpcStream('%s'): fast finishing %s completion(s)", this,
+            completions_.size());
+
   // TODO(varconst): reset buffered_writer_? Should not be necessary, because it
   // should never be called again after a call to Finish.
 
-  for (auto completion : completions_) {
+  for (const auto& completion : completions_) {
     // `GrpcStream` cannot actually remove any of the completions that already
     // have been enqueued on the worker queue, so instead turn them into no-ops.
     completion->Cancel();
   }
 
-  for (auto completion : completions_) {
+  for (const auto& completion : completions_) {
     // This is blocking.
     completion->WaitUntilOffQueue();
   }
+
+  // This will release all the shared pointers to GrpcCompletion, leaving it
+  // up to gRPC to actually call Complete and trigger deletion.
   completions_.clear();
 }
 
 bool GrpcStream::WriteAndFinish(grpc::ByteBuffer&& message) {
   bool did_last_write = false;
+  if (!is_grpc_call_finished_) {
+    did_last_write = TryLastWrite(std::move(message));
+  }
+  FinishImmediately();
+  return did_last_write;
+}
 
+bool GrpcStream::TryLastWrite(grpc::ByteBuffer&& message) {
   absl::optional<BufferedWrite> maybe_write =
       buffered_writer_.EnqueueWrite(std::move(message));
   // Only bother with the last write if there is no active write at the moment.
-  if (maybe_write) {
-    BufferedWrite last_write = std::move(maybe_write).value();
-    GrpcCompletion* completion = NewCompletion(Type::Write, {});
-    *completion->message() = last_write.message;
-    call_->WriteLast(*completion->message(), grpc::WriteOptions{}, completion);
-
-    // Empirically, the write normally takes less than a millisecond to finish
-    // (both with and without network connection), and never more than several
-    // dozen milliseconds. Nevertheless, ensure `WriteAndFinish` doesn't hang if
-    // there happen to be circumstances under which the write may block
-    // indefinitely (in that case, rely on the fact that canceling a gRPC call
-    // makes all pending operations come back from the queue quickly).
-    auto status = completion->WaitUntilOffQueue(std::chrono::milliseconds(500));
-    if (status == std::future_status::ready) {
-      did_last_write = true;
-    }
+  if (!maybe_write) {
+    return false;
   }
 
-  FinishImmediately();
-  return did_last_write;
+  BufferedWrite last_write = std::move(maybe_write).value();
+  auto completion = NewCompletion(Type::Write, {});
+  *completion->message() = last_write.message;
+  call_->WriteLast(*completion->message(), grpc::WriteOptions{},
+                   completion.get());
+
+  // Empirically, the write normally takes less than a millisecond to finish
+  // (both with and without network connection), and never more than several
+  // dozen milliseconds. Nevertheless, ensure `WriteAndFinish` doesn't hang if
+  // there happen to be circumstances under which the write may block
+  // indefinitely (in that case, rely on the fact that canceling a gRPC call
+  // makes all pending operations come back from the queue quickly).
+
+  auto status = completion->WaitUntilOffQueue(std::chrono::milliseconds(500));
+  return status == std::future_status::ready;
 }
 
 GrpcStream::Metadata GrpcStream::GetResponseHeaders() const {
@@ -277,23 +310,31 @@ void GrpcStream::OnWrite() {
 }
 
 void GrpcStream::OnOperationFailed() {
-  FinishCall([this](const GrpcCompletion* completion) {
+  if (is_grpc_call_finished_) {
+    // If a finish operation has been enqueued already (possibly by a previous
+    // failed operation), there's nothing to do.
+    return;
+  }
+
+  FinishGrpcCall([this](const std::shared_ptr<GrpcCompletion>& completion) {
     Status status = ConvertStatus(*completion->status());
     FinishAndNotify(status);
   });
 }
 
-void GrpcStream::RemoveCompletion(const GrpcCompletion* to_remove) {
+void GrpcStream::RemoveCompletion(
+    const std::shared_ptr<GrpcCompletion>& to_remove) {
   auto found = std::find(completions_.begin(), completions_.end(), to_remove);
   HARD_ASSERT(found != completions_.end(), "Missing GrpcCompletion");
   completions_.erase(found);
 }
 
-GrpcCompletion* GrpcStream::NewCompletion(Type tag,
-                                          const OnSuccess& on_success) {
+std::shared_ptr<GrpcCompletion> GrpcStream::NewCompletion(
+    Type tag, const OnSuccess& on_success) {
   // Can't move into lambda until C++14.
   GrpcCompletion::Callback decorated =
-      [this, on_success](bool ok, const GrpcCompletion* completion) {
+      [this, on_success](bool ok,
+                         const std::shared_ptr<GrpcCompletion>& completion) {
         RemoveCompletion(completion);
 
         if (ok) {
@@ -303,13 +344,15 @@ GrpcCompletion* GrpcStream::NewCompletion(Type tag,
         } else {
           // Use the same error-handling for all operations; all errors are
           // unrecoverable.
+          LOG_DEBUG("GrpcStream('%s'): operation of type %s failed", this,
+                    completion->type());
           OnOperationFailed();
         }
       };
 
   // For lifetime details, see `GrpcCompletion` class comment.
-  auto* completion =
-      new GrpcCompletion{tag, worker_queue_, std::move(decorated)};
+  auto completion =
+      GrpcCompletion::Create(tag, worker_queue_, std::move(decorated));
   completions_.push_back(completion);
   return completion;
 }
