@@ -16,12 +16,19 @@ let storageRef = Storage.storage().reference()
 
 class ClosetViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var noItemsLabel: UILabel!
+    
+    var lentArray: [closet_item] = []
+    var closetArray: [closet_item] = []
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     let itemsPerRow: CGFloat = 2.0
     let imageCache = NSCache<NSString, UIImage>()
 
-    var status_lending = true
+    var status_borrowing = false
+    var status_lending = false
+    var status_closet = true
+    
     var user = Auth.auth().currentUser
 
     @IBOutlet weak var tabPicker: UISegmentedControl!
@@ -38,10 +45,15 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     override func viewDidAppear(_ animated: Bool) {
         loadData()
+        loadLentArray()
         if (status_lending) {
             loadLending()
-        } else {
+        }
+        if (status_borrowing) {
             loadBorrowing()
+        }
+        if (status_closet) {
+            loadCloset()
         }
         viewOfItems.reloadData()
     }
@@ -61,6 +73,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     func loadBorrowing() {
         currFirebaseArray = firebaseUser.borrowed ?? [];
         status_lending = false;
+        status_closet = false;
     }
     
     @objc func showActionSheet() {
@@ -229,11 +242,62 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var ref = Database.database().reference()
         //for clothes you are lending
-        if (status_lending) {
+        
+        if (status_closet) {
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
+            if closetArray.isEmpty {
+                cell.isUserInteractionEnabled = false
+                cell.itemName.isHidden = true
+                cell.due_display.isHidden = true
+                noItemsLabel.isHidden = false
+                noItemsLabel.text = "You haven't uploaded any items yet."
+                return cell
+            } else {
+                cell.isUserInteractionEnabled = true
+                cell.itemName.isHidden = false
+                cell.due_display.isHidden = false
+                noItemsLabel.isHidden = true
+            }
+            let i = closetArray[indexPath.row]
+            cell.itemName.text = i.name;
+            cell.backgroundColor = UIColor(red: 252, green: 246, blue: 240, alpha: 1)
+            let imageRef = storageRef.child("images/" + String(i.image))
+            imageRef.downloadURL { url, error in
+                if let error = error {
+                    print("image url error")
+                } else {
+                    cell.img_display.image = self.downloadImage(imageName: String(i.image), url: url!)
+                }
+            }
+            cell.img_display.contentMode = .scaleAspectFit;
+//            cell.img_display.layer.borderWidth = 1;
+            cell.backgroundColor = UIColor.white
+            cell.due_display.text = "Not borrowed";
+            cell.due_display.textColor = UIColor.black
+            
+            return cell
+        }
+        
+        else if (status_lending) {
+            let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "lendingCell",for: indexPath) as! ItemCell
+            if lentArray.isEmpty {
+                cell.isUserInteractionEnabled = false
+                cell.itemName.isHidden = true
+                cell.due_display.isHidden = true
+                noItemsLabel.isHidden = false
+                noItemsLabel.text = "No one has borrowed from you yet."
+                return cell
+            } else {
+                cell.isUserInteractionEnabled = true
+                cell.itemName.isHidden = false
+                cell.due_display.isHidden = false
+                noItemsLabel.isHidden = true
+            }
+            let i = lentArray[indexPath.row]
 //            var closetRef = ref.child("users").child(user!.uid).child("closet")
             //let i = currArray[indexPath.row]
-            let i = currFirebaseArray[indexPath.row]
+            
+//            let i = currFirebaseArray[indexPath.row]
             cell.itemName.text = i.name;
             cell.backgroundColor = UIColor(red: 252, green: 246, blue: 240, alpha: 1)
             let imageRef = storageRef.child("images/" + String(i.image))
@@ -260,21 +324,40 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
                 cell.img_display.image = UIImage(named: i.image);
             }
 */          cell.img_display.contentMode = .scaleAspectFit;
-            cell.img_display.layer.borderWidth = 1;
-            if (i.borrowed) {
-                cell.backgroundColor = UIColor(hue: 0.0028, saturation: 0, brightness: 0.82, alpha: 1.0)
-                cell.due_display.text = "1 day left";
-                cell.due_display.textColor = UIColor(hue: 0.0028, saturation: 0.97, brightness: 0.65, alpha: 1.0);
-            } else {
-                cell.backgroundColor = UIColor.white
-                cell.due_display.text = "Not borrowed";
-                cell.due_display.textColor = UIColor.black;
-            }
+//            cell.img_display.layer.borderWidth = 1;
+            
+//            if (i.borrowed) {
+//            cell.backgroundColor = UIColor(hue: 0.0028, saturation: 0, brightness: 0.82, alpha: 1.0)
+            
+            cell.due_display.text = "1 day left";
+            cell.due_display.textColor = UIColor(hue: 0.0028, saturation: 0.97, brightness: 0.65, alpha: 1.0);
+            
             return cell
-        } // for borrowing clothes
+    } // for borrowing clothes
+        
         else {
+            
             let cell = viewOfItems.dequeueReusableCell(withReuseIdentifier: "borrowingCell",for: indexPath) as! BorrowedCell
             //let i = currArray[indexPath.row]
+            
+            if currFirebaseArray.isEmpty {
+                cell.isUserInteractionEnabled = false
+                noItemsLabel.isHidden = false
+                cell.dist_display.isHidden = true
+                cell.due_display.isHidden = true
+                cell.price_display.isHidden = true
+                noItemsLabel.text = "You haven't borrowed any items yet."
+                print("it's empty yo")
+                return cell
+            } else {
+                print("it's not empty yo")
+                cell.isUserInteractionEnabled = true
+                cell.dist_display.isHidden = false
+                cell.due_display.isHidden = false
+                cell.price_display.isHidden = false
+                noItemsLabel.isHidden = true
+            }
+            
             let i = currFirebaseArray[indexPath.row]
 /*            let imgURL = i.image
             if (ImageRetriever().fileIsURL(fileName: imgURL)) {
@@ -296,7 +379,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
               }
             }
             cell.img_display.contentMode = .scaleAspectFit;
-            cell.img_display.layer.borderWidth = 1;
+//            cell.img_display.layer.borderWidth = 1;
             cell.dist_display.text = "1.2 mi";
             cell.due_display.text = "Due in 10 days";
             cell.due_display.textColor = UIColor.black;
@@ -304,15 +387,21 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
             cell.backgroundColor = UIColor.white
             return cell
         }
-
     }
     
-
+    func loadCloset() {
+        currFirebaseArray = firebaseUser.closet ?? [];
+        status_lending = false;
+        status_borrowing = false;
+        status_closet = true;
+    }
 
     func loadLending() {
         //currArray = currUser.closet;
         currFirebaseArray = firebaseUser.closet ?? [];
         status_lending = true;
+        status_borrowing = false;
+        status_closet = false;
     }
     
     
@@ -322,10 +411,11 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         case 0:
             loadLending();
         case 1:
-            currFirebaseArray = firebaseUser.borrowed ?? [];
-            status_lending = false;
+            loadCloset();
+        case 2:
+            loadBorrowing();
         default:
-            break
+            loadCloset()
         }
        self.viewOfItems.reloadData();
     }
@@ -334,6 +424,19 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
         //currItem = currArray[indexPath.row].item_id;
         currItem = currFirebaseArray[indexPath.row].item_id
 
+    }
+    
+    func loadLentArray() {
+        let closetArr = firebaseUser.closet ?? [];
+        
+        for item in closetArr {
+            if (item.borrowed) {
+                lentArray.append(item)
+            } else {
+                closetArray.append(item)
+            }
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -350,9 +453,10 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
               print("it did not worked\(error)")
         }
         loadData();
+        loadLentArray();
+        loadCloset();
         loadProfImage();
         showUserName();
-        loadLending();
         uploadButton.imageView?.contentMode = .scaleAspectFit;
         uploadButton.layer.cornerRadius = 5;
         viewOfItems.contentInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)

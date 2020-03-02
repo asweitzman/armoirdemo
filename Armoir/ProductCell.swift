@@ -16,4 +16,8 @@ class ProductCell: UICollectionViewCell {
     
     @IBOutlet weak var productDistance: UILabel!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImage.image = nil
+    }
 }

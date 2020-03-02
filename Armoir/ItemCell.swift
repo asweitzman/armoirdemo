@@ -13,4 +13,9 @@ class ItemCell: UICollectionViewCell {
     @IBOutlet weak var due_display: UILabel!
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var img_display: UIImageView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        img_display.image = nil
+    }
 }
