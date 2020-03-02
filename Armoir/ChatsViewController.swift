@@ -15,8 +15,8 @@ class ChatsViewController: UIViewController {
     private let cellId = "chatCell"
     private var messages = [MessageModel]()
     let messageDB = Database.database().reference().child("Messages")
-    let chatMessageDB = Database.database().reference().child("chatMessages").child("chat1")
-    
+    let chatMessageDB = Database.database().reference().child("chatMessages")
+    var frameView: UIView!
     
     //MARK: Outlets
     
@@ -24,16 +24,38 @@ class ChatsViewController: UIViewController {
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
 
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = keyboardSize.cgRectValue
+        if self.view.frame.origin.y == 0{
+            self.view.frame.origin.y -= keyboardFrame.height
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = keyboardSize.cgRectValue
+        if self.view.frame.origin.y != 0{
+            self.view.frame.origin.y += keyboardFrame.height
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.messageTextField.delegate = self
+        self.messageTextField.returnKeyType = UIReturnKeyType.send
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         setup()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         messageDB.removeAllObservers()
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     
@@ -58,7 +80,8 @@ class ChatsViewController: UIViewController {
         
         messageDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String, String>
-            guard let message = snapshotValue["message"], let sender = snapshotValue["sender"] else {return}
+            guard let message = snapshotValue["message"] else {return}
+            guard let sender = snapshotValue["sender"] else {return}
             let isIncoming = (sender == Auth.auth().currentUser?.displayName ? false : true)
             let chatMessage = MessageModel.init(message: message, sender: sender, isIncoming: isIncoming)
             self.addNewRow(with: chatMessage)
@@ -138,6 +161,10 @@ extension ChatsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChatsViewController: UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        //return true
+    }
     //handle when keyboard is shown and hidden
     func textFieldDidBeginEditing(_ textField: UITextField) {
         /*UIView.animate(withDuration: 0.3) {
