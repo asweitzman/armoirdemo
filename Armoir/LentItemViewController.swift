@@ -20,6 +20,7 @@ class LentItemViewController: UIViewController {
     @IBOutlet weak var imgDisplay: UIImageView!
     @IBOutlet weak var itemDescrip: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         daysLeft.text = "10 days left";

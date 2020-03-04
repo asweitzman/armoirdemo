@@ -21,6 +21,18 @@ class BorrowedItemDetailViewController: UIViewController {
     @IBOutlet weak var itemDescrip: UILabel!
     let imageCache = NSCache<NSString, UIImage>()
        
+    @IBAction func reminderButton(_ sender: Any) {
+           let alert = UIAlertController(title: "Reminder sent!", message: "", preferredStyle: .alert)
+
+       
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            alert.dismiss(animated: false) {
+                
+            }
+        }))
+        
+        self.present(alert, animated: true)
+       }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +75,7 @@ class BorrowedItemDetailViewController: UIViewController {
                 var userID = i.owner;
                 if (status_lending) {
                     userID = String(i.borrowed_by);
-                    distanceText.text = "Borrowed by";
+                    distanceText.text = "Borrowed by Ellen Roper";
                     reminderButton.isHidden = false;
                 } else {
                     distanceText.text = "Not borrowed";
@@ -85,8 +97,10 @@ class BorrowedItemDetailViewController: UIViewController {
                         user = stru;
                         var image = UIImage(named: user.profPic);
                         if (status_lending) {
-                            userName.text = user.owner;
-
+////                            userName.text = user.owner;
+//
+//                            userName.text = "Ellen Roper"
+//                            userName.isHidden = false
                         } else {
                             userName.text = "Owned by you";
                             if let url = currentUser?.photoURL {
