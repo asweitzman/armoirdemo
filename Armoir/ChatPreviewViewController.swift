@@ -5,7 +5,6 @@
 //  Created by Ellen Roper on 2/26/20.
 //  Copyright © 2020 CS147. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import Firebase
@@ -107,4 +106,3 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 }
-

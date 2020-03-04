@@ -5,7 +5,6 @@
 //  Created by Ellen Roper on 2/26/20.
 //  Copyright © 2020 CS147. All rights reserved.
 //
-
 import UIKit
 import Foundation
 
@@ -18,7 +17,7 @@ class ChatPreviewCell: UITableViewCell {
     
     var isIncoming: Bool = false {
         didSet {
-            messageBgView.backgroundColor = isIncoming ? UIColor.white : #colorLiteral(red: 0.8823529412, green: 0.968627451, blue: 0.7921568627, alpha: 1)
+            messageBgView.backgroundColor = isIncoming ? UIColor.white : #colorLiteral(red: 0.8622178435, green: 0.8425275087, blue: 0.8211465478, alpha: 1)
         }
     }
     

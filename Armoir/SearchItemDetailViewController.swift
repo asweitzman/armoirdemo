@@ -21,6 +21,11 @@ class SearchItemDetailViewController: UIViewController {
      let chatMessageDB = Database.database().reference().child("Messages")
     var owner = ""
     
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
     func addItem(itemID: Int) {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
