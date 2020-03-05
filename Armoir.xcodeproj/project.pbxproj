@@ -24,8 +24,6 @@
 		179234B521BC745400B391F5 /* test2.json in Resources */ = {isa = PBXBuildFile; fileRef = 179234B421BC745400B391F5 /* test2.json */; };
 		179234B721BCCDF700B391F5 /* ImageRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179234B621BCCDF700B391F5 /* ImageRetriever.swift */; };
 		179234B921BCEA4C00B391F5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179234B821BCEA4C00B391F5 /* FirstViewController.swift */; };
-		1798EA83240CD92100E58FFC /* ChatPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798EA82240CD92000E58FFC /* ChatPreviewViewController.swift */; };
-		1798EA85240CD93F00E58FFC /* ChatPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798EA84240CD93F00E58FFC /* ChatPreviewCell.swift */; };
 		1798EA87240CDD5600E58FFC /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798EA86240CDD5600E58FFC /* ChatsViewController.swift */; };
 		17B3022E21B65735004E5EF8 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 17B3022D21B65735004E5EF8 /* images */; };
 		17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D979E021B22BAA00E74816 /* MainViewController.swift */; };
@@ -44,6 +42,8 @@
 		17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */; };
 		17F0ED7D23F10C1000904F3A /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */; };
 		2F4EB6A65C6E1331B9831F4D /* Pods_Armoir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */; };
+		343E616F2410618A000C2C9B /* ChatPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E616E2410618A000C2C9B /* ChatPreviewViewController.swift */; };
+		343E6171241061FF000C2C9B /* ChatPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E6170241061FF000C2C9B /* ChatPreviewCell.swift */; };
 		34DCFE10240CA65D00487B72 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34DCFE0F240CA65D00487B72 /* WorkSans-SemiBold.ttf */; };
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
@@ -106,8 +106,6 @@
 		179234B421BC745400B391F5 /* test2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test2.json; sourceTree = "<group>"; };
 		179234B621BCCDF700B391F5 /* ImageRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRetriever.swift; sourceTree = "<group>"; };
 		179234B821BCEA4C00B391F5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		1798EA82240CD92000E58FFC /* ChatPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatPreviewViewController.swift; path = ../../../../Downloads/ChatPreviewViewController.swift; sourceTree = "<group>"; };
-		1798EA84240CD93F00E58FFC /* ChatPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatPreviewCell.swift; path = ../../../../Downloads/ChatPreviewCell.swift; sourceTree = "<group>"; };
 		1798EA86240CDD5600E58FFC /* ChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		17B3022D21B65735004E5EF8 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		17D979E021B22BAA00E74816 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +124,8 @@
 		17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
 		17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		2BFD9C27390DC9FB9E7BC3FA /* Pods-Armoir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.release.xcconfig"; sourceTree = "<group>"; };
+		343E616E2410618A000C2C9B /* ChatPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewViewController.swift; sourceTree = "<group>"; };
+		343E6170241061FF000C2C9B /* ChatPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewCell.swift; sourceTree = "<group>"; };
 		34DCFE0F240CA65D00487B72 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		34DCFE11240CD68800487B72 /* FakeChat */ = {isa = PBXFileReference; lastKnownFileType = text; name = FakeChat; path = "../../../Downloads/FakeChat-master/FakeChat"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,9 +135,6 @@
 		6250122121BAAE5B0015F10A /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6409E25423F0DEA9001AA5A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		640D7A3124049F7400929536 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
-		640D7A3324049FFC00929536 /* FakeChat */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FakeChat; path = "../../../../Downloads/FakeChat-master/FakeChat"; sourceTree = "<group>"; };
-		640D7A362404A08B00929536 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
-		643C5C63240CC3FA00CD3C9E /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "WorkSans-Regular.ttf"; path = "../../../../Downloads/Work_Sans/WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		645905A423DE5DEE00930FD8 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		7193F59521BA370700427907 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		743BD5E221B5E64400855A1E /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
@@ -226,11 +223,11 @@
 				1732E87523EB990A00E4F3E1 /* GoogleService-Info.plist */,
 				17040B1121B796D40049C902 /* Assets.xcassets */,
 				743BD5E221B5E64400855A1E /* ItemCell.swift */,
-				1798EA84240CD93F00E58FFC /* ChatPreviewCell.swift */,
 				17D979E221B2309F00E74816 /* ClosetViewController.swift */,
 				17D979E421B230BE00E74816 /* NewsViewController.swift */,
+				343E616E2410618A000C2C9B /* ChatPreviewViewController.swift */,
 				179234B621BCCDF700B391F5 /* ImageRetriever.swift */,
-				1798EA82240CD92000E58FFC /* ChatPreviewViewController.swift */,
+				343E6170241061FF000C2C9B /* ChatPreviewCell.swift */,
 				17F0ED6723F0D4D300904F3A /* Fonts */,
 				17B3022D21B65735004E5EF8 /* images */,
 				1751F07E21B08BFD00F55356 /* ProductCell.swift */,
@@ -429,7 +426,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				643C5C64240CC3FB00CD3C9E /* WorkSans-Regular.ttf in Resources */,
 				17F0ED7323F0D51600904F3A /* WorkSans-Black.ttf in Resources */,
 				17E7E74523FB7F7A00281AA7 /* Marcellus-Regular.ttf in Resources */,
 				7D48658523F12DF3009C3E5A /* Alike-Regular.ttf in Resources */,
@@ -583,15 +579,15 @@
 				176F559121B746BA00FFF556 /* SignUpViewController.swift in Sources */,
 				1798EA87240CDD5600E58FFC /* ChatsViewController.swift in Sources */,
 				17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */,
-				1798EA83240CD92100E58FFC /* ChatPreviewViewController.swift in Sources */,
 				743BD5E921B9DEAB00855A1E /* BorrowedItemDetailViewController.swift in Sources */,
 				17E7E73A23FB741E00281AA7 /* StepZero.swift in Sources */,
 				17E7E73C23FB749900281AA7 /* StepOne.swift in Sources */,
 				645905A523DE5DEE00930FD8 /* InboxViewController.swift in Sources */,
 				640D7A3224049F7400929536 /* ChatMessageCell.swift in Sources */,
 				6409E25523F0DEA9001AA5A4 /* ChatViewController.swift in Sources */,
-				1798EA85240CD93F00E58FFC /* ChatPreviewCell.swift in Sources */,
 				1751F07D21B08B2100F55356 /* ProductBrowseViewController.swift in Sources */,
+				343E6171241061FF000C2C9B /* ChatPreviewCell.swift in Sources */,
+				343E616F2410618A000C2C9B /* ChatPreviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -254,7 +254,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
 //        }
         
         for item in allItems {
-            if item.owner != currentUser!.uid {
+            if item.owner != currentUser?.uid {
                 var keywordMatch = true
                 if (!keywords.isEmpty && keywords[0] != "") {
                     keywordMatch = false
