@@ -288,7 +288,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
     func initDropDowns() {
         DropDown.appearance().textColor = UIColor.black
-        DropDown.appearance().textFont = UIFont(name: "Alike-Regular", size: 17)!
+        DropDown.appearance().textFont = UIFont(name: "WorkSans-Regular", size: 17)!
         DropDown.appearance().backgroundColor = UIColor.white
         DropDown.appearance().cellHeight = 40
         
