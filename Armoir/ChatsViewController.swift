@@ -15,7 +15,7 @@ class ChatsViewController: UIViewController {
     private let cellId = "chatCell"
     private var messages = [MessageModel]()
     let messageDB = Database.database().reference().child("Messages")
-    let chatMessageDB = Database.database().reference().child("chatMessages")
+    let chatsDB = Database.database().reference().child("chats")
     var frameView: UIView!
     
     //MARK: Outlets
@@ -43,6 +43,11 @@ class ChatsViewController: UIViewController {
         }
     }
     
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageTextField.delegate = self
@@ -68,26 +73,27 @@ class ChatsViewController: UIViewController {
         // do not show separators and set the background to gray-ish
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        
-        getMessages()
-        // extension of this can be found in the ViewController.swift
-        // basically hides the keyboard when tapping anywhere
         hideKeyboardOnTap()
+        loadMessages()
     }
+    
     
     // call this to listen to database changes and add it into our tableview
-    
-    func getMessages() {
-        
-        messageDB.observe(.childAdded) { (snapshot) in
-            let snapshotValue = snapshot.value as! Dictionary<String, String>
-            guard let message = snapshotValue["message"] else {return}
-            guard let sender = snapshotValue["sender"] else {return}
-            let isIncoming = (sender == Auth.auth().currentUser?.displayName ? false : true)
-            let chatMessage = MessageModel.init(message: message, sender: sender, isIncoming: isIncoming)
-            self.addNewRow(with: chatMessage)
-        }
-    }
+    func loadMessages() {
+        let chatRef = Database.database().reference().child("chats").child(currChat).child("messages")
+        chatRef.queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
+               let name = snapshot.key
+               print(name)
+            let snapshotValue = snapshot.value as! [String: AnyObject]
+            guard let senderHash = snapshotValue["senderHash"] as? String, let content = snapshotValue["content"]  as? String else {return}
+               print("here: ")
+               print(senderHash)
+            guard let senderName = snapshotValue["senderName"]  as? String else {return}
+            let isIncoming = (senderHash as! String == Auth.auth().currentUser!.uid ? false : true)
+            let chatPreview = MessageModel.init(message: content, senderName: senderName, isIncoming: isIncoming)
+               self.addNewRow(with: chatPreview)
+           }
+       }
     
     // function to add our cells with animation
     
@@ -105,6 +111,7 @@ class ChatsViewController: UIViewController {
     
     @IBAction func sendButtonDidTap(_ sender: Any) {
         // return if message does not exist
+        let chatRef = Database.database().reference().child("chats").child(currChat).child("messages")
         guard let message = messageTextField.text else {return}
         if message == "" {
             return
@@ -116,24 +123,15 @@ class ChatsViewController: UIViewController {
         messageTextField.isEnabled = false
         sendButton.isEnabled = false
         
-        let messageDict = ["sender": Auth.auth().currentUser?.displayName, "message" : message]
-        let chatMessageDict = ["sender": Auth.auth().currentUser?.displayName, "message" : message]
-        chatMessageDB.childByAutoId().setValue(chatMessageDict) { (error, reference) in
+        let timestamp = NSDate().timeIntervalSince1970
+        let messageID = self.randomString(length: 20)
+        let chatMessageDict = ["senderName": Auth.auth().currentUser?.displayName, "content" : message, "timestamp": timestamp, "senderHash": Auth.auth().currentUser!.uid, "messageID" : messageID] as [String : Any]
+        chatRef.child(messageID).setValue(chatMessageDict) { (error, reference) in
             if error != nil {
                 print(error?.localizedDescription as Any)
             }
             else {
-                print("umm")
-            }
-        }
-        
-        messageDB.childByAutoId().setValue(messageDict) { (error, reference) in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-            }
-            else {
-                print("Message sent!")
-                //enable the buttons and remove the text
+                print("sent message")
                 self.messageTextField.isEnabled = true
                 self.sendButton.isEnabled = true
                 self.messageTextField.text?.removeAll()

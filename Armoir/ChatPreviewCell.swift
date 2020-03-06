@@ -5,7 +5,6 @@
 //  Created by Ellen Roper on 2/26/20.
 //  Copyright © 2020 CS147. All rights reserved.
 //
-
 import UIKit
 import Foundation
 
@@ -18,7 +17,7 @@ class ChatPreviewCell: UITableViewCell {
     
     var isIncoming: Bool = false {
         didSet {
-            messageBgView.backgroundColor = isIncoming ? UIColor.white : #colorLiteral(red: 0.8823529412, green: 0.968627451, blue: 0.7921568627, alpha: 1)
+            messageBgView.backgroundColor = isIncoming ? UIColor.white : #colorLiteral(red: 0.8622178435, green: 0.8425275087, blue: 0.8211465478, alpha: 1)
         }
     }
     
@@ -53,7 +52,7 @@ class ChatPreviewCell: UITableViewCell {
             
             // what we will call from our tableview method
             func configure(with model: PreviewMessageModel) {
-                    let sender = model.senderName
+                    let sender = model.sender
                     // align to the left
                     let nameAttributes = [
                         NSAttributedString.Key.foregroundColor : UIColor.orange,
@@ -61,7 +60,7 @@ class ChatPreviewCell: UITableViewCell {
                         ] as [NSAttributedString.Key : Any]
                     // sender name at top, message at the next line
                     let senderName = NSMutableAttributedString(string: sender + "\n", attributes: nameAttributes)
-                    let receiver = NSMutableAttributedString(string: model.receiverName)
+                    let receiver = NSMutableAttributedString(string: model.receiver)
                     senderName.append(receiver)
                     senderLabel.attributedText = senderName
                     senderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
@@ -70,7 +69,8 @@ class ChatPreviewCell: UITableViewCell {
         }
 
 struct PreviewMessageModel {
-    let receiverName: String
-    let senderName: String
+    let receiver: String
+    let sender: String
     let isIncoming: Bool
+    let name: String
 }

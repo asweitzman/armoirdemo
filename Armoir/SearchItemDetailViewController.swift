@@ -18,8 +18,16 @@ class SearchItemDetailViewController: UIViewController {
         @IBOutlet weak var itemImage: UIImageView!
         @IBOutlet weak var itemDescrip: UILabel!
     @IBOutlet weak var itemSize: UILabel!
-     let chatMessageDB = Database.database().reference().child("Messages")
+    let chatMessageDB = Database.database().reference().child("Messages")
+    let rootDB = Database.database().reference()
+    let chatsDb = Database.database().reference().child("chats")
+    let usersDB = Database.database().reference().child("users")
     var owner = ""
+    
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
     
     func addItem(itemID: Int) {
         let ref = Database.database().reference()
@@ -28,50 +36,79 @@ class SearchItemDetailViewController: UIViewController {
         ref.child("users/\(user!.uid)/borrowed/\(itemID)/").setValue(item)
     }
     
-    @IBAction func borrowItemButton(_ sender: Any) {
-        
-        var ref = Database.database().reference()
-        var currUser = Auth.auth().currentUser
-        ref.child("items").child(String(currItem)).child("borrowed").setValue(true)
-        ref.child("items").child(String(currItem)).child("borrowed_by").setValue(currentUser?.uid)
-        var borrowedRef = ref.child("users").child(currentUser!.uid).child("borrowed")
-        
-        var requestMessageString = ""
+    func addNewChat(chatID: String) {
         let itemref = Database.database().reference().child("items").child(String(currItem))
-        let chatsDb = ref.child("chats")
-        let chatPreviewDict = ["senderName": Auth.auth().currentUser?.displayName, "receiverName" : self.owner ]
-        chatsDb.childByAutoId().setValue(chatPreviewDict) { (error, reference) in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-            }
-            else {
-                print("chat preview added")
-            }
+        itemref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String : AnyObject]
+            let item_id = snapshotValue["item_id"]
+            let status = snapshotValue["borrowed"]
+            let sender = currentUser!.uid
+            let senderName = currentUser?.displayName
+            let receiver = snapshotValue["owner"]
+            let chatDict = ["item_id": item_id, "sender" : sender, "senderName" : senderName, "receiver" : receiver, "status": status, "messages": []] as [String: Any]
+            self.chatsDb.child(chatID).setValue(chatDict)
         }
+    }
+    
+    func addChatToUser(chatID: String) {
+        //adding user chats to user if it doesn't exist
+        let senderRef = rootDB.child("users").child(currentUser!.uid)
+        let itemref = Database.database().reference().child("items").child(String(currItem))
+        //add chat to recipient's chatlist
+        itemref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String: AnyObject]
+            let receiverHash = snapshotValue["owner"] as! String
+            let recipientRef = self.rootDB.child("users").child(receiverHash)
+            recipientRef.child("chats").observeSingleEvent(of: .value, with: { (snapshot) in
+                if !snapshot.exists(){
+                    recipientRef.child("chats").setValue("")
+                }
+            })
+            recipientRef.child("chats").child(chatID).setValue(chatID)
+        }
+        
+        //add chat to sender's chatlist
+        senderRef.child("chats").observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.exists(){
+                senderRef.child("chats").setValue("")
+            }
+        })
+        //updating user chats to add chatID for reference
+        senderRef.child("chats").child(chatID).setValue(chatID)
+    }
+    
+    func addInitialMsg(chatID: String){
+        let itemref = Database.database().reference().child("items").child(String(currItem))
         itemref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
             let snapshotValue = snapshot.value as! [String : AnyObject]
             let receiverName = snapshotValue["owner"]
-            let name = snapshotValue["name"] as! String
-            requestMessageString = "Hi, I'd like to borrow your " + name
-            let chatMessageDict = ["sender": Auth.auth().currentUser?.displayName, "message" : requestMessageString]
-            self.chatMessageDB.childByAutoId().setValue(chatMessageDict) { (error, reference) in
-                if error != nil {
-                    print(error?.localizedDescription as Any)
-                }
-                else {
-                    print("request sent")
-                }
-            }
+            let item_name = snapshotValue["name"] as! String
+            let requestMessageString = "Hi, I'd like to borrow your " + item_name
+            // Get the Unix timestamp
+            let timestamp = NSDate().timeIntervalSince1970
+            let messageID = self.randomString(length: 20)
+            let chatMessageDict = ["senderName": Auth.auth().currentUser?.displayName, "content" : requestMessageString, "timestamp": timestamp, "senderHash": Auth.auth().currentUser!.uid, "messageID" : messageID] as [String : Any]
+            self.chatsDb.child(chatID).child("messages").child(messageID).setValue(chatMessageDict)
         }
+    }
+    
+    
+    @IBAction func borrowItemButton(_ sender: Any) {
+        let currUser = Auth.auth().currentUser
+        //updating items list
+        //rootDB.child("items").child(String(currItem)).child("borrowed").setValue(true)
+       // rootDB.child("items").child(String(currItem)).child("borrowed_by").setValue(currentUser?.uid)
+        let borrowedRef = rootDB.child("users").child(currentUser!.uid).child("borrowed")
+        let chatID = randomString(length:20)
+        addNewChat(chatID: chatID)
+        addChatToUser(chatID: chatID)
+        addInitialMsg(chatID: chatID)
         let alert = UIAlertController(title: "Sent request to borrow this item! Check your inbox for updates.", message: "", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
             
             _ = self.navigationController?.popViewControllers(viewsToPop: 1)}))
         self.present(alert, animated: true)
-            /*let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SearchItemDetailVC") as! SearchItemDetailViewController
-            self.present(nextViewController, animated:true, completion:nil)*/
         let group = DispatchGroup()
         group.enter()
         var itemID = 0
@@ -83,112 +120,6 @@ class SearchItemDetailViewController: UIViewController {
                 print("item id 1: " + String(itemID))
                 group.leave()
             }
-        //ref.child("Messages").child("sender").setValue(currUser)
-        //ref.child("Messages").child("")
-        
- /*
-        //1. find index of item in all_users array
-        var i = 0;
-        var it_i = 0;
-        var found = false;
-        for u in all_users {
-            if (!found) {
-                it_i = 0
-            }
-            for it in u.closet {
-                if (it.item_id == chosenItem.item_id) {
-                    found = true
-                }
-                if (!found) {
-                    it_i += 1
-                }
-            }
-            if (!found) {
-                i += 1
-            }
-        }
-        
-        //2. use the index to change the actual element in all users
-        //print (all_users[i]) //testing before
-        all_users[i].closet[it_i].borrowed = true
-        all_users[i].closet[it_i].borrowed_by = currUser.user_ID
-        
-        Analytics.logEvent("item_borrowed", parameters: ["currUserID": currUser.user_ID])
-        
-        //3. find index of currUser in all_users array
-        var b = 0;
-        var found_b = false;
-        for u in all_users {
-            if (u.user_ID == currUser.user_ID) {
-                found_b = true
-            }
-            if (!found_b) {
-                b += 1
-            }
-        }
-        
-        //4. use the index to change the actual element in all users
-        var temp = all_users[b].borrowed
-        temp.append(all_users[i].closet[it_i])
-        all_users[b].borrowed = temp
-        currUser.borrowed = temp
-        
-        print(all_users[b])
-        print("DIFF")
-        print(all_users[i])
-        
-        //encode to json
-        var text = "" //just a text
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        do {
-            let data = try encoder.encode(all_users)
-            text = String(data: data, encoding: .utf8)!
-            //longJsonData = String(data: data, encoding: .utf8)!
-            print("DONE ENCODING")
-            //print(String(data: data, encoding: .utf8)!)
-        }
-        catch {
-            print("array didn't work");
-        }
-        
-        //save to json file
-        do {
-            try text.write(toFile: fullDestPathString, atomically: true, encoding: String.Encoding.utf8)
-            print(fullDestPathString)
-        }
-        catch {
-            print(error)
-        }
-        
-//        let path = "search" //this is the file. we will write to and read from it
-//        print("continuing");
-//
-//        if let fileURL = Bundle.main.url(forResource: path, withExtension: "json") {
-//            do {
-//                try text.write(to: fileURL, atomically: false, encoding: .utf8)
-//                print("tried to write")
-//            }
-//            catch {
-//                print ("oh no");
-//            }
-//        }
-        let alert = UIAlertController(title: "You borrowed an item! Go check out your closet.", message: "", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-            
-            _ = self.navigationController?.popViewControllers(viewsToPop: 1)
-            /*let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SearchItemDetailVC") as! SearchItemDetailViewController
-            self.present(nextViewController, animated:true, completion:nil)*/
-        }))
-        //alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true)
-        
-
- */
-
     }
     
 
@@ -198,8 +129,7 @@ class SearchItemDetailViewController: UIViewController {
             itemSize.text = "Size: " + chosenItem.size
             itemDescrip.text = chosenItem.name
             
-            //code to read username from the database
-            let ref = Database.database().reference().child("users")
+                let ref = Database.database().reference().child("users")
             ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
                 let snapshotValue = snapshot.value as! [String : AnyObject]
                 let ownerVal = snapshotValue[chosenItem.owner] as! [String: AnyObject]

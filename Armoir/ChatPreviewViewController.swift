@@ -5,7 +5,6 @@
 //  Created by Ellen Roper on 2/26/20.
 //  Copyright © 2020 CS147. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import Firebase
@@ -15,6 +14,7 @@ class ChatPreviewViewController: UIViewController {
     private let cellId = "chatPreviewCell"
     private var chats = [PreviewMessageModel]()
     let chatsDB = Database.database().reference().child("chats")
+    let usersDB = Database.database().reference().child("users")
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -53,19 +53,46 @@ class ChatPreviewViewController: UIViewController {
        }
     }*/
     
-    func getMessages() {
-        
-        chatsDB.observe(.childAdded) { (snapshot) in
-            let name = snapshot.key
-            print(name)
-            let snapshotValue = snapshot.value as! Dictionary<String, String>
-            guard let sender = snapshotValue["senderName"], let receiver = snapshotValue["receiverName"] else {return}
-            print("here: ")
-            print(sender)
-            let isIncoming = (receiver == Auth.auth().currentUser?.displayName ? false : true)
-            let chatPreview = PreviewMessageModel.init(receiverName: receiver, senderName: sender, isIncoming: isIncoming)
+    func loadChat(chatID: String) {
+        let chatRef = chatsDB.child(chatID)
+        chatRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String : AnyObject]
+            guard let senderHash = snapshotValue["sender"] as? String else {return}
+            guard let senderName = snapshotValue["senderName"] as? String else {return}
+            guard let receiverHash = snapshotValue["receiver"] as? String else {return}
+            //for use in custom cells
+            guard let item_id = snapshotValue["item_id"] else {return}
+            guard let status = snapshotValue["status"] else {return}
+            let isIncoming = (senderHash == Auth.auth().currentUser!.uid ? false : true)
+            
+            //@ALEX: PreviewMessageModel is in ChatPreviewCell.swift. It'll probably not be necessary when the custom tableview cell is implemented.
+            let chatPreview = PreviewMessageModel.init(receiver: receiverHash, sender: senderName, isIncoming: isIncoming, name: chatID)
             self.addNewRow(with: chatPreview)
         }
+    }
+    
+    
+    func getMessages() {
+        let target = Database.database().reference().child("users").child(currentUser!.uid)
+        target.child("chats").observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.exists(){
+                target.child("chats").setValue("")
+            }
+        })
+        let userDB = Database.database().reference().child("users").child(currentUser!.uid).child("chats")
+        userDB.observeSingleEvent(of: .value, with: { snapshot in
+            if ( snapshot.value is NSNull ) {
+               print("– – – Data was not found – – –")
+
+            } else {
+                for chat_child in (snapshot.children) {
+
+                    let user_snap = chat_child as! DataSnapshot
+                    let chatID = user_snap.value as! String
+                    self.loadChat(chatID: chatID)
+                }
+            }
+        })
     }
     
     // function to add our cells with animation
@@ -86,6 +113,8 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         print("tapped")
+        let current = chats[indexPath.row]
+        currChat = current.name
         self.performSegue(withIdentifier: "toChatsSegue", sender: self)
     }
     
@@ -107,4 +136,3 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 }
-

@@ -58,7 +58,7 @@ class ChatMessageCell: UITableViewCell {
     func configure(with model: MessageModel) {
         isIncoming = model.isIncoming
         if isIncoming {
-            guard let sender = model.sender else {return}
+            guard let sender = model.senderName else {return}
             // align to the left
             let nameAttributes = [
                 NSAttributedString.Key.foregroundColor : UIColor.orange,
@@ -84,6 +84,6 @@ class ChatMessageCell: UITableViewCell {
 // message struct
 struct MessageModel {
     let message: String
-    let sender: String?
+    let senderName: String?
     let isIncoming: Bool
 }
