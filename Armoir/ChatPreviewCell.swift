@@ -52,7 +52,7 @@ class ChatPreviewCell: UITableViewCell {
             
             // what we will call from our tableview method
             func configure(with model: PreviewMessageModel) {
-                    let sender = model.senderName
+                    let sender = model.sender
                     // align to the left
                     let nameAttributes = [
                         NSAttributedString.Key.foregroundColor : UIColor.orange,
@@ -60,7 +60,7 @@ class ChatPreviewCell: UITableViewCell {
                         ] as [NSAttributedString.Key : Any]
                     // sender name at top, message at the next line
                     let senderName = NSMutableAttributedString(string: sender + "\n", attributes: nameAttributes)
-                    let receiver = NSMutableAttributedString(string: model.receiverName)
+                    let receiver = NSMutableAttributedString(string: model.receiver)
                     senderName.append(receiver)
                     senderLabel.attributedText = senderName
                     senderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
@@ -69,7 +69,8 @@ class ChatPreviewCell: UITableViewCell {
         }
 
 struct PreviewMessageModel {
-    let receiverName: String
-    let senderName: String
+    let receiver: String
+    let sender: String
     let isIncoming: Bool
+    let name: String
 }

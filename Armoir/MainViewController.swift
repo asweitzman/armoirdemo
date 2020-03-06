@@ -13,6 +13,7 @@ import Firebase
 var itemImage: UIImage = UIImage()
 var startWithCamera: Bool = Bool()
 var currItem: Int = 0
+var currChat: String = ""
 var user_num = 123;
 var currUser = a_User(user_ID: 123, profPic: "", owner: "", closet: [], borrowed: [], distance: 1);
 var firebaseUser = firebase_User(username: "", display_name: "", closet: [], borrowed: []);
