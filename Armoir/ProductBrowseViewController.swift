@@ -254,7 +254,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
 //        }
         
         for item in allItems {
-            if item.owner != currentUser!.uid {
+            if item.owner != currentUser?.uid {
                 var keywordMatch = true
                 if (!keywords.isEmpty && keywords[0] != "") {
                     keywordMatch = false
@@ -482,7 +482,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     
     func initDropDowns() {
         DropDown.appearance().textColor = UIColor.black
-        DropDown.appearance().textFont = UIFont(name: "Alike-Regular", size: 17)!
+        DropDown.appearance().textFont = UIFont(name: "WorkSans-Regular", size: 17)!
         DropDown.appearance().backgroundColor = UIColor.white
         DropDown.appearance().cellHeight = 60
         //shadeDropDown.width = 154

@@ -42,6 +42,8 @@
 		17F0ED7A23F0D51600904F3A /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */; };
 		17F0ED7D23F10C1000904F3A /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */; };
 		2F4EB6A65C6E1331B9831F4D /* Pods_Armoir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B0FD42F3D1F612CE415C3 /* Pods_Armoir.framework */; };
+		343E616F2410618A000C2C9B /* ChatPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E616E2410618A000C2C9B /* ChatPreviewViewController.swift */; };
+		343E6171241061FF000C2C9B /* ChatPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E6170241061FF000C2C9B /* ChatPreviewCell.swift */; };
 		34DCFE10240CA65D00487B72 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34DCFE0F240CA65D00487B72 /* WorkSans-SemiBold.ttf */; };
 		6216B1D921BA5E5B00AB5943 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6216B1D821BA5E5A00AB5943 /* SettingsViewController.swift */; };
 		6216B1DB21BAA73300AB5943 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6216B1DA21BAA73300AB5943 /* DropDown.framework */; };
@@ -124,6 +126,8 @@
 		17F0ED7123F0D51600904F3A /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
 		17F0ED7C23F10C1000904F3A /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		2BFD9C27390DC9FB9E7BC3FA /* Pods-Armoir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Armoir/Pods-Armoir.release.xcconfig"; sourceTree = "<group>"; };
+		343E616E2410618A000C2C9B /* ChatPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewViewController.swift; sourceTree = "<group>"; };
+		343E6170241061FF000C2C9B /* ChatPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewCell.swift; sourceTree = "<group>"; };
 		34DCFE0F240CA65D00487B72 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		34DCFE11240CD68800487B72 /* FakeChat */ = {isa = PBXFileReference; lastKnownFileType = text; name = FakeChat; path = "../../../Downloads/FakeChat-master/FakeChat"; sourceTree = "<group>"; };
 		44DC47DD6FC2973BBAADF91A /* Pods-ArmoirUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArmoirUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArmoirUITests/Pods-ArmoirUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,7 +231,9 @@
 				64F811EA240DAD84002FE954 /* ChatPreviewCell.swift */,
 				64F811E8240DAD4F002FE954 /* ChatPreviewViewController.swift */,
 				17D979E421B230BE00E74816 /* NewsViewController.swift */,
+				343E616E2410618A000C2C9B /* ChatPreviewViewController.swift */,
 				179234B621BCCDF700B391F5 /* ImageRetriever.swift */,
+				343E6170241061FF000C2C9B /* ChatPreviewCell.swift */,
 				17F0ED6723F0D4D300904F3A /* Fonts */,
 				17B3022D21B65735004E5EF8 /* images */,
 				1751F07E21B08BFD00F55356 /* ProductCell.swift */,

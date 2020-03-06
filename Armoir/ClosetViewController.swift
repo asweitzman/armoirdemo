@@ -44,7 +44,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     override func viewDidAppear(_ animated: Bool) {
         //loadData()
         print("view did appear")
-        
+        loadData()
         switch tabPicker.selectedSegmentIndex {
             case 0:
                 status_lending = true
@@ -425,6 +425,7 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
     
     
     @IBAction func indexChanged(_ sender: AnyObject) {
+        self.loadData()
         switch tabPicker.selectedSegmentIndex
         {
         case 0:

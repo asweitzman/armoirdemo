@@ -86,7 +86,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         let imageID = randomString(length:8)
         let imageRef = storageRef.child("images/" + imageID);
         var imageData = Data()
-            imageData = itemImage.jpegData(compressionQuality: 0.5)!
+            imageData = itemImage.jpegData(compressionQuality: 0.01)!
         let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
           guard let metadata = metadata else {
             // Uh-oh, an error occurred!
@@ -288,7 +288,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
     func initDropDowns() {
         DropDown.appearance().textColor = UIColor.black
-        DropDown.appearance().textFont = UIFont(name: "Alike-Regular", size: 17)!
+        DropDown.appearance().textFont = UIFont(name: "WorkSans-Regular", size: 17)!
         DropDown.appearance().backgroundColor = UIColor.white
         DropDown.appearance().cellHeight = 40
         
