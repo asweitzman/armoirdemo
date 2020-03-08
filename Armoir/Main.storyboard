@@ -26,7 +26,7 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsViewController" id="rlv-nD-C9r" customClass="SettingsViewController" customModule="Armoir" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s2W-os-hig">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plt-bR-gyC">
@@ -93,6 +93,9 @@
                                 <state key="normal" title="Log out">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="function" destination="rlv-nD-C9r" eventType="touchUpInside" id="qEc-x3-5bl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqG-UG-eEW">
                                 <rect key="frame" x="173" y="155" width="186" height="43"/>
@@ -145,8 +148,10 @@
                         <outlet property="changePicture" destination="pSW-Pt-WIV" id="htd-AS-0bt"/>
                         <outlet property="changeUsername" destination="8QA-Wp-pns" id="C0Z-e8-cut"/>
                         <outlet property="inviteFriends" destination="7ML-uI-OBm" id="hwX-ry-JBL"/>
+                        <outlet property="logoutButton" destination="0o5-pB-gHr" id="I06-S4-sb2"/>
                         <outlet property="profileImage" destination="Khb-uK-E2K" id="y2Y-gw-sjG"/>
                         <outlet property="saveChanges" destination="Mkq-1D-Pg2" id="B4f-2W-2h1"/>
+                        <segue destination="gBE-pl-xks" kind="show" identifier="goToLogin" id="3fw-xB-N9a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbH-vl-ezO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,11 +163,11 @@
             <objects>
                 <viewController title="New Item" id="McH-PY-hkW" customClass="AddItemViewController" customModule="Armoir" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FGS-gP-6Z3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSQ-bL-rHC">
-                                <rect key="frame" x="15" y="44" width="345" height="523"/>
+                                <rect key="frame" x="15" y="56" width="345" height="491"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LoS-rq-Gba">
                                         <rect key="frame" x="15" y="10" width="315" height="225"/>
@@ -609,7 +614,7 @@
                                     <constraint firstAttribute="height" constant="49" id="Oil-aE-HAK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="21"/>
-                                <state key="normal" title="send reminder"/>
+                                <state key="normal" title="Send Reminder"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
@@ -626,6 +631,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBo-Jc-GW2">
+                                <rect key="frame" x="25" y="473" width="325" height="49"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="WEC-e7-iZg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="21"/>
+                                <state key="normal" title="Message"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="messageButtonPressed:" destination="XH1-R9-w02" eventType="touchUpInside" id="nYD-p4-SbR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -643,6 +665,8 @@
                             <constraint firstItem="TDY-K8-XwR" firstAttribute="trailing" secondItem="qxh-e1-Bvz" secondAttribute="trailing" constant="25" id="ZRg-1L-XUf"/>
                             <constraint firstItem="qxh-e1-Bvz" firstAttribute="top" secondItem="p9k-3j-acN" secondAttribute="bottom" constant="50" id="ZsY-EK-j9E"/>
                             <constraint firstItem="qxh-e1-Bvz" firstAttribute="leading" secondItem="TDY-K8-XwR" secondAttribute="leading" constant="25" id="bKM-pj-CKm"/>
+                            <constraint firstItem="hBo-Jc-GW2" firstAttribute="leading" secondItem="qxh-e1-Bvz" secondAttribute="leading" id="cJt-AZ-pTk"/>
+                            <constraint firstItem="hBo-Jc-GW2" firstAttribute="trailing" secondItem="qxh-e1-Bvz" secondAttribute="trailing" id="dL9-rb-JxN"/>
                             <constraint firstItem="zCI-Vp-YPu" firstAttribute="leading" secondItem="PKc-7o-7p9" secondAttribute="trailing" constant="21" id="dWq-2t-PI9"/>
                             <constraint firstItem="TDY-K8-XwR" firstAttribute="trailing" secondItem="pwg-o0-00G" secondAttribute="trailing" constant="8" id="e68-CJ-O1V"/>
                             <constraint firstItem="iIi-Sd-Vlk" firstAttribute="top" secondItem="TDY-K8-XwR" secondAttribute="top" id="evd-Sj-MIh"/>
@@ -650,6 +674,7 @@
                             <constraint firstItem="p9k-3j-acN" firstAttribute="top" secondItem="PKc-7o-7p9" secondAttribute="bottom" constant="20" id="h3S-T7-BL3"/>
                             <constraint firstItem="v2E-k7-eMz" firstAttribute="leading" secondItem="p9k-3j-acN" secondAttribute="trailing" constant="21" id="mEu-sO-CDV"/>
                             <constraint firstItem="TDY-K8-XwR" firstAttribute="trailing" secondItem="DFm-g9-XQv" secondAttribute="trailing" constant="8" id="oGu-t0-bTb"/>
+                            <constraint firstItem="hBo-Jc-GW2" firstAttribute="top" secondItem="qxh-e1-Bvz" secondAttribute="bottom" constant="23" id="qKh-T3-bju"/>
                             <constraint firstItem="v2E-k7-eMz" firstAttribute="top" secondItem="PKc-7o-7p9" secondAttribute="bottom" constant="20" id="rzJ-6e-Eec"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TDY-K8-XwR"/>
@@ -663,6 +688,7 @@
                         <outlet property="reminderButton" destination="qxh-e1-Bvz" id="Mud-Wc-X0R"/>
                         <outlet property="sizeDetail" destination="v2E-k7-eMz" id="Ihd-bT-BZm"/>
                         <outlet property="userName" destination="DFm-g9-XQv" id="1ju-QL-q0W"/>
+                        <segue destination="KnJ-9k-oBf" kind="show" identifier="toChatsSegue" id="vPA-wk-sWi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kef-ii-F5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1370,11 +1396,11 @@
             <objects>
                 <viewController id="gBE-pl-xks" customClass="FirstViewController" customModule="Armoir" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="omM-GM-5k9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrx-ew-nMQ">
-                                <rect key="frame" x="13" y="270" width="349" height="127"/>
+                                <rect key="frame" x="13" y="260" width="349" height="127"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="127" id="51O-a1-JQc"/>
                                 </constraints>
@@ -1387,7 +1413,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="z2l-oI-efO" customClass="GIDSignInButton">
-                                <rect key="frame" x="35" y="416" width="305" height="49"/>
+                                <rect key="frame" x="35" y="406" width="305" height="49"/>
                                 <color key="backgroundColor" red="1" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="sIj-ls-FiW"/>
@@ -1885,15 +1911,14 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="tyn-e6-Y9A"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="21"/>
-                                <state key="normal" title="message"/>
+                                <state key="normal" title="Message"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="reminderButton:" destination="XH1-R9-w02" eventType="touchUpInside" id="1Rj-vy-er7"/>
-                                    <action selector="reminderButton:" destination="oTu-IY-5r6" eventType="touchUpInside" id="bzC-fT-p9b"/>
+                                    <action selector="messageButton:" destination="0gy-E7-uYq" eventType="touchUpInside" id="h8O-1x-X5i"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1924,15 +1949,17 @@
                         <outlet property="distDisplay" destination="Mlz-ki-p53" id="QWa-xn-xvB"/>
                         <outlet property="imgDisplay" destination="2wT-in-COi" id="hqB-i8-h7w"/>
                         <outlet property="itemDescrip" destination="AO6-hj-o7f" id="dvv-yp-98J"/>
+                        <outlet property="messageButton" destination="o2g-Pb-dI6" id="9bU-PP-NW7"/>
                         <outlet property="priceDisplay" destination="kbR-pi-C6D" id="6FD-i5-lMg"/>
                         <outlet property="profPic" destination="6rC-3I-rBw" id="dWf-3m-8WX"/>
                         <outlet property="sizeDetail" destination="PqF-wF-0uP" id="6sO-Uy-qD2"/>
                         <outlet property="userName" destination="ZTl-5o-wUs" id="djp-JP-PNV"/>
+                        <segue destination="KnJ-9k-oBf" kind="show" identifier="toChatsSegue" id="tOY-NN-bi7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHq-zk-qm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2120.8000000000002" y="-949.50738916256159"/>
+            <point key="canvasLocation" x="2120.8000000000002" y="-950.37481259370327"/>
         </scene>
         <!--Search Item Detail View Controller-->
         <scene sceneID="1ta-t5-u01">
@@ -2249,7 +2276,7 @@
             </objects>
             <point key="canvasLocation" x="16.800000000000001" y="1063.3004926108374"/>
         </scene>
-        <!--Chat Preview View Controller-->
+        <!--Inbox-->
         <scene sceneID="M6T-eY-UwT">
             <objects>
                 <viewController id="aRy-62-Uff" customClass="ChatPreviewViewController" customModule="Armoir" customModuleProvider="target" sceneMemberID="viewController">
@@ -2269,7 +2296,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPH-Jm-k8Y">
-                                                    <rect key="frame" x="47" y="26" width="157" height="21"/>
+                                                    <rect key="frame" x="47" y="26" width="55" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="SAt-yX-dlA"/>
                                                     </constraints>
@@ -2302,9 +2329,8 @@
                                                 <constraint firstItem="wVw-By-wgq" firstAttribute="leading" secondItem="4WD-ld-pG3" secondAttribute="leadingMargin" constant="32" id="RUe-hO-hj1"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="wVw-By-wgq" secondAttribute="bottom" constant="49" id="Rnu-jh-GfP"/>
                                                 <constraint firstItem="wVw-By-wgq" firstAttribute="top" secondItem="CPH-Jm-k8Y" secondAttribute="bottom" constant="8" id="TPV-fV-C09"/>
-                                                <constraint firstItem="nnW-yX-Cj4" firstAttribute="leading" secondItem="CPH-Jm-k8Y" secondAttribute="trailing" constant="8" id="ULv-Le-93h"/>
                                                 <constraint firstAttribute="bottom" secondItem="nnW-yX-Cj4" secondAttribute="bottom" constant="4" id="bl8-aQ-IwB"/>
-                                                <constraint firstItem="nnW-yX-Cj4" firstAttribute="leading" secondItem="wVw-By-wgq" secondAttribute="trailing" constant="8" id="pXu-sQ-GjA"/>
+                                                <constraint firstAttribute="trailing" secondItem="nnW-yX-Cj4" secondAttribute="trailing" constant="26" id="g6d-hk-JRl"/>
                                                 <constraint firstItem="nnW-yX-Cj4" firstAttribute="top" secondItem="4WD-ld-pG3" secondAttribute="top" constant="4" id="r3e-p3-33r"/>
                                                 <constraint firstAttribute="trailing" secondItem="nnW-yX-Cj4" secondAttribute="trailing" constant="26" id="xjX-KU-3vh"/>
                                             </constraints>
@@ -2328,7 +2354,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="noN-C7-5hY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WhK-bk-m2v"/>
+                    <navigationItem key="navigationItem" title="Inbox" id="WhK-bk-m2v"/>
                     <connections>
                         <outlet property="tableView" destination="diZ-oJ-eMp" id="2bK-U2-P5C"/>
                     </connections>
@@ -2483,7 +2509,7 @@
                                 <rect key="frame" x="0.0" y="50" width="375" height="99.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="browse closets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaM-2z-BfN">
-                                        <rect key="frame" x="20" y="22" width="335" height="56"/>
+                                        <rect key="frame" x="20" y="22" width="335" height="55.5"/>
                                         <fontDescription key="fontDescription" name="Marcellus-Regular" family="Marcellus" pointSize="44"/>
                                         <color key="textColor" red="0.2588275075" green="0.25881636139999997" blue="0.25882393120000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -2992,11 +3018,13 @@ the planet</string>
         <image name="shirt_icon" width="88" height="66"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="sFg-96-RhS"/>
         <segue reference="KpY-Yi-dgg"/>
+        <segue reference="3fw-xB-N9a"/>
         <segue reference="jab-sZ-aSN"/>
         <segue reference="dTl-b8-yKo"/>
-        <segue reference="Om7-qJ-M5f"/>
-        <segue reference="43q-gw-GJD"/>
+        <segue reference="PCX-mb-E7O"/>
+        <segue reference="P0h-GW-DiH"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
 </document>

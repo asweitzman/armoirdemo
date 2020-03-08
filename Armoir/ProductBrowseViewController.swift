@@ -53,11 +53,17 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
               return cachedImage
         }
+//        if let all = imageCache.value(forKey: "allObjects") as? NSArray {
+//            for object in all {
+//                print("object is \(object)")
+//            }
+//        }
+        print(imageCache)
         let data = try? Data(contentsOf: url)
         let image = UIImage(data: data!)
-        let thumb1 = image?.resized(By: 0.25)
-        self.imageCache.setObject(thumb1!, forKey: url.absoluteString as NSString)
-        return thumb1 as! UIImage;
+//        let thumb1 = image?.resized(By: 0.25)
+        self.imageCache.setObject(image!, forKey: url.absoluteString as NSString)
+        return image as! UIImage;
     }
 
     
@@ -119,7 +125,8 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             //let jsonData = try Data(contentsOf: fullDestPath)
             let user = ref.child("items")
             user.observeSingleEvent(of: .value) { (snapshot) in
-                let value = snapshot.value 
+                let value = snapshot.value
+                print("here")
                 //readableJSON = try? JSONSerialization.jsonObject(with: value, options: [])
                 let json = try? JSONSerialization.data(withJSONObject: value, options: [])
                 if let JSONString = String(data: json!, encoding: String.Encoding.utf8) {
@@ -166,6 +173,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
              print(error)
          }
  */
+        print("data retreived")
     }
 
     func sortDistanceLowHigh(this:closet_item, that:closet_item) -> Bool {
@@ -198,61 +206,6 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     func reloadData() {
         itemData = []
         let currentUser = Auth.auth().currentUser
-/*        for (_,user) in readableJSON {
-            if (user["user_ID"].int == currUser.user_ID) {
-                currUserJSON = user
-            }
-        }
-*/
-//        for (_,user) in readableJSON {
-//            if (user["user_ID"].int != currUser.user_ID) {
-//                for (_,item) in user["closet"] {
-//                    var alreadyBorrowed = false
-//                    for (_,borrowedItem) in currUserJSON["borrowed"] {
-//                        if (item == borrowedItem) { alreadyBorrowed = true }
-//                    }
-//                    if (!alreadyBorrowed) {
-//                        var keywordMatch = true
-//                        if (!keywords.isEmpty && keywords[0] != "") {
-//                            keywordMatch = false
-//                            let itemName = item["name"].string!
-//                            let nameWords = itemName.lowercased().components(separatedBy: " ")
-//                            for word in nameWords {
-//                                for keyword in keywords {
-//                                    if (word == keyword) { keywordMatch = true }
-//                                }
-//                            }
-//                        } else {
-//                            keywordMatch = true
-//                        }
-//
-//                        if(keywordMatch) {
-//                            if (categorySet) {
-//
-//                                if(item["category"].string! == categories[currCategory]) {
-//
-//                                    if (currSizeIndex == 5) {
-//                                        itemData.append(item)
-//                                    } else if (item["size"].string! == sizes[currSizeIndex]) {
-//                                        itemData.append(item)
-//                                    }
-//
-//                                }
-//
-//                            } else {
-//
-//                                if (currSizeIndex == 5) {
-//                                    itemData.append(item)
-//                                } else if (item["size"].string! == sizes[currSizeIndex]) {
-//                                    itemData.append(item)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        
         for item in allItems {
             if item.owner != currentUser?.uid {
                 var keywordMatch = true
@@ -298,42 +251,58 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }
    
     func loadData() {
-        /*
-        var myStructArray:[a_User] = [];
-        do {
-            try myStructArray = JSONDecoder().decode([a_User].self, from: json);
-        }
-        catch {
-            print("array didn't work");
-        }
-        for stru in myStructArray { */
-/*        for stru in all_users {
-            if stru.user_ID != user_num {
-                otherUsers.append(stru);
-            }
-        }
-        
-        // add all the items
-        for u in otherUsers {
-            let cl = u.closet;
-            for i in cl {
-                if !(i.borrowed) {
-                    fullArray.append(i);
+        itemData = []
+        let currentUser = Auth.auth().currentUser
+        for item in allItems {
+            if item.owner != currentUser?.uid {
+                var keywordMatch = true
+                if (!keywords.isEmpty && keywords[0] != "") {
+                    keywordMatch = false
+                    let itemName = item.name
+                    let nameWords = itemName.lowercased().components(separatedBy: " ")
+                    for word in nameWords {
+                        for keyword in keywords {
+                            if (word == keyword) { keywordMatch = true }
+                        }
+                    }
+                } else {
+                    keywordMatch = true
+                }
+                if(keywordMatch) {
+                    if (categorySet) {
+                        if(item.category == categories[currCategory]) {
+                            if (currSizeIndex == 5) {
+                                itemData.append(item)
+                            } else if (item.size == sizes[currSizeIndex]) {
+                                itemData.append(item)
+                            }
+                        }
+                    } else {
+                        if (currSizeIndex == 5) {
+                            itemData.append(item)
+                        } else if (item.size == sizes[currSizeIndex]) {
+                            itemData.append(item)
+                        }
+                    }
                 }
             }
         }
-*/
-        //let currentUser = Auth.auth().currentUser
-       /* let currUserID = Auth.auth().currentUser!.uid
-        for item in allItems {
-            if item.owner != currUserID {
-                fullArray.append(item)
-            }
-        }*/
+//        if (sortType == 0) {
+//            itemData.sort(by: sortPriceLowHigh)
+//        } else if (sortType == 1) {
+//            itemData.sort(by: sortPriceHighLow)
+//        } else if (sortType == 2) {
+//            itemData.sort(by: sortDistanceLowHigh)
+//        }
+//        myCollectionView.reloadData()
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        reloadData()
+        print("collection view")
+        getData()
+        loadData()
+        print("num items in array: " + String(itemData.count))
         return itemData.count
     }
     
@@ -381,6 +350,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         //cell.productDistance.text = currItem["distance"].string! + " mi";
         cell.backgroundColor = .white
         //cell.backgroundColor = hexStringToUIColor(hex: "#FCF6F0")
+        print("cell: " + String(cell.productPrice.text ?? ""))
         return cell
     }
     
@@ -409,12 +379,14 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     }*/
     
     override func viewDidAppear(_ animated: Bool) {
+        print("view did appear")
         getData()
         loadData()
         reloadData()
     }
     
     override func viewDidLoad() {
+        print("view did load")
         super.viewDidLoad()
 //        let icon = UIImage(named: "downarrow3")!
 //        categoryButton.setImage(icon, for: .normal)

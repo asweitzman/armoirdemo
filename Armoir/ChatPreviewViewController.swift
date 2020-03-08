@@ -15,6 +15,37 @@ class MessagePreviewCell: UITableViewCell {
     @IBOutlet weak var itemLabel: UILabel!
     
     @IBOutlet weak var itemImage: UIImageView!
+    
+//    var isIncoming: Bool = false {
+//        didSet {
+//            messageBgView.backgroundColor = isIncoming ? UIColor.white : #colorLiteral(red: 0.8622178435, green: 0.8425275087, blue: 0.8211465478, alpha: 1)
+//        }
+//    }
+    
+    required init?(coder aDecoder: NSCoder) {
+         super.init(coder: aDecoder)
+     }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    func configure(with model: ChatPreviewViewController.PreviewMessageModel) {
+            let sender = model.sender
+            // align to the left
+            let nameAttributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.orange,
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)
+                ] as [NSAttributedString.Key : Any]
+            // sender name at top, message at the next line
+            let senderName = NSMutableAttributedString(string: sender + "\n", attributes: nameAttributes)
+            let receiver = NSMutableAttributedString(string: model.receiver)
+            senderName.append(receiver)
+            senderLabel.attributedText = senderName
+//            senderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
+//            senderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = false
+    }
+    
 }
 
 
@@ -63,6 +94,14 @@ class ChatPreviewViewController: UIViewController {
            // destination.blogName = swiftBlogs[index]
        }
     }*/
+    
+    
+    struct PreviewMessageModel {
+        let receiver: String
+        let sender: String
+        let isIncoming: Bool
+        let name: String
+    }
     
     func loadChat(chatID: String) {
         let chatRef = chatsDB.child(chatID)
@@ -131,6 +170,9 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessagePreviewCell
+        
+        cell.configure(with: chats[indexPath.row])
+        
 //        cell.configure(with: chats[indexPath.row])
         
         
@@ -147,4 +189,5 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
         cell.receiverLabel.text = currentChat.receiverName*/
         return cell
     }
+    
 }

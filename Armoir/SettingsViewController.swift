@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsViewController: UIViewController {
 
@@ -19,6 +20,18 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var changeUsername: UIButton!
     
     @IBOutlet weak var changePicture: UIButton!
+    
+    @IBOutlet weak var logoutButton: UIButton!
+    
+    @IBAction func logout(sender: UIButton) {
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
+        self.performSegue(withIdentifier: "toBegin", sender: self)
+    }
     
     func makeButtonsRound(){
         self.inviteFriends.layer.cornerRadius = 7
