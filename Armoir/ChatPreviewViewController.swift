@@ -9,9 +9,18 @@ import Foundation
 import UIKit
 import Firebase
 
+class MessagePreviewCell: UITableViewCell {
+    @IBOutlet weak var senderLabel: UILabel!
+    
+    @IBOutlet weak var itemLabel: UILabel!
+    
+    @IBOutlet weak var itemImage: UIImageView!
+}
+
+
 class ChatPreviewViewController: UIViewController {
     
-    private let cellId = "chatPreviewCell"
+    private let cellId = "messagePreviewCell"
     private var chats = [PreviewMessageModel]()
     let chatsDB = Database.database().reference().child("chats")
     let usersDB = Database.database().reference().child("users")
@@ -32,7 +41,9 @@ class ChatPreviewViewController: UIViewController {
         //set the delegates
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ChatPreviewCell.self, forCellReuseIdentifier: cellId)
+//        tableView.register(ChatPreviewCell.self, forCellReuseIdentifier: cellId)
+    
+        
         // do not show separators and set the background to gray-ish
         //tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -119,9 +130,10 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatPreviewCell
-       // cell.configure(with: chats[indexPath.row])
-        cell.configure(with: chats[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessagePreviewCell
+//        cell.configure(with: chats[indexPath.row])
+        
+        
         /*let currentChat = chats[indexPath.row]
         let nameAttributes = [
                        NSAttributedString.Key.foregroundColor : UIColor.orange,
