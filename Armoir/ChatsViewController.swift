@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class ChatsViewController: UIViewController {
     
@@ -135,6 +136,25 @@ class ChatsViewController: UIViewController {
                 self.messageTextField.isEnabled = true
                 self.sendButton.isEnabled = true
                 self.messageTextField.text?.removeAll()
+            }
+        }
+        let content = UNMutableNotificationContent()
+        content.title = "New message from " + String(Auth.auth().currentUser?.displayName ?? "")
+        content.body = message
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (5), repeats: false)
+        
+        // Create the request
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString,
+                    content: content, trigger: trigger)
+
+        // Schedule the request with the system.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                print("error when sending message notification")
+           } else {
+                print("notification successfully scheduled")
             }
         }
     }
