@@ -83,6 +83,7 @@ class SearchItemDetailViewController: UIViewController {
             let snapshotValue = snapshot.value as! [String : AnyObject]
             let receiverName = snapshotValue["owner"]
             let item_name = snapshotValue["name"] as! String
+            itemref.child("currentChat").setValue(chatID)
             let requestMessageString = "Hi, I'd like to borrow your " + item_name
             // Get the Unix timestamp
             let timestamp = NSDate().timeIntervalSince1970
@@ -103,6 +104,7 @@ class SearchItemDetailViewController: UIViewController {
         addNewChat(chatID: chatID)
         addChatToUser(chatID: chatID)
         addInitialMsg(chatID: chatID)
+        
         let alert = UIAlertController(title: "Sent request to borrow this item! Check your inbox for updates.", message: "", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in

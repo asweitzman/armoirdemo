@@ -19,7 +19,31 @@ class LentItemViewController: UIViewController {
     @IBOutlet weak var priceDisplay: UILabel!
     @IBOutlet weak var imgDisplay: UIImageView!
     @IBOutlet weak var itemDescrip: UILabel!
+    @IBOutlet weak var messageButton: UIButton!
     
+    @IBAction func messageButton(_ sender: Any) {
+        msgButtonHelper()
+       // self.performSegue(withIdentifier: "toChatsSegue", sender: self)
+    }
+    
+    func msgButtonHelper() {
+        let item = String(currItem)
+        let ref = Database.database().reference().child("items").child(item)
+        ref.observe(.value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String : AnyObject]
+            let chat = snapshotValue["currentChat"] as! String
+            currChat = chat
+            print("what" + currChat)
+            //self.performSegue(withIdentifier: "toChatsSegue", sender: self)
+            //let snapVal = snapshot.value as! [String : AnyObject]
+           // let test = snapVal.keys
+           // print(test)
+            //let res = test.first
+            //print(res)
+            //currChat = res!
+            self.performSegue(withIdentifier: "toChatsSegue", sender: self)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

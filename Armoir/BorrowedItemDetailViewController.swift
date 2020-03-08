@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 class BorrowedItemDetailViewController: UIViewController {
     
@@ -20,9 +20,40 @@ class BorrowedItemDetailViewController: UIViewController {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemDescrip: UILabel!
     let imageCache = NSCache<NSString, UIImage>()
-       
-    @IBAction func reminderButton(_ sender: Any) {
-           let alert = UIAlertController(title: "Reminder sent!", message: "", preferredStyle: .alert)
+    
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    @IBAction func messageButtonPressed(_ sender: Any) {
+        let item = String(currItem)
+        let ref = Database.database().reference().child("items").child(item)
+        ref.observe(.value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String : AnyObject]
+            let chat = snapshotValue["currentChat"] as! String
+            currChat = chat
+            print("whatwhat " + currChat)
+            self.performSegue(withIdentifier: "toChatsSegue", sender: self)
+        }
+    }
+    
+    @IBAction func reminderButton(_ sender: UIButton) {
+        let chatsDb = Database.database().reference().child("chats")
+        let itemref = Database.database().reference().child("items").child(String(currItem))
+        itemref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+            let snapshotValue = snapshot.value as! [String : AnyObject]
+           // let receiverName = snapshotValue["owner"]
+            //let item_name = snapshotValue["name"] as! String
+            let chat = snapshotValue["currentChat"] as! String
+            let reminderMessage = "This item is due soon!"
+            // Get the Unix timestamp
+            let timestamp = NSDate().timeIntervalSince1970
+            let messageID = self.randomString(length: 20)
+            let chatMessageDict = ["senderName": Auth.auth().currentUser?.displayName, "content" : reminderMessage, "timestamp": timestamp, "senderHash": Auth.auth().currentUser!.uid, "messageID" : messageID] as [String : Any]
+            chatsDb.child(chat).child("messages").child(messageID).setValue(chatMessageDict)
+        }
+        let alert = UIAlertController(title: "Reminder sent!", message: "", preferredStyle: .alert)
 
        
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
@@ -32,6 +63,7 @@ class BorrowedItemDetailViewController: UIViewController {
         }))
         
         self.present(alert, animated: true)
+        sender.isEnabled = false
        }
     
     override func viewDidLoad() {
@@ -75,21 +107,26 @@ class BorrowedItemDetailViewController: UIViewController {
                 var userID = i.owner;
                 if (status_lending) {
                     userID = String(i.borrowed_by);
-                    distanceText.text = "Borrowed by Ellen Roper";
+                    //TODO add not hardcoded here. easy.
+                    var currItemId = String(currItem)
+                    let ref = Database.database().reference().child("items").child(currItemId)
+                    ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                        let snapshotValue = snapshot.value as! [String: AnyObject]
+                        let borrowerHash = snapshotValue["borrowed_by"]
+                        let userref = Database.database().reference().child("users").child(borrowerHash as! String)
+                        userref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                            if let snapVal = snapshot.value as? [String: Any] {
+                                let name = snapVal["display_name"] as? String
+                                self.distanceText.text = "Borrowed by " + name!
+                            }
+                        }
+                    }
                     reminderButton.isHidden = false;
                 } else {
                     distanceText.text = "Not borrowed";
                     reminderButton.isHidden = true;
                 }
                 var user: a_User;
-                /*var myStructArray:[a_User] = [];
-                do {
-                    try myStructArray = JSONDecoder().decode([a_User].self, from: json);
-                }
-                catch {
-                    print("array didn't work");
-                }
-                for stru in myStructArray { */
                 userName.text = "Owned by you"
                 
                 for stru in all_users {
