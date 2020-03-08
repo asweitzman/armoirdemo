@@ -81,6 +81,7 @@ class ChatsViewController: UIViewController {
     
     // call this to listen to database changes and add it into our tableview
     func loadMessages() {
+        print("current chat: " + currChat)
         let chatRef = Database.database().reference().child("chats").child(currChat).child("messages")
         chatRef.queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
                let name = snapshot.key
