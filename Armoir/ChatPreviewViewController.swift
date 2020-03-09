@@ -29,7 +29,7 @@ class MessagePreviewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-    
+        
     func configure(with model: ChatPreviewViewController.PreviewMessageModel) {
             let sender = model.sender
             // align to the left
@@ -42,11 +42,30 @@ class MessagePreviewCell: UITableViewCell {
             let receiver = NSMutableAttributedString(string: model.receiver)
             senderName.append(receiver)
             senderLabel.attributedText = senderName
+        
+            for item in allItems {
+                if model.item_id == item.item_id {
+
+                    itemLabel.text = item.name
+                    
+                    let imageRef = storageRef.child("images/" + String(item.image))
+                    imageRef.downloadURL { url, error in
+                        if let error = error {
+                            print("image url error")
+                        } else {
+                            let data = try? Data(contentsOf: url!)
+                            let image = try? UIImage(data: data!)
+                            self.itemImage.image = image as! UIImage;
+                        }
+                    }
+                }
+            }
+        }
+    }
 //            senderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
 //            senderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = false
-    }
-    
-}
+        
+
 
 
 class ChatPreviewViewController: UIViewController {
@@ -76,7 +95,7 @@ class ChatPreviewViewController: UIViewController {
     
         
         // do not show separators and set the background to gray-ish
-        //tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         getMessages()
         // extension of this can be found in the ViewController.swift
@@ -95,12 +114,18 @@ class ChatPreviewViewController: UIViewController {
        }
     }*/
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let index = self.tableView.indexPathForSelectedRow{
+            self.tableView.deselectRow(at: index, animated: true)
+        }
+    }
     
     struct PreviewMessageModel {
         let receiver: String
         let sender: String
         let isIncoming: Bool
         let name: String
+        let item_id: Int
     }
     
     func loadChat(chatID: String) {
@@ -111,12 +136,12 @@ class ChatPreviewViewController: UIViewController {
             guard let senderName = snapshotValue["senderName"] as? String else {return}
             guard let receiverHash = snapshotValue["receiver"] as? String else {return}
             //for use in custom cells
-            guard let item_id = snapshotValue["item_id"] else {return}
+            guard let item_id = snapshotValue["item_id"] as? Int else {return}
             guard let status = snapshotValue["status"] else {return}
             let isIncoming = (senderHash == Auth.auth().currentUser!.uid ? false : true)
             
             //@ALEX: PreviewMessageModel is in ChatPreviewCell.swift. It'll probably not be necessary when the custom tableview cell is implemented.
-            let chatPreview = PreviewMessageModel.init(receiver: receiverHash, sender: senderName, isIncoming: isIncoming, name: chatID)
+            let chatPreview = PreviewMessageModel.init(receiver: receiverHash, sender: senderName, isIncoming: isIncoming, name: chatID, item_id: item_id)
             self.addNewRow(with: chatPreview)
         }
     }
