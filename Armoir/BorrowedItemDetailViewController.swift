@@ -19,6 +19,7 @@ class BorrowedItemDetailViewController: UIViewController {
     @IBOutlet weak var distanceText: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemDescrip: UILabel!
+    @IBOutlet weak var messageButton: UIButton!
     let imageCache = NSCache<NSString, UIImage>()
     
     func randomString(length: Int) -> String {
@@ -69,9 +70,12 @@ class BorrowedItemDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reminderButton.isHidden = true
+
+        messageButton.isHidden = true
         
         if (status_lending) {
             currArray = lentArray
+            messageButton.isHidden = false
         } else if (status_closet) {
             currArray = closetArray
         }

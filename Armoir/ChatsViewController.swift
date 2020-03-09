@@ -21,11 +21,42 @@ class ChatsViewController: UIViewController {
     
     //MARK: Outlets
     
+    @IBOutlet weak var itemLabel: UILabel!
+    @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
 
-
+    @IBOutlet weak var markButton: UIButton!
+    
+    @IBAction func markedAsExchanged(_ sender: Any) {
+        if markButton.currentTitle == "Mark as returned" {
+            markButton.setTitle("Mark as exchanged", for: .normal)
+        } else {
+            
+            markButton.setTitle("Mark as returned", for: .normal)
+            
+//            var ref = Database.database().reference()
+//            var currUser = Auth.auth().currentUser
+//        ref.child("items").child(String(currItemID)).child("borrowed").setValue(true)
+//        ref.child("items").child(String(currItemID)).child("borrowed_by").setValue(currSenderID)
+//            
+//            var borrowedRef = ref.child("users").child(currentUser!.uid).child("borrowed")
+//                let group = DispatchGroup()
+//                group.enter()
+//                var itemID = 0
+//                group.notify(queue: .main) {
+//                    self.addItem(itemID: itemID)
+//                }
+//                borrowedRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+//                        itemID = Int(snapshot.childrenCount)
+//                        print("item id 1: " + String(itemID))
+//                        group.leave()
+//                    }
+            
+        }
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else {return}
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
@@ -51,6 +82,38 @@ class ChatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if isIncoming {
+            self.title = currSender
+        } else {
+            let ref = Database.database().reference().child("users")
+            ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                let snapshotValue = snapshot.value as! [String : AnyObject]
+                let ownerVal = snapshotValue[currReceiver] as! [String: AnyObject]
+                let usernameString = ownerVal["display_name"] as! String
+                self.title = usernameString
+            }
+        }
+        
+        for item in allItems {
+            if currItemID == item.item_id {
+                
+                self.itemLabel.text = item.name
+                
+                let imageRef = storageRef.child("images/" + String(item.image))
+                imageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("image url error")
+                    } else {
+                        let data = try? Data(contentsOf: url!)
+                        let image = try? UIImage(data: data!)
+                        self.itemImage.image = image as! UIImage;
+                    }
+                }
+                
+            }
+        }
+        
         self.messageTextField.delegate = self
         self.messageTextField.returnKeyType = UIReturnKeyType.send
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)

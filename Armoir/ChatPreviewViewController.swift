@@ -9,14 +9,23 @@ import Foundation
 import UIKit
 import Firebase
 
+var currItemID = 0
+var currSender = ""
+var currSenderID = ""
+var currReceiver = ""
+var isIncoming = Bool()
+
 class MessagePreviewCell: UITableViewCell {
+
     @IBOutlet weak var senderLabel: UILabel!
     
-    @IBOutlet weak var itemLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var itemImage: UIImageView!
     
-//    var isIncoming: Bool = false {
+    @IBOutlet weak var senderIcon: UIImageView!
+    
+    //    var isIncoming: Bool = false {
 //        didSet {
 //            messageBgView.backgroundColor = isIncoming ? UIColor.white : #colorLiteral(red: 0.8622178435, green: 0.8425275087, blue: 0.8211465478, alpha: 1)
 //        }
@@ -29,9 +38,9 @@ class MessagePreviewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-        
+    
     func configure(with model: ChatPreviewViewController.PreviewMessageModel) {
-            let sender = model.sender
+            let sender = model.senderName
             // align to the left
             let nameAttributes = [
                 NSAttributedString.Key.foregroundColor : UIColor.orange,
@@ -41,12 +50,67 @@ class MessagePreviewCell: UITableViewCell {
             let senderName = NSMutableAttributedString(string: sender + "\n", attributes: nameAttributes)
             let receiver = NSMutableAttributedString(string: model.receiver)
             senderName.append(receiver)
-            senderLabel.attributedText = senderName
+        
+            print(senderName)
+            print(model.name)
+            print(model.receiver)
+        
+//            let isIncoming = model.isIncoming
+//            if isIncoming {
+//                senderLabel.attributedText = senderName
+//            } else {
+//                for user in otherUsers {
+//                    if (user.user_ID == model.receiver) {
+//                        senderLabel.attributedText = user.display_name
+//                    }
+//                }
+//
+//            }
+
         
             for item in allItems {
                 if model.item_id == item.item_id {
-
-                    itemLabel.text = item.name
+                    
+                    let ref = Database.database().reference().child("users")
+                    ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+                        let snapshotValue = snapshot.value as! [String : AnyObject]
+                        let ownerVal = snapshotValue[item.owner] as! [String: AnyObject]
+                        let usernameString = ownerVal["display_name"] as! String
+                        if model.isIncoming {
+                            self.senderLabel.attributedText = senderName
+                            print("sendeR:")
+                            print(model.sender)
+                            let ownerVal = snapshotValue[model.sender] as! [String: AnyObject]
+                            let imageUrl = ownerVal["profPic"] as! String
+                            let profRef = storageRef.child("images/\(imageUrl)")
+                            profRef.downloadURL { url, error in
+                            if let error = error {
+                                print("image download error")
+                            } else {
+                                let data = try? Data(contentsOf: url!)
+                                let image = try? UIImage(data: data!)
+                                self.senderIcon.image = image as! UIImage;
+                            }
+                            }
+                                
+                        } else {
+                            let otherPerson = NSMutableAttributedString(string: usernameString + "\n", attributes: nameAttributes)
+                            self.senderLabel.attributedText = otherPerson
+                            let imageUrl = ownerVal["profPic"] as! String
+                            let profRef = storageRef.child("images/\(imageUrl)")
+                            profRef.downloadURL { url, error in
+                              if let error = error {
+                                print("image download error")
+                              } else {
+                                let data = try? Data(contentsOf: url!)
+                                let image = try? UIImage(data: data!)
+                                self.senderIcon.image = image as! UIImage;
+                              }
+                            }
+                        }
+                    }
+                    
+                    
                     
                     let imageRef = storageRef.child("images/" + String(item.image))
                     imageRef.downloadURL { url, error in
@@ -70,6 +134,7 @@ class MessagePreviewCell: UITableViewCell {
 
 class ChatPreviewViewController: UIViewController {
     
+
     private let cellId = "messagePreviewCell"
     private var chats = [PreviewMessageModel]()
     let chatsDB = Database.database().reference().child("chats")
@@ -80,6 +145,21 @@ class ChatPreviewViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    func getNewestMessage(currChat: String) -> String {
+     print("current chat: " + currChat)
+     var newest = ""
+     var newestMessages:[String:String] = [String:String]()
+     let chatRef = Database.database().reference().child("chats").child(currChat).child("messages")
+     chatRef.queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
+         let snapshotValue = snapshot.value as! [String: AnyObject]
+        guard let content = snapshotValue["content"]  as? String else { return }
+        newest = content
+        print("content before: ")
+        print(newest)
+        }
+        return newest
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,7 +175,7 @@ class ChatPreviewViewController: UIViewController {
     
         
         // do not show separators and set the background to gray-ish
-        tableView.separatorStyle = .none
+        //tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         getMessages()
         // extension of this can be found in the ViewController.swift
@@ -122,7 +202,9 @@ class ChatPreviewViewController: UIViewController {
     
     struct PreviewMessageModel {
         let receiver: String
+        var receiverName: String
         let sender: String
+        let senderName: String
         let isIncoming: Bool
         let name: String
         let item_id: Int
@@ -138,10 +220,24 @@ class ChatPreviewViewController: UIViewController {
             //for use in custom cells
             guard let item_id = snapshotValue["item_id"] as? Int else {return}
             guard let status = snapshotValue["status"] else {return}
+            
             let isIncoming = (senderHash == Auth.auth().currentUser!.uid ? false : true)
             
+//            var receiverName = ""
+//            for item in allItems {
+//                if item_id == item.item_id {
+//                let ref = Database.database().reference().child("users")
+//                ref.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
+//                    let snapshotValue = snapshot.value as! [String : AnyObject]
+//                    let ownerVal = snapshotValue[item.owner] as! [String: AnyObject]
+//                    let usernameString = ownerVal["display_name"] as! String
+//                    receiverName = usernameString
+//                    }
+//                }
+//            }
+            
             //@ALEX: PreviewMessageModel is in ChatPreviewCell.swift. It'll probably not be necessary when the custom tableview cell is implemented.
-            let chatPreview = PreviewMessageModel.init(receiver: receiverHash, sender: senderName, isIncoming: isIncoming, name: chatID, item_id: item_id)
+            let chatPreview = PreviewMessageModel.init(receiver: receiverHash, receiverName: "", sender: senderHash, senderName: senderName, isIncoming: isIncoming, name: chatID, item_id: item_id)
             self.addNewRow(with: chatPreview)
         }
     }
@@ -190,14 +286,25 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
         print("tapped")
         let current = chats[indexPath.row]
         currChat = current.name
+        currItemID = current.item_id
+        currSender = current.senderName
+        currSenderID = current.sender
+        currReceiver = current.receiver
+        isIncoming = current.isIncoming
+        
         self.performSegue(withIdentifier: "toChatsSegue", sender: self)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessagePreviewCell
         
+        cell.senderIcon.layer.cornerRadius = cell.senderIcon.frame.size.width / 2;
         cell.configure(with: chats[indexPath.row])
         
+//        let newestMessage = cell.getNewestMessage(currChat: chats[indexPath.row].name)
+//        print("newest: ")
+//        print(newestMessage)
+//        cell.messageLabel.text = newestMessage
 //        cell.configure(with: chats[indexPath.row])
         
         
