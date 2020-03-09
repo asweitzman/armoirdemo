@@ -23,6 +23,7 @@ var currFirebaseArray: [closet_item] = []
 var longJsonData: String = ""
 var fullDestPathString: String = ""
 var fullDestPath: URL = NSURLComponents().url!
+var selectedItem = closet_item(item_id: 0, borrowed: false, borrowed_by: "", category:"", color: "", image: "", name: "", owner: "", price: 0, size: "", distance: 0)
 
 //extension UIImage {
 //    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {

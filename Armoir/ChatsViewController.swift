@@ -11,7 +11,6 @@ import Firebase
 import UserNotifications
 
 class ChatsViewController: UIViewController {
-    
     //chatcell identifier
     private let cellId = "chatCell"
     private var messages = [MessageModel]()
@@ -24,6 +23,8 @@ class ChatsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var itemName: UILabel!
+    @IBOutlet weak var itemImage: UIImageView!
 
 
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -56,6 +57,22 @@ class ChatsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         setup()
+        for i in currArray {
+            if (i.item_id == currItem) {
+                itemName.text = i.name
+                let imageRef = storageRef.child("images/" + String(i.image))
+                imageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("image url error")
+                    } else {
+                        let data = try? Data(contentsOf: url!)
+                        let image = UIImage(data: data!)
+                        let thumb1 = image?.resized(By: 0.2)
+                        self.itemImage.image = thumb1
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
