@@ -190,6 +190,7 @@ extension ChatPreviewViewController: UITableViewDelegate, UITableViewDataSource 
         print("tapped")
         let current = chats[indexPath.row]
         currChat = current.name
+        currItem = current.item_id
         self.performSegue(withIdentifier: "toChatsSegue", sender: self)
     }
     

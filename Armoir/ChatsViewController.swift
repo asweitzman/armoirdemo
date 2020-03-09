@@ -57,7 +57,7 @@ class ChatsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         setup()
-        for i in currArray {
+        for i in allItems {
             if (i.item_id == currItem) {
                 itemName.text = i.name
                 let imageRef = storageRef.child("images/" + String(i.image))
