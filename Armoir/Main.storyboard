@@ -1617,13 +1617,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="$6/day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLx-CY-CAB" userLabel="Product Price">
-                                                            <rect key="frame" x="8" y="167" width="58.5" height="24"/>
+                                                            <rect key="frame" x="8" y="167" width="63.5" height="24"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="19"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.2 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcA-tT-mgO" userLabel="Product Distance">
-                                                            <rect key="frame" x="117" y="169" width="47" height="20"/>
+                                                            <rect key="frame" x="116" y="168.5" width="48" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="MXJ-n1-8AL"/>
                                                             </constraints>
@@ -2263,14 +2263,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qy3-Vj-iLs">
-                                <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3e2-D5-NPs">
-                                <rect key="frame" x="0.0" y="44" width="375" height="114"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="158"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bA-KR-nTT">
-                                        <rect key="frame" x="155" y="66" width="206" height="32"/>
+                                        <rect key="frame" x="155" y="110" width="206" height="32"/>
                                         <color key="backgroundColor" red="0.83486014600000003" green="0.80849176649999999" blue="0.77646666769999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="17"/>
                                         <state key="normal" title="Mark as exchanged"/>
@@ -2280,13 +2280,13 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kCO-kb-yXs">
-                                        <rect key="frame" x="28" y="4" width="113" height="106"/>
+                                        <rect key="frame" x="28" y="4" width="113" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="113" id="oJl-U0-Bgo"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Acg-mT-nQm">
-                                        <rect key="frame" x="154" y="27" width="208" height="31"/>
+                                        <rect key="frame" x="154" y="71" width="208" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="evZ-Sd-kgk"/>
                                         </constraints>
@@ -2929,7 +2929,7 @@ the planet</string>
         <image name="shirt_icon" width="88" height="66"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HSF-kY-CO2"/>
+        <segue reference="vPA-wk-sWi"/>
         <segue reference="KpY-Yi-dgg"/>
         <segue reference="3fw-xB-N9a"/>
         <segue reference="jab-sZ-aSN"/>

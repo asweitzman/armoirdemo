@@ -11,7 +11,6 @@ import Firebase
 import UserNotifications
 
 class ChatsViewController: UIViewController {
-    
     //chatcell identifier
     private let cellId = "chatCell"
     private var messages = [MessageModel]()

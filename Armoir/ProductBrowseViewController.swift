@@ -302,11 +302,15 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         print("collection view")
         getData()
         loadData()
+        reloadData()
         print("num items in array: " + String(itemData.count))
         return itemData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        getData()
+        loadData()
+        reloadData()
         chosenItem = itemData[indexPath.row]
         currItem = chosenItem.item_id
         self.performSegue(withIdentifier: "toItemDetail", sender: self)
