@@ -302,6 +302,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         print("collection view")
         getData()
         loadData()
+        reloadData()
         print("num items in array: " + String(itemData.count))
         return itemData.count
     }
