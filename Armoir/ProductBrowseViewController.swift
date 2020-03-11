@@ -301,7 +301,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("collection view")
         getData()
-        loadData()
+        //loadData()
         reloadData()
         print("num items in array: " + String(itemData.count))
         return itemData.count
@@ -309,7 +309,7 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         getData()
-        loadData()
+        //loadData()
         reloadData()
         chosenItem = itemData[indexPath.row]
         currItem = chosenItem.item_id
@@ -414,9 +414,9 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
         currSizeIndex = 5
         categories = ["Shirt", "Pants", "Skirt", "Shorts", "Dress", "Outerwear"]
         sizes = ["XS", "S", "M", "L", "XL"]
-        getData()
-        loadData()
-        reloadData()
+//        getData()
+//        loadData()
+//        reloadData()
         
         initDropDowns()
         initCategoryDropDown()
