@@ -41,7 +41,7 @@ class ChatsViewController: UIViewController {
             var itemIndex = 0
             for item in closetArray {
                 if currItemID == item.item_id {
-                ref.child("users/\(user!.uid)/closet/\(itemIndex)/borrowed").setValue(true)
+                ref.child("users/\(user!.uid)/closet/\(itemIndex)/borrowed").setValue(false)
                 }
                 itemIndex += 1
             }
