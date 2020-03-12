@@ -212,6 +212,7 @@ class ChatPreviewViewController: UIViewController {
     
     func loadChat(chatID: String) {
         let chatRef = chatsDB.child(chatID)
+        print("chat id:" + chatID)
         chatRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot!) in
             let snapshotValue = snapshot.value as! [String : AnyObject]
             guard let senderHash = snapshotValue["sender"] as? String else {return}
