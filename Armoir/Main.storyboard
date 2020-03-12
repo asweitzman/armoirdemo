@@ -2271,9 +2271,11 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bA-KR-nTT">
                                         <rect key="frame" x="155" y="110" width="206" height="32"/>
-                                        <color key="backgroundColor" red="0.83486014600000003" green="0.80849176649999999" blue="0.77646666769999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="1" green="0.54117647058823526" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="17"/>
-                                        <state key="normal" title="Mark as exchanged"/>
+                                        <state key="normal" title="Mark as exchanged">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="markedAsExchanged:" destination="Pa0-xL-DML" eventType="touchUpInside" id="l7D-P6-DaN"/>
                                             <action selector="markedAsExchanged:" destination="KnJ-9k-oBf" eventType="touchUpInside" id="npV-aX-F5O"/>

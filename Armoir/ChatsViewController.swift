@@ -109,7 +109,7 @@ class ChatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.markButton.layer.cornerRadius = 8;
         if isIncoming {
             self.title = currSender
         } else {
