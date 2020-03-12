@@ -572,7 +572,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.85882352941176465" green="0.84313725490196079" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="zTj-sD-ZvW" firstAttribute="leading" secondItem="iIi-Sd-Vlk" secondAttribute="leading" constant="25" id="7Mm-Px-q6O"/>
                                     <constraint firstItem="zTj-sD-ZvW" firstAttribute="centerY" secondItem="iIi-Sd-Vlk" secondAttribute="centerY" id="EE4-BX-zAg"/>
@@ -616,7 +616,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxh-e1-Bvz">
                                 <rect key="frame" x="25" y="401" width="325" height="49"/>
-                                <color key="backgroundColor" red="0.85856276750000005" green="0.84353798629999999" blue="0.82352751489999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.94235104319999996" green="0.46109288929999998" blue="0.1886304617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="Oil-aE-HAK"/>
                                 </constraints>
@@ -1861,7 +1861,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.86242574449999998" green="0.84362113480000001" blue="0.81960529090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="AO6-hj-o7f" firstAttribute="centerY" secondItem="cbe-UA-ney" secondAttribute="centerY" id="9dZ-df-HCS"/>
                                     <constraint firstAttribute="height" constant="70" id="Jqb-gz-yap"/>
@@ -1914,7 +1914,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2g-Pb-dI6">
                                 <rect key="frame" x="25" y="401" width="325" height="49"/>
-                                <color key="backgroundColor" red="0.99651163819999999" green="0.51521241659999994" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.94235104319999996" green="0.46109288929999998" blue="0.1886304617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="Iuo-Ci-R8T"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="tyn-e6-Y9A"/>
@@ -2055,12 +2055,14 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y69-ov-EoG">
                                 <rect key="frame" x="25" y="494" width="325" height="49"/>
-                                <color key="backgroundColor" red="0.85856276750000005" green="0.84353798629999999" blue="0.82352751489999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.94235104319999996" green="0.46109288929999998" blue="0.1886304617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="bup-tn-FH0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="21"/>
-                                <state key="normal" title="request to borrow"/>
+                                <state key="normal" title="request to borrow">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
