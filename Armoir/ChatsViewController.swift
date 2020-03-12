@@ -29,10 +29,37 @@ class ChatsViewController: UIViewController {
     @IBOutlet weak var markButton: UIButton!
     
     @IBAction func markedAsExchanged(_ sender: Any) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
         if markButton.currentTitle == "Mark as returned" {
             markButton.setTitle("Mark as exchanged", for: .normal)
+            for item in allItems {
+                if currItemID == item.item_id {
+                    ref.child("items/\(currItemID)/borrowed").setValue(false)
+                }
+            }
+            var itemIndex = 0
+            for item in closetArray {
+                if currItemID == item.item_id {
+                ref.child("users/\(user!.uid)/closet/\(itemIndex)/borrowed").setValue(true)
+                }
+                itemIndex += 1
+            }
         } else {
-            
+            for item in allItems {
+                if currItemID == item.item_id {
+                    ref.child("items/\(currItemID)/borrowed").setValue(true)
+                }
+            }
+            var itemIndex = 0
+            for item in closetArray {
+                print("itemIndex: " + String(itemIndex))
+                print("itemID: " + String(item.item_id))
+                if currItemID == item.item_id {
+                ref.child("users/\(user!.uid)/closet/\(itemIndex)/borrowed").setValue(true)
+                }
+                itemIndex += 1
+            }
             markButton.setTitle("Mark as returned", for: .normal)
             
 //            var ref = Database.database().reference()
@@ -54,6 +81,7 @@ class ChatsViewController: UIViewController {
 //                    }
             
         }
+       
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

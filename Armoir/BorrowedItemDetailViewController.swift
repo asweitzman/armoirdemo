@@ -34,6 +34,12 @@ class BorrowedItemDetailViewController: UIViewController {
             let snapshotValue = snapshot.value as! [String : AnyObject]
             let chat = snapshotValue["currentChat"] as! String
             currChat = chat
+            currItemID = currItem
+            let chatRef = Database.database().reference().child("chats").child(currChat)
+            chatRef.observe(.value) { (snapshot: DataSnapshot!) in
+                let snapshotValue = snapshot.value as! [String : AnyObject]
+                currReceiver = snapshotValue["receiver"] as! String
+            }
             print("whatwhat " + currChat)
             self.performSegue(withIdentifier: "toChatsSegue", sender: self)
         }
