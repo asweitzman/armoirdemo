@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ldg-kh-r0s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wRE-vz-pzR">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -270,13 +270,20 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzd-D6-FFJ">
                                         <rect key="frame" x="78" y="431" width="189" height="42"/>
-                                        <color key="backgroundColor" red="0.86242574449999998" green="0.84362113480000001" blue="0.81960529090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.99651163819999999" green="0.51521241659999994" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="189" id="P3S-cl-J9B"/>
                                             <constraint firstAttribute="height" constant="42" id="TSX-hI-fUF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="21"/>
-                                        <state key="normal" title="add item"/>
+                                        <state key="normal" title="Add item">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="buttonTapped:" destination="McH-PY-hkW" eventType="touchUpInside" id="mE2-Q6-dBW"/>
                                         </connections>
@@ -1907,13 +1914,15 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2g-Pb-dI6">
                                 <rect key="frame" x="25" y="401" width="325" height="49"/>
-                                <color key="backgroundColor" red="0.85856276750000005" green="0.84353798629999999" blue="0.82352751489999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.99651163819999999" green="0.51521241659999994" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="Iuo-Ci-R8T"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="tyn-e6-Y9A"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="21"/>
-                                <state key="normal" title="Message"/>
+                                <state key="normal" title="Message">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
@@ -2933,7 +2942,7 @@ the planet</string>
     <inferredMetricsTieBreakers>
         <segue reference="vPA-wk-sWi"/>
         <segue reference="KpY-Yi-dgg"/>
-        <segue reference="3fw-xB-N9a"/>
+        <segue reference="SGC-ae-Gqc"/>
         <segue reference="jab-sZ-aSN"/>
         <segue reference="Om7-qJ-M5f"/>
         <segue reference="43q-gw-GJD"/>
