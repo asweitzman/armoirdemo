@@ -1861,7 +1861,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.86242574449999998" green="0.84362113480000001" blue="0.81960529090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.98788684609999999" green="0.96519011259999998" blue="0.94117397069999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="AO6-hj-o7f" firstAttribute="centerY" secondItem="cbe-UA-ney" secondAttribute="centerY" id="9dZ-df-HCS"/>
                                     <constraint firstAttribute="height" constant="70" id="Jqb-gz-yap"/>
@@ -2940,7 +2940,7 @@ the planet</string>
         <image name="shirt_icon" width="88" height="66"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vPA-wk-sWi"/>
+        <segue reference="tOY-NN-bi7"/>
         <segue reference="KpY-Yi-dgg"/>
         <segue reference="SGC-ae-Gqc"/>
         <segue reference="jab-sZ-aSN"/>
