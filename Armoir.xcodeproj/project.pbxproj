@@ -20,6 +20,7 @@
 		1751F06F21B06EA400F55356 /* ArmoirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F06E21B06EA400F55356 /* ArmoirUITests.swift */; };
 		1751F07D21B08B2100F55356 /* ProductBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F07C21B08B2100F55356 /* ProductBrowseViewController.swift */; };
 		1751F07F21B08BFD00F55356 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751F07E21B08BFD00F55356 /* ProductCell.swift */; };
+		1764BB2C241E09E1005C56EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764BB2B241E09E1005C56EB /* Extensions.swift */; };
 		176F559121B746BA00FFF556 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F559021B746BA00FFF556 /* SignUpViewController.swift */; };
 		179234B521BC745400B391F5 /* test2.json in Resources */ = {isa = PBXBuildFile; fileRef = 179234B421BC745400B391F5 /* test2.json */; };
 		179234B721BCCDF700B391F5 /* ImageRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179234B621BCCDF700B391F5 /* ImageRetriever.swift */; };
@@ -99,6 +100,7 @@
 		1751F07E21B08BFD00F55356 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		175D4F9E23E24ACB001EB119 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		175D4F9F23E24ACB001EB119 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1764BB2B241E09E1005C56EB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		176F559021B746BA00FFF556 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		179234B421BC745400B391F5 /* test2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test2.json; sourceTree = "<group>"; };
 		179234B621BCCDF700B391F5 /* ImageRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRetriever.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			children = (
 				3478E3172411E88000F296EE /* Armoir.entitlements */,
 				1751F04E21B06E9F00F55356 /* AppDelegate.swift */,
+				1764BB2B241E09E1005C56EB /* Extensions.swift */,
 				7193F59521BA370700427907 /* Main.storyboard */,
 				17E7E74123FB7EF000281AA7 /* Onboarding */,
 				179234B821BCEA4C00B391F5 /* FirstViewController.swift */,
@@ -572,6 +575,7 @@
 				17D979E121B22BAA00E74816 /* MainViewController.swift in Sources */,
 				17F3DC5724158BB3003C0F6F /* ChatPreviewViewController.swift in Sources */,
 				743BD5E921B9DEAB00855A1E /* BorrowedItemDetailViewController.swift in Sources */,
+				1764BB2C241E09E1005C56EB /* Extensions.swift in Sources */,
 				17E7E73A23FB741E00281AA7 /* StepZero.swift in Sources */,
 				17E7E73C23FB749900281AA7 /* StepOne.swift in Sources */,
 				640D7A3224049F7400929536 /* ChatMessageCell.swift in Sources */,
