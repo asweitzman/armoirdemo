@@ -146,7 +146,9 @@ class SearchItemDetailViewController: UIViewController {
                   } else {
                     let data = try? Data(contentsOf: url!)
                     let image = try? UIImage(data: data!)
-                    self.profPic.image = image as! UIImage;
+                    self.profPic.image = image as! UIImage
+                    self.profPic.layer.cornerRadius = self.profPic.frame.size.width / 2
+                    self.profPic.clipsToBounds = true
                   }
                 }
             }
