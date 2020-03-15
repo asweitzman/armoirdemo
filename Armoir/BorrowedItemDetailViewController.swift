@@ -104,7 +104,8 @@ class BorrowedItemDetailViewController: UIViewController {
                     if let error = error {
                         print("image url error")
                     } else {
-                        self.itemImage.image = self.downloadImage(imageName: String(i.image), url: url!)
+                        //self.itemImage.image = self.downloadImage(imageName: String(i.image), url: url!)
+                        self.itemImage.loadImageUsingCacheWithUrlString(url!.absoluteString)
                     }
                 }
                 

@@ -51,13 +51,10 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
     func downloadImage(imageName: String, url: URL) -> UIImage{
         let imageRef = storageRef.child("images/" + String(imageName))
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            print("image is cached")
               return cachedImage
         }
-//        if let all = imageCache.value(forKey: "allObjects") as? NSArray {
-//            for object in all {
-//                print("object is \(object)")
-//            }
-//        }
+        
         print(imageCache)
         let data = try? Data(contentsOf: url)
         let image = UIImage(data: data!)
@@ -341,7 +338,8 @@ class ProductBrowseViewController: UIViewController, UICollectionViewDataSource,
             if let error = error {
                 print("image url error")
             } else {
-                cell.productImage.image = self.downloadImage(imageName: String(currItem.image), url: url!)
+                //cell.productImage.image = self.downloadImage(imageName: String(currItem.image), url: url!)
+                cell.productImage.loadImageUsingCacheWithUrlString(url!.absoluteString)
             }
         }
         let currPrice = currItem.price

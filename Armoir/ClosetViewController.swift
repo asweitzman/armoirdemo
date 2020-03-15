@@ -281,7 +281,8 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
                 if let error = error {
                     print("image url error")
                 } else {
-                    cell.img_display.image = self.downloadImage(imageName: String(i.image), url: url!)
+                    //cell.img_display.image = self.downloadImage(imageName: String(i.image), url: url!)
+                    cell.img_display.loadImageUsingCacheWithUrlString(url!.absoluteString)
                 }
             }
             cell.img_display.contentMode = .scaleAspectFit;
@@ -329,7 +330,8 @@ class ClosetViewController: UIViewController,UICollectionViewDataSource, UIColle
                 if let error = error {
                     print("image url error")
                 } else {
-                    cell.img_display.image = self.downloadImage(imageName: String(i.image), url: url!)
+                    //cell.img_display.image = self.downloadImage(imageName: String(i.image), url: url!)
+                    cell.img_display.loadImageUsingCacheWithUrlString(url!.absoluteString)
                 }
             }
 /*            let imgURL = i.image
