@@ -27,22 +27,26 @@ class BorrowedItemDetailViewController: UIViewController {
       return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    @IBAction func messageButtonPressed(_ sender: Any) {
+    func messageButtonAction() {
         let item = String(currItem)
-        let ref = Database.database().reference().child("items").child(item)
-        ref.observe(.value) { (snapshot: DataSnapshot!) in
-            let snapshotValue = snapshot.value as! [String : AnyObject]
-            let chat = snapshotValue["currentChat"] as! String
-            currChat = chat
-            currItemID = currItem
-            let chatRef = Database.database().reference().child("chats").child(currChat)
-            chatRef.observe(.value) { (snapshot: DataSnapshot!) in
-                let snapshotValue = snapshot.value as! [String : AnyObject]
-                currReceiver = snapshotValue["receiver"] as! String
-            }
-            print("whatwhat " + currChat)
-            self.performSegue(withIdentifier: "toChatsSegue", sender: self)
-        }
+       let ref = Database.database().reference().child("items").child(item)
+       ref.observe(.value) { (snapshot: DataSnapshot!) in
+           let snapshotValue = snapshot.value as! [String : AnyObject]
+           let chat = snapshotValue["currentChat"] as! String
+           currChat = chat
+           currItemID = currItem
+           let chatRef = Database.database().reference().child("chats").child(currChat)
+           chatRef.observe(.value) { (snapshot: DataSnapshot!) in
+               let snapshotValue = snapshot.value as! [String : AnyObject]
+               currReceiver = snapshotValue["receiver"] as! String
+           }
+           print("whatwhat " + currChat)
+           self.performSegue(withIdentifier: "toChatsSegue", sender: self)
+       }
+    }
+    
+    @IBAction func messageButtonPressed(_ sender: Any) {
+        self.messageButtonAction()
     }
     
     @IBAction func reminderButton(_ sender: UIButton) {
@@ -60,17 +64,18 @@ class BorrowedItemDetailViewController: UIViewController {
             let chatMessageDict = ["senderName": Auth.auth().currentUser?.displayName, "content" : reminderMessage, "timestamp": timestamp, "senderHash": Auth.auth().currentUser!.uid, "messageID" : messageID] as [String : Any]
             chatsDb.child(chat).child("messages").child(messageID).setValue(chatMessageDict)
         }
-        let alert = UIAlertController(title: "Reminder sent!", message: "", preferredStyle: .alert)
-
-       
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-            alert.dismiss(animated: false) {
-                
-            }
-        }))
-        
-        self.present(alert, animated: true)
+//        let alert = UIAlertController(title: "Reminder sent!", message: "", preferredStyle: .alert)
+//
+//       
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+//            alert.dismiss(animated: false) {
+//                
+//            }
+//        }))
+//        
+//        self.present(alert, animated: true)
         sender.isEnabled = false
+        messageButtonAction()
        }
     
     override func viewDidLoad() {
